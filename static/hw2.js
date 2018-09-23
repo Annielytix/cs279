@@ -2,13 +2,19 @@ $(document).ready(function() {
   window.HW2 = {};
   
   HW2.begin = function() {
-    $('#begin-modal').modal();
-    $('#submit-begin').on("click", function() {
-      $('#begin-modal').modal('hide');
-      $('#demographics-modal').modal();
-      HW2.prepareDemographicsForm();
-    });
+    if (window.location.hash.indexOf('skip') != -1) {
+      HW2.prepareExperiment();
+    } else {
+      $('#begin-modal').modal();
+      $('#submit-begin').on("click", function() {
+        $('#begin-modal').modal('hide');
+        $('#demographics-modal').modal();
+        HW2.prepareDemographicsForm();
+      });
+    }
   };
+  
+  
   
   HW2.prepareDemographicsForm = function() {
     $("#demographics-submit").on("click", function() {
@@ -37,4 +43,5 @@ $(document).ready(function() {
   };
   
   HW2.begin();
+  
 });
