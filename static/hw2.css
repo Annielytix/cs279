@@ -3,7 +3,7 @@ html, body {
 	width: 100%;
 }
 
-#experiment {
+#practice-experiment {
   display: none;
   height: 100%;
   width: 100%;
@@ -46,8 +46,14 @@ html, body {
 	width: 200px !important;
 }
 .experiment-menu-option {
-	border: 1px solid black;
-	padding: 5px;
-	height: 40px;
-	background: #ddd;
+	border-bottom: 1px solid black;
+	border-right: 1px solid black;
+	border-left: 1px solid black;
+	padding: 2px;
+	width: 98px;
+	background: gray;
+}
+
+#feedback-modal label {
+  font-weight: bold;
 }

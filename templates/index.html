@@ -12,6 +12,7 @@
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="https://underscorejs.org/underscore-min.js" crossorigin="anonymous"></script>
 
   <script src="/static/hw2.js?r={{ random }}"></script>
   <link rel="stylesheet" href="/static/hw2.css?r={{ random }}" />
@@ -55,7 +56,7 @@
             <div class="form-group row">
               <label for="inputGender" class="col-sm-4 col-form-label">Gender</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control col-sm-8" placeholder="" name="gender" id="inputGender">
+                <input type="text" class="form-control" placeholder="" name="gender" id="inputGender">
               </div>
             </div>
             <div class="form-group row">
@@ -98,7 +99,7 @@
             <div class="form-group row">
               <label for="inputLang" class="col-sm-4 col-form-label">Native language</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control col-sm-8" placeholder="" name="language" id="inputLang">
+                <input type="text" class="form-control" placeholder="" name="language" id="inputLang">
               </div>
             </div>
             <div class="form-group row">
@@ -114,14 +115,250 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" id="demographics-submit">Submit and begin experiment</button>
-          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+          <button type="button" class="btn btn-primary" id="demographics-submit">Submit and continue</button>
         </div>
       </div>
     </div>
   </div>
   
-  <div id="experiment">
+  <div class="modal" tabindex="-1" role="dialog" id="practice-modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">About to begin...</h5>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Thank you for completing the demographic survey. Feel free to take a short break before continuing to the next section.</p>
+
+          <p>Next is the practice task section, which will familiarize you with the layout of the task interface. There will be three dropdown menus on the next screen. A prompt at the top of the page will ask you to select a certain menu and then select an option from the menu. Don’t worry if you select the wrong one; you will have an opportunity to try again.</p>
+
+          <p>Click “Begin” when you are ready to continue to the practice task.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="submit-begin-experiment">Begin</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal" tabindex="-1" role="dialog" id="intermission-modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Half-way done...</h5>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Thank you for completing the previous task. Feel free to take short break before continuing to the next section.</p>
+
+          <p>This is the main task. The behavior of the menus may be slightly different from that of the practice task, but the overall task remains the same. There will be three dropdown menus on the next screen. A prompt at the top of the page will ask you to select a certain menu and then select an option from the menu. Don’t worry if you select the wrong one; you will have an opportunity to try again.</p>
+
+          <p>Click “Continue” when you are ready to continue to the practice task.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="submit-intermission">Continue</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Thank you! Please complete this short feedback form...</h5>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Thank you so much for completing this task! Please complete the following survey based on your experience with the task.</p>
+          <form>
+            <div>
+              <label for="inputDifficulty" class="col-form-label">Difficulty?</label>
+            </div>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                Least difficult
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="difficulty" id="difficulty1" value="1">
+                <label class="form-check-label" for="difficulty1">1</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="difficulty" id="difficulty2" value="2">
+                <label class="form-check-label" for="difficulty2">2</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="difficulty" id="difficulty3" value="3">
+                <label class="form-check-label" for="difficulty3">3</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="difficulty" id="difficulty4" value="4">
+                <label class="form-check-label" for="difficulty4">4</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="difficulty" id="difficulty5" value="5">
+                <label class="form-check-label" for="difficulty5">5</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="difficulty" id="difficulty6" value="6">
+                <label class="form-check-label" for="difficulty6">6</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="difficulty" id="difficulty7" value="7">
+                <label class="form-check-label" for="difficulty7">7</label>
+              </div>
+              <div class="form-check form-check-inline">
+                Most difficult
+              </div>
+            </div>
+            
+            <div>
+              <label for="inputSatisfaction" class="col-form-label">Satisfaction?</label>
+            </div>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                Least satisfied
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="satisfaction" id="satisfaction1" value="1">
+                <label class="form-check-label" for="satisfaction1">1</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="satisfaction" id="satisfaction2" value="2">
+                <label class="form-check-label" for="satisfaction2">2</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="satisfaction" id="satisfaction3" value="3">
+                <label class="form-check-label" for="satisfaction3">3</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="satisfaction" id="satisfaction4" value="4">
+                <label class="form-check-label" for="satisfaction4">4</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="satisfaction" id="satisfaction5" value="5">
+                <label class="form-check-label" for="satisfaction5">5</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="satisfaction" id="satisfaction6" value="6">
+                <label class="form-check-label" for="satisfaction6">6</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="satisfaction" id="satisfaction7" value="7">
+                <label class="form-check-label" for="satisfaction7">7</label>
+              </div>
+              <div class="form-check form-check-inline">
+                Most satisfied
+              </div>
+            </div>
+
+            <div>
+              <label for="inputFrustration" class="col-form-label">Frustration?</label>
+            </div>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                Least frustrated
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="frustration" id="frustration1" value="1">
+                <label class="form-check-label" for="frustration1">1</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="frustration" id="frustration2" value="2">
+                <label class="form-check-label" for="frustration2">2</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="frustration" id="frustration3" value="3">
+                <label class="form-check-label" for="frustration3">3</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="frustration" id="frustration4" value="4">
+                <label class="form-check-label" for="frustration4">4</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="frustration" id="frustration5" value="5">
+                <label class="form-check-label" for="frustration5">5</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="frustration" id="frustration6" value="6">
+                <label class="form-check-label" for="frustration6">6</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="frustration" id="frustration7" value="7">
+                <label class="form-check-label" for="frustration7">7</label>
+              </div>
+              <div class="form-check form-check-inline">
+                Most frustrated
+              </div>
+            </div>
+            
+
+            <div>
+              <label for="inputEfficiency" class="col-form-label">Efficiency?</label>
+            </div>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                Least efficient
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="efficiency" id="efficiency1" value="1">
+                <label class="form-check-label" for="efficiency1">1</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="efficiency" id="efficiency2" value="2">
+                <label class="form-check-label" for="efficiency2">2</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="efficiency" id="efficiency3" value="3">
+                <label class="form-check-label" for="efficiency3">3</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="efficiency" id="efficiency4" value="4">
+                <label class="form-check-label" for="efficiency4">4</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="efficiency" id="efficiency5" value="5">
+                <label class="form-check-label" for="efficiency5">5</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="efficiency" id="efficiency6" value="6">
+                <label class="form-check-label" for="efficiency6">6</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="efficiency" id="efficiency7" value="7">
+                <label class="form-check-label" for="efficiency7">7</label>
+              </div>
+              <div class="form-check form-check-inline">
+                Most efficient
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="submit-feedback">Submit feedback</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="modal" tabindex="-1" role="dialog" id="goodbye-modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">All done!<h5>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Thank you for completing our experiment. You are now eligible to receive a free cookie.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="practice-experiment">
     <div id="experiment-nav">
       <div id="experiment-prompt">Menu 1 > Option 3</div>
       <div class="experiment-menubar">
@@ -171,7 +408,10 @@
 
 
   </div>
-  
+
+  <div id="main-experiment">
+
+  </div>  
 </body>
 </html>
 

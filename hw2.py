@@ -23,7 +23,7 @@ def experiment():
 
 @app.route("/demographics", methods=["POST"])
 def demographics():
-    print(" ---> Submitting form: %s" % request.form)
+    print(" ---> Submitting demographics: %s" % request.form)
     mongo.db.demographics.insert({
         "uuid": request.cookies.get('hw2uuid'),
         "gender": request.form.get("gender"),
@@ -35,6 +35,18 @@ def demographics():
         "experience": request.form.get("experience"),
     })
     return jsonify(dict(message="OK", form=request.form))
-    
+
+@app.route("/feedback", methods=["POST"])
+def feedback():
+    print(" ---> Submitting feedback: %s" % request.form)
+    mongo.db.feedback.insert({
+        "uuid": request.cookies.get('hw2uuid'),
+        "difficulty": request.form.get("difficulty"),
+        "satisfaction": request.form.get("satisfaction"),
+        "frustration": request.form.get("frustration"),
+        "efficiency": request.form.get("efficiency"),
+    })
+    return jsonify(dict(message="OK", form=request.form))
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
