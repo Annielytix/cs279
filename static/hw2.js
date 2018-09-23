@@ -40,6 +40,11 @@ $(document).ready(function() {
   HW2.prepareExperiment = function() {
     $("#demographics-modal").modal('hide');
     $("#experiment").show();
+
+    $("#experiment-menu-button-1").on("click", function(){
+      $("#experiment-menu-dropdown-1").toggle();
+    })
+
   };
   
   HW2.begin();
