@@ -1,22 +1,24 @@
 $(document).ready(function() {
   window.HW2 = {};
+  HW2.modalOptions = {
+    'keyboard': false,
+    'backdrop': 'static'
+  };
   
   HW2.begin = function() {
     if (window.location.hash.indexOf('skip') != -1) {
       HW2.prepareExperiment();
     } else {
-      $('#begin-modal').modal();
+      $('#begin-modal').modal(HW2.modalOptions);
       $('#submit-begin').on("click", function() {
-        $('#begin-modal').modal('hide');
-        $('#demographics-modal').modal();
         HW2.prepareDemographicsForm();
       });
     }
   };
   
-  
-  
   HW2.prepareDemographicsForm = function() {
+    $('#begin-modal').modal('hide');
+    $('#demographics-modal').modal(HW2.modalOptions);
     $("#demographics-submit").on("click", function() {
       HW2.submitDemographicsForm();
     });
