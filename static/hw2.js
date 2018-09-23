@@ -1,21 +1,24 @@
 $(document).ready(function() {
   window.HW2 = {};
   
-  HW2.prepareDemographicsForm = function() {
-    $("#prepare-demographics").on("click", function() {
-      HW2.handleDemographicsForm();
+  HW2.begin = function() {
+    $('#begin-modal').modal();
+    $('#submit-begin').on("click", function() {
+      $('#begin-modal').modal('hide');
+      $('#demographics-modal').modal();
+      HW2.prepareDemographicsForm();
     });
   };
   
-  HW2.handleDemographicsForm = function() {
-    $("#prepare-demographics").hide();
-    $("#demographics-form").show();
+  HW2.prepareDemographicsForm = function() {
     $("#demographics-submit").on("click", function() {
       HW2.submitDemographicsForm();
     });
   };
   
   HW2.submitDemographicsForm = function() {
+    $("#demographics-modal").modal('hide');
+
     $.ajax({
       'type': "POST",
       'url': '/demographics',
@@ -29,9 +32,9 @@ $(document).ready(function() {
   };
   
   HW2.prepareExperiment = function() {
-    $("#demographics-form").hide();
+    $("#demographics-modal").modal('hide');
     $("#experiment").show();
   };
   
-  HW2.prepareDemographicsForm();
+  HW2.begin();
 });

@@ -18,17 +18,64 @@
   
 </head>
 <body>
-  <h1 style='color:blue'>Hello There!</h1>
-  <div>
-    <a href="https://www.cs.ubc.ca/labs/imager/tr/2009/findlater_chi_ephemeral/findlater-2009-chi-ephemeral.pdf">Ephemeral Adaptation: The Use of Gradual Onset to Improve Menu Selection Performance</a>
+  <div class="modal" tabindex="-1" role="dialog" id="begin-modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Welcome to a CS 279 Experiment</h5>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+            <!-- <span aria-hidden="true">&times;</span> -->
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Thank you for volunteering to participate in this experiment. This experiment will be in three parts. In the first part, you will be asked several demographic questions.</p>
+          <p>In the second part, you will practice a task. Finally, you will be asked to complete two tasks that will be similar to the practice task. You will have the opportunity to take breaks in between the tasks.</p>
+          <p>This experiment is based on a paper called     <a href="https://www.cs.ubc.ca/labs/imager/tr/2009/findlater_chi_ephemeral/findlater-2009-chi-ephemeral.pdf">Ephemeral Adaptation: The Use of Gradual Onset to Improve Menu Selection Performance</a>.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="submit-begin">Begin</button>
+          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+        </div>
+      </div>
+    </div>
   </div>
   
-  <div id="prepare-demographics">Begin Experiment by filling out demographics form</div>
-  
-  <form method="post" action="/demographics" id="demographics-form">
-    <label for="name">Name</label><input type="text" name="name" value="" id="demographics-name">
-    <div class="button" id="demographics-submit">Submit Demographics and begin experiment</div>
-  </form>
+
+  <div class="modal" tabindex="-1" role="dialog" id="demographics-modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">CS 279: Before we begin, let's get your demographics</h5>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+            <!-- <span aria-hidden="true">&times;</span> -->
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="inputGender">Gender</label>
+              <input type="text" class="form-control" placeholder="" name="gender" id="inputGender">
+              <label for="inputAge">Age</label>
+              <input type="number" class="form-control" placeholder="" name="age" id="inputAge">
+              <label for="inputEducation">Level of education</label>
+              <select class="form-control form-control-lg" name="education" id="inputEducation">
+                <option>Some high school</option>
+                <option>High school graduate</option>
+                <option>Some college</option>
+                <option>College graduate</option>
+                <option>Some graduate school</option>
+                <option>Graduate degree</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="demographics-submit">Submit and begin experiment</button>
+          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
   
   <div id="experiment">
     Time for an experiment.
