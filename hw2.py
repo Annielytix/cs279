@@ -22,7 +22,11 @@ def experiment():
 
 @app.route("/demographics", methods=["POST"])
 def demographics():
-    print request.form
+    print(" ---> Submitting form: %s" % request.form)
+    mongo.db.demographics.insert({
+        "uuid": request.cookies.get('hw2uuid'),
+        "name": request.form.get("name"),
+    })
     return jsonify(dict(message="OK", form=request.form))
     
 if __name__ == "__main__":
