@@ -26,7 +26,13 @@ def demographics():
     print(" ---> Submitting form: %s" % request.form)
     mongo.db.demographics.insert({
         "uuid": request.cookies.get('hw2uuid'),
-        "name": request.form.get("name"),
+        "gender": request.form.get("gender"),
+        "age": request.form.get("age"),
+        "education": request.form.get("education"),
+        "pointer": request.form.get("pointer"),
+        "handedness": request.form.get("handedness"),
+        "language": request.form.get("language"),
+        "experience": request.form.get("experience"),
     })
     return jsonify(dict(message="OK", form=request.form))
     

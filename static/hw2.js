@@ -31,7 +31,13 @@ $(document).ready(function() {
       'type': "POST",
       'url': '/demographics',
       'data': {
-        'name': $("#demographics-name").val()
+        'gender': $("input[name=gender]").val(),
+        'age': $("input[name=age]").val(),
+        'education': $("select[name=education]").val(),
+        'pointer': $("select[name=pointer]").val(),
+        'handedness': $("select[name=handedness]").val(),
+        'language': $("input[name=language]").val(),
+        'experience': $("select[name=experience]").val()
       },
       'success': function() {
         HW2.prepareExperiment();
