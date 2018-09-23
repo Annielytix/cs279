@@ -1,3 +1,4 @@
+from random import randint
 import uuid
 from flask import Flask
 from flask import render_template
@@ -13,7 +14,7 @@ mongo = PyMongo(app)
 @app.route("/")
 def experiment():
     hw2uuid = request.cookies.get('hw2uuid')
-    response = make_response(render_template('index.html'))
+    response = make_response(render_template('index.html', random=randint(0, 100000)))
     
     if not hw2uuid:
         response.set_cookie('hw2uuid', str(uuid.uuid4()))

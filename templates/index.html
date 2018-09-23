@@ -13,8 +13,8 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
-  <script src="/static/hw2.js"></script>
-  <link rel="stylesheet" href="/static/hw2.css" />
+  <script src="/static/hw2.js?r={{ random }}"></script>
+  <link rel="stylesheet" href="/static/hw2.css?r={{ random }}" />
   
 </head>
 <body>
@@ -53,8 +53,8 @@
         <div class="modal-body">
           <form>
             <div class="form-group">
-              <label for="inputGender">Gender</label>
-              <input type="text" class="form-control" placeholder="" name="gender" id="inputGender">
+              <label for="inputGender" class="col-sm-2 col-form-label">Gender</label>
+              <input type="text" class="form-control col-sm-10" placeholder="" name="gender" id="inputGender">
               <label for="inputAge">Age</label>
               <input type="number" class="form-control" placeholder="" name="age" id="inputAge">
               <label for="inputEducation">Level of education</label>
@@ -65,6 +65,24 @@
                 <option>College graduate</option>
                 <option>Some graduate school</option>
                 <option>Graduate degree</option>
+              </select>
+              <label for="inputPointer">Pointer input type</label>
+              <select class="form-control form-control-lg" name="pointer" id="inputPointer">
+                <option value="mouse">Mouse</option>
+                <option value="trackpad">Trackpad</option>
+              </select>
+              <label for="inputHandedness">Handedness</label>
+              <select class="form-control form-control-lg" name="handedness" id="inputHandedness">
+                <option value="right">Right-handed</option>
+                <option value="left">Left-handed</option>
+              </select>
+              <label for="inputLang">Native language</label>
+              <input type="text" class="form-control" placeholder="" name="language" id="inputLang">
+              <label for="inputExperience">Experience with computers</label>
+              <select class="form-control form-control-lg" name="experience" id="inputExperience">
+                <option value="inexperienced">Inexperienced</option>
+                <option value="familiar">Familiar</option>
+                <option value="expert">Expert</option>
               </select>
             </div>
           </form>
