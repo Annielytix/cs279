@@ -16,10 +16,15 @@ $(document).ready(function() {
   };
   
   HW2.submitDemographicsForm = function() {
-    $.post('/demographics', {
-      'name': $("#demographics-name").val()
-    }, function() {
-      HW2.prepareExperiment();
+    $.ajax({
+      'type': "POST",
+      'url': '/demographics',
+      'data': {
+        'name': $("#demographics-name").val()
+      },
+      'success': function() {
+        HW2.prepareExperiment();
+      }
     });
   };
   
