@@ -16,7 +16,7 @@ def experiment():
     response = make_response(render_template('index.html'))
     
     if not hw2uuid:
-        response.set_cookie('hw2uuid', unicode(uuid.uuid4()))
+        response.set_cookie('hw2uuid', str(uuid.uuid4()))
 
     return response
 
