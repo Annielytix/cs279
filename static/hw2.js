@@ -51,6 +51,7 @@ $(document).ready(function() {
 
     $("#experiment-menu-button-1").on("click", function(){
       $("#experiment-menu-dropdown-1").toggle();
+      $(".fade-in").hide().fadeIn(500);
     })
 
   };
