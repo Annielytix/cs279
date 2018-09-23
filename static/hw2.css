@@ -46,12 +46,11 @@ html, body {
 	width: 200px !important;
 }
 .experiment-menu-option {
-	border-bottom: 1px solid black;
-	border-right: 1px solid black;
-	border-left: 1px solid black;
-	padding: 2px;
-	width: 98px;
-	background: gray;
+	border: 1px solid black;
+	padding: 5px;
+	width: 200px;
+	background: #ddd;
+	height: 40px;
 }
 
 #feedback-modal label {
