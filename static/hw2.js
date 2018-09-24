@@ -47,6 +47,31 @@ $(document).ready(function() {
     });
   };
   
+  HW2.groups = [["Alphonso", "Chaunsa", "Fazli", "Raspuri"],
+                ["Grapes", "Cranberry", "Lemon", "Apple"],
+                ["English", "French", "Chinese", "Arabic"],
+                ["Bass", "Trout", "Salmon", "Tuna"],
+                ["MongoDB", "Postgres", "MonetDB", "Firebase"],
+                ["Sofa", "Table", "Bed", "Chair"],
+                ["Car", "Boat", "Bus", "Train"],
+                ["Celery", "Broccoli", "Cabbage", "Cauliflower"],
+                ["Tomato", "Eggplant", "Cucumber", "Squash"],
+                ["Merlot", "Champagne", "Cabernet", "Chardonnay"],
+                ["Fir", "Alder", "Cedar", "Poplar"],
+                ["Oak", "Maple", "Walnut", "Mahogany"],
+                ["Padauk", "Bubinga", "Cocobolo", "Poculi"],
+                ["Sunflower", "Canola", "Sesame", "Olive"],
+                ["Sapphire", "Ruby", "Diamond", "Pearl"],
+                ["Mewtwo", "Ghastly", "Meowth", "Pikachu"],
+                ["Python", "Java", "Ruby", "Go"],
+                ["Sicilian", "Chicago", "New York", "Thin Crust"],
+                ["Windows", "iOS", "Linux", "MacOS"],
+                ["Adidas", "Nike", "Reebok", "Puma"],
+                ["Beyonce", "Prince", "Beatles", "Katy Perry"],
+                ["Airplane", "Helicopter", "Blimp", "Rocket"],
+                ["Daffodil", "Rose", "Tulip", "Pansy"],
+                ["Flounder", "Bass", "Salmon", "Mackerel"]]
+
   HW2.preparePracticeModal = function() {
     $("#practice-modal").modal(HW2.modalOptions);
     
@@ -59,10 +84,55 @@ $(document).ready(function() {
     $("#practice-modal").modal('hide');
     $("#practice-experiment").show();
 
-    $("#experiment-menu-button-1").on("click", function() {
+    $("#experiment-menu-button-1").on("click", function(){
       $("#experiment-menu-dropdown-1").toggle();
       $(".fade-in").hide().fadeIn(500);
     });
+    $("#experiment-menu-button-2").on("click", function(){
+      $("#experiment-menu-dropdown-2").toggle();
+      $(".fade-in").hide().fadeIn(500);
+    })
+    $("#experiment-menu-button-3").on("click", function(){
+      $("#experiment-menu-dropdown-3").toggle();
+      $(".fade-in").hide().fadeIn(500);
+    })
+  }
+
+  HW2.prepareExperiment = function() {
+    $("#demographics-modal").modal('hide');
+    $("#experiment").show();
+
+    HW2.experiment_params = {};
+
+    // pick selection prompt order
+    HW2.experiment_params.selections = _.shuffle(_.range(16));
+
+    // pick experimental condition order
+    HW2.experiment_params.conditions = _.shuffle(["Baseline", "Ephemeral"]);
+
+    // pick item group order
+    HW2.groups = _.shuffle(HW2.groups);
+
+    HW2.runExperiment();
+  };
+
+  HW2.runExperiment = function() {
+    // populate menus
+
+    // install handlers
+
+    // enable menu functionality
+    $("#experiment-menu-button-1").on("click", function(){
+      $("#experiment-menu-dropdown-1").toggle();
+      $(".fade-in").hide().fadeIn(500);
+    });
+    $("#experiment-menu-button-2").on("click", function(){
+      $("#experiment-menu-dropdown-2").toggle();
+    })
+
+    $("#experiment-menu-button-3").on("click", function(){
+      $("#experiment-menu-dropdown-3").toggle();
+    })
   };
   
   HW2.finishPracticeExperiment = function() {
@@ -110,5 +180,4 @@ $(document).ready(function() {
   };
   
   HW2.begin();
-  
 });
