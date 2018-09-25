@@ -147,9 +147,9 @@ $(document).ready(function() {
     $("#intermission-modal").modal('hide');
 
     // construct experiment object
-    // TODO modify flow from here for two conditions
-    var items = _.flatten(HW2.groups.slice(0, 12)); // TODO pick per condition
-    var trials = HW2.experimentParams.selections.slice(0); // TODO should be selections
+    // TODO modify flow from here for two conditions - Eric
+    var items = _.flatten(HW2.groups.slice(0, 12)); // TODO pick per condition - Eric
+    var trials = HW2.experimentParams.selections.slice(0); // TODO should be selections - Eric
 
     var exp = new HW2.Experiment(items, trials, false, HW2.finishMainExperiment);
     exp.install();
@@ -158,7 +158,7 @@ $(document).ready(function() {
   };
   
   HW2.finishMainExperiment = function(exp) {
-    // TODO send the experimental results off to the server
+    // TODO send the experimental results off to the server - Dhruv
     
     $("#feedback-modal").modal(HW2.modalOptions);
 

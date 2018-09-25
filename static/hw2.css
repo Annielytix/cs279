@@ -32,12 +32,20 @@ html, body {
 	background: #ddd;
 	position: relative;
 	cursor: pointer;
+	-webkit-user-select: none; /* webkit (safari, chrome) browsers */
+    -moz-user-select: none; /* mozilla browsers */
+    -khtml-user-select: none; /* webkit (konqueror) browsers */
+    -ms-user-select: none; /* IE10+ */
 
 }
 .experiment-menu-button {
 	height: 44px;
 	position: relative;
 	padding: 10px;
+	-webkit-user-select: none; /* webkit (safari, chrome) browsers */
+    -moz-user-select: none; /* mozilla browsers */
+    -khtml-user-select: none; /* webkit (konqueror) browsers */
+    -ms-user-select: none; /* IE10+ */
 }
 .experiment-menu-dropdown {
 	position: absolute;
@@ -51,6 +59,10 @@ html, body {
 	width: 200px;
 	background: #ddd;
 	height: 40px;
+	-webkit-user-select: none; /* webkit (safari, chrome) browsers */
+    -moz-user-select: none; /* mozilla browsers */
+    -khtml-user-select: none; /* webkit (konqueror) browsers */
+    -ms-user-select: none; /* IE10+ */
 }
 
 #feedback-modal label {
