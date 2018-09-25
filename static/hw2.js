@@ -59,6 +59,7 @@ $(document).ready(function() {
 
   // selections: 8 items per menu, weighted as 15, 8, 5, 4, 3, 3, 2, 2 (= 42) ("Zipfian")
   var copies = [15, 8, 5, 4, 3, 3, 2, 2];
+  // var copies = [1, 1];
   var selections = [];
   for (var m = 0; m < 3; m++) {
     var picked = _.shuffle(_.range(16)).slice(0, 8)
@@ -128,6 +129,8 @@ $(document).ready(function() {
   HW2.preparePracticeExperiment = function() {
     console.log("preparePracticeExperiment");
     $("#practice-modal").modal('hide');
+    $("#intermission-modal").modal('hide');
+    $("#feedback-modal").modal('hide');
 
     var fadeIn;
     if (HW2.experimentParams.conditions[0] === "Baseline") {
@@ -184,16 +187,16 @@ $(document).ready(function() {
   
   HW2.finishMainExperiment = function(exp) {
     // TODO send the experimental results off to the server - Dhruv
+
+    console.log(exp);
+
     if(exp){
       $.ajax({
         'type': "POST",
         'url': '/taskdata',
-        'data': {
-          'condition': exp.condition,
-          'permutation': exp.permutation,
-          'selection': exp.selection,
-          'trials': exp.trials
-        }
+        'contentType': "application/json; charset=utf-8",
+        'dataType': "json",
+        'data': JSON.stringify( exp )
       });
     }
 
