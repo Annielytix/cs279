@@ -56,11 +56,20 @@ $(document).ready(function() {
 
   // set up experimental params
   HW2.experimentParams = {};
-  HW2.experimentParams.selections = _.shuffle(_.range(16)); // TODO correct for true experimental distribution
+
+  // selections: 8 items per menu, weighted as 15, 8, 5, 4, 3, 3, 2, 2 (= 42) ("Zipfian")
+  var copies = [15, 8, 5, 4, 3, 3, 2, 2];
+  var selections = [];
+  for (var m = 0; m < 3; m++) {
+    var picked = _.shuffle(_.range(16)).slice(0, 8)
+    for (var i = 0; i < 8; i++) {
+      selections += Array(copies[i]).fill(picked[i] + m * 16);
+    }
+  }
+  HW2.experimentParams.selections = _.shuffle(selections);
   HW2.experimentParams.conditions = _.shuffle(["Baseline", "Ephemeral"]);
 
   HW2.begin = function() {
-    $("#experiment").hide();
     if (window.location.hash.indexOf('skip') != -1) {
       HW2.preparePracticeExperiment();
     } else if (window.location.hash.indexOf('survey') != -1) {
@@ -113,11 +122,11 @@ $(document).ready(function() {
   HW2.preparePracticeExperiment = function() {
     $("#practice-modal").modal('hide');
 
-    console.log("preparing practice");
+    console.log("starting");
 
     // construct experiment object
     var items = _.flatten(HW2.practiceGroups);
-    var trials = _.shuffle(_.range(48)).slice(0, 4);
+    var trials = _.shuffle(_.range(48)).slice(0, 8); // just pick 8 menu items
 
     var exp = new HW2.Experiment(items, trials, false, HW2.finishPracticeExperiment);
     exp.install();
@@ -136,15 +145,15 @@ $(document).ready(function() {
 
   HW2.prepareMainExperiment = function() {
     $("#intermission-modal").modal('hide');
-    $("#experiment").show();
 
     // construct experiment object
     // TODO two conditions
     var items = _.flatten(HW2.groups.slice(0, 12)); // TODO pick per condition
-    var trials = _.shuffle(_.range(36)); // TODO should be selections
-    var exp = new HW2.Experiment(items, trials, false, HW2.finishMainExperiment);
+    var trials = HW2.experimentParams.selections.slice(0); // TODO should be selections
 
+    var exp = new HW2.Experiment(items, trials, false, HW2.finishMainExperiment);
     exp.install();
+
     $("#experiment").show();
   };
   
@@ -201,53 +210,114 @@ $(document).ready(function() {
         </div>`;
     }
 
-    // construct menus
+    // construct menu HTML
     var menuElements = ""
+    var menuItems = items.slice(0);
+    this.menuItems = []; // save item order
     for (var m = 1; m <= 3; m++) {
       var options = "";
       for (var o = 1; o <= 16; o++) {
-        options += mkMenuOption(m, o, items.pop());
+        var nextItem = menuItems.pop();
+        this.menuItems.push(nextItem);
+        options += mkMenuOption(m, o, nextItem);
       }
 
       menuElements += mkMenu(m, mkMenuDropdown(m, options));
     }
-
     this.menuElements = menuElements;
-    console.log(menuElements);
 
     // pick a random menu permutation
     this.menuPerm = _.shuffle(_.range(3));
 
+    // get [menu, opt] intended by current selection
+    this.selections = selections.slice(0);
+    this.getSelection = function () {
+      var menu = this.menuPerm[Math.floor(this.selections[0] / 16)];
+      var opt = this.selections[0] % 16;
+
+      return [menu, opt];
+    };
+
+    // get prompt text for current selection
+    this.getPrompt = function() {
+      var loc = this.getSelection();
+      return `Menu ${loc[0] + 1} > ${this.menuItems[loc[0] * 16 + loc[1]]}`
+    };
+
+    this.updatePrompt = function() {
+      $("#experiment-prompt").text(this.getPrompt());
+    }
+
+    // handle menu clicks
+    this.menuButtonClicked = function(menuNum, timestamp) {
+      console.log(`menu-button clicked: ${timestamp}, menu = ${menuNum}`);
+    };
+
+    this.menuOptionClicked = function(menuNum, optionNum, timestamp) {
+      console.log(`menu-option clicked: ${timestamp}, menu = ${menuNum}, opt = ${optionNum}`);
+
+      var loc = this.getSelection();
+      if (menuNum - 1 === loc[0] && optionNum - 1 === loc[1]) {
+        console.log("correct selection");
+
+        this.selections = this.selections.slice(1);
+        if (this.selections.length === 0) {
+          finishHook();
+        } else {
+          this.updatePrompt();
+        }
+      }
+    };
+
     this.install = function() {
-      console.log("installing!");
+      console.log("NOW INSTALLING NEW EXPERIMENT");
+
+      var instance = this;
 
       // clear current menus, drop constructed menus
       $(".experiment-menubar").empty();
       $(".experiment-menubar").append(this.menuElements);
 
-      // TODO install measurement handlers
-      // and those handlers will have to arrange fading as appropriate
+      // update prompt text
+      this.updatePrompt(); // XXX why does this appear after a lag?
 
-      // enable menu functionality
-      $("#experiment-menu-button-1").on("click", function(){
+      // install measurement handlers
+      $(".experiment-menu-button").on("click", function (e) {
+        m = /experiment-menu-button-(\d+)/.exec($(this).attr("id"))
+        // XXX timeStamp is NOT supported in Firefox
+        // XXX timeStamp in Chrome is time since page loaded
+        instance.menuButtonClicked(m[1], e.timeStamp);
+      });
+      $(".experiment-menu-option").on("click", function (e) {
+        m = /experiment-menu-(\d+)-option-(\d+)/.exec($(this).attr("id"))
+        instance.menuOptionClicked(m[1], m[2], e.timeStamp);
+      });
+
+      // menu show/hide functionality
+      $("#experiment-menu-button-1").on("click", function() {
         $("#experiment-menu-dropdown-1").toggle();
         $("#experiment-menu-dropdown-2").hide();
         $("#experiment-menu-dropdown-3").hide();
-        $(".fade-in").hide().fadeIn(500);
+        $(".fade-in").hide().fadeIn(500); // XXX hopefully rapid clicking-about doesn't bug this
       });
-      $("#experiment-menu-button-2").on("click", function(){
+      $("#experiment-menu-button-2").on("click", function() {
         $("#experiment-menu-dropdown-1").hide();
         $("#experiment-menu-dropdown-2").toggle();
         $("#experiment-menu-dropdown-3").hide();
         $(".fade-in").hide().fadeIn(500);
       });
-      $("#experiment-menu-button-3").on("click", function(){
+      $("#experiment-menu-button-3").on("click", function() {
         $("#experiment-menu-dropdown-1").hide();
         $("#experiment-menu-dropdown-2").hide();
         $("#experiment-menu-dropdown-3").toggle();
         $(".fade-in").hide().fadeIn(500);
       });
-    }
+      $(".experiment-menu-option").on("click", function () {
+        $("#experiment-menu-dropdown-1").hide();
+        $("#experiment-menu-dropdown-2").hide();
+        $("#experiment-menu-dropdown-3").hide();
+      });
+    };
   };
 
   HW2.begin();
