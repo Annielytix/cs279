@@ -59,10 +59,11 @@ $(document).ready(function() {
 
   // selections: 8 items per menu, weighted as 15, 8, 5, 4, 3, 3, 2, 2 (= 42) ("Zipfian")
   var copies = [15, 8, 5, 4, 3, 3, 2, 2];
+  // var copies = [1, 1];
   var selections = [];
   for (var m = 0; m < 3; m++) {
     var picked = _.shuffle(_.range(16)).slice(0, 8)
-    for (var i = 0; i < 8; i++) {
+    for (var i = 0; i < copies.length; i++) {
       selections = selections.concat(Array(copies[i]).fill(picked[i] + m * 16));
     }
   }
@@ -129,6 +130,8 @@ $(document).ready(function() {
     console.log("preparePracticeExperiment");
 
     $("#practice-modal").modal('hide');
+    $("#intermission-modal").modal('hide');
+    $("#feedback-modal").modal('hide');
 
     // construct experiment object
     var items = _.flatten(HW2.practiceGroups);
@@ -172,18 +175,20 @@ $(document).ready(function() {
   
   HW2.finishMainExperiment = function(exp) {
     // TODO send the experimental results off to the server - Dhruv
+
+    console.log(exp);
+
     if(exp){
       $.ajax({
         'type': "POST",
         'url': '/taskdata',
-        'data': {
-          'condition': exp.condition,
-          'permutation': exp.permutation,
-          'selection': exp.selection,
-          'trials': exp.trials
-        }
+        'contentType': "application/json; charset=utf-8",
+        'dataType': "json",
+        'data': JSON.stringify( exp )
       });
     }
+
+    $("#experiment").hide();
 
     $("#feedback-modal").modal(HW2.modalOptions);
 

@@ -50,14 +50,14 @@ def feedback():
 
 @app.route("/taskdata", methods=["POST"])
 def taskdata():
-    print(" ---> Submitting task data: %s" % request.form)
+    result = request.get_json()
+    print(" ---> Submitting task data: %s" % result)
     mongo.db.taskdata.insert({
         "uuid": request.cookies.get('hw2uuid'),
-        "condition": request.form.get('condition'),
-        "permutation": request.form.get("permutation"),
-        "selection": request.form.get("selection"),
-        "fadeIns": request.form.get("fadeIns"),
-        "trials": request.form.get("trials")
+        "condition": result.get('condition'),
+        "permutation": result.get("permutation"),
+        "selection": result.get("selection"),
+        "trials": result.get("trials")
     })
     return jsonify(dict(message="OK", form=request.form))
 
