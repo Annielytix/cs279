@@ -48,5 +48,18 @@ def feedback():
     })
     return jsonify(dict(message="OK", form=request.form))
 
+@app.route("/taskdata", methods=["POST"])
+def taskdata():
+    print(" ---> Submitting task data: %s" % request.form)
+    mongo.db.taskdata.insert({
+        "uuid": request.cookies.get('hw2uuid'),
+        "condition": request.form.get('condition'),
+        "permutation": request.form.get("permutation"),
+        "selection": request.form.get("selection"),
+        "fadeIns": request.form.get("fadeIns"),
+        "trials": request.form.get("trials")
+    })
+    return jsonify(dict(message="OK", form=request.form))
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

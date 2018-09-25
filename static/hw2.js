@@ -73,7 +73,7 @@ $(document).ready(function() {
     if (window.location.hash.indexOf('skip') != -1) {
       HW2.preparePracticeExperiment();
     } else if (window.location.hash.indexOf('survey') != -1) {
-      HW2.finishMainExperiment();
+      HW2.finishMainExperiment(null);
     } else {
       $('#begin-modal').modal(HW2.modalOptions);
       $('#submit-begin').on("click", function() {
@@ -159,7 +159,20 @@ $(document).ready(function() {
   
   HW2.finishMainExperiment = function(exp) {
     // TODO send the experimental results off to the server - Dhruv
-    
+    if(exp){
+      $.ajax({
+        'type': "POST",
+        'url': '/taskdata',
+        'data': {
+          'condition': exp.condition,
+          'permutation': exp.permutation,
+          'selection': exp.selection,
+          'fadeIns': exp.fadeIns,
+          'trials': exp.trials
+        }
+      });
+    }
+
     $("#feedback-modal").modal(HW2.modalOptions);
 
     $("#submit-feedback").on("click", function() {
@@ -173,7 +186,10 @@ $(document).ready(function() {
           'efficiency': $("input[name=efficiency]:checked").val()
         },
         'success': function() {
-          HW2.prepareGoodbye();
+          if (HW2.experimentParams.conditions.length == 0)
+            HW2.prepareGoodbye();
+          else
+            HW2.preparePracticeExperiment();
         }
       });
     });
