@@ -59,10 +59,10 @@ $(document).ready(function() {
 
   // selections: 8 items per menu, weighted as 15, 8, 5, 4, 3, 3, 2, 2 (= 42) ("Zipfian")
   var copies = [15, 8, 5, 4, 3, 3, 2, 2];
-  // var copies = [1, 1];
+  //var copies = [1];
   var selections = [];
   for (var m = 0; m < 3; m++) {
-    var picked = _.shuffle(_.range(16)).slice(0, 8)
+    var picked = _.shuffle(_.range(16));
     for (var i = 0; i < copies.length; i++) {
       selections = selections.concat(Array(copies[i]).fill(picked[i] + m * 16));
     }
@@ -117,15 +117,15 @@ $(document).ready(function() {
       }
     });
   };
-  
+
   HW2.preparePracticeModal = function() {
     $("#practice-modal").modal(HW2.modalOptions);
-    
-    $("#submit-begin-experiment").on("click", function() {
+
+    $("#submit-begin-experiment").off(".begin").on("click.begin", function() {
       HW2.preparePracticeExperiment();
     });
   };
-  
+
   HW2.preparePracticeExperiment = function() {
     console.log("preparePracticeExperiment");
     $("#practice-modal").modal('hide');
@@ -157,8 +157,8 @@ $(document).ready(function() {
       $("#intermission-modal-title").text("Almost finished!");
     }
     $("#intermission-modal").modal(HW2.modalOptions);
-    
-    $("#submit-intermission").on("click", function() {
+
+    $("#submit-intermission").off(".intermission").on("click.intermission", function() {
       HW2.prepareMainExperiment();
     });
   };
@@ -186,10 +186,10 @@ $(document).ready(function() {
   };
   
   HW2.finishMainExperiment = function(exp) {
-    // TODO send the experimental results off to the server - Dhruv
-
+    console.log("finishMainExperiment");
     console.log(exp);
 
+    // send the experimental results off to the server
     if(exp){
       $.ajax({
         'type': "POST",
@@ -203,7 +203,7 @@ $(document).ready(function() {
     $("#experiment").hide();
     $("#feedback-modal").modal(HW2.modalOptions);
 
-    $("#submit-feedback").on("click", function() {
+    $("#submit-feedback").off(".feedback").on("click.feedback", function() {
       $.ajax({
         'type': "POST",
         'url': '/feedback',
