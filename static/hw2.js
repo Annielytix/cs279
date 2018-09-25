@@ -62,7 +62,7 @@ $(document).ready(function() {
   var selections = [];
   for (var m = 0; m < 3; m++) {
     var picked = _.shuffle(_.range(16)).slice(0, 8)
-    for (var i = 0; i < 8; i++) {
+    for (var i = 0; i < copies.length; i++) {
       selections = selections.concat(Array(copies[i]).fill(picked[i] + m * 16));
     }
   }
@@ -127,14 +127,20 @@ $(document).ready(function() {
   
   HW2.preparePracticeExperiment = function() {
     console.log("preparePracticeExperiment");
-
     $("#practice-modal").modal('hide');
+
+    var fadeIn;
+    if (HW2.experimentParams.conditions[0] === "Baseline") {
+      fadeIn = false;
+    } else {
+      fadeIn = true;
+    }
 
     // construct experiment object
     var items = _.flatten(HW2.practiceGroups);
     var trials = _.shuffle(_.range(48)).slice(0, 8); // just pick 8 menu items
 
-    var exp = new HW2.Experiment(items, trials, false, HW2.finishPracticeExperiment);
+    var exp = new HW2.Experiment(items, trials, fadeIn, HW2.finishPracticeExperiment);
     exp.install();
 
     $("#experiment").show();
@@ -142,8 +148,11 @@ $(document).ready(function() {
 
   HW2.finishPracticeExperiment = function(exp) {
     console.log("finishPracticeExperiment");
-
     $("#experiment").hide();
+
+    if (HW2.experimentParams.conditions.length === 1) {
+      $("#intermission-modal-title").text("Almost finished!");
+    }
     $("#intermission-modal").modal(HW2.modalOptions);
     
     $("#submit-intermission").on("click", function() {
@@ -153,18 +162,21 @@ $(document).ready(function() {
 
   HW2.prepareMainExperiment = function() {
     console.log("prepareMainExperiment");
-
     $("#intermission-modal").modal('hide');
 
-    // TODO modify flow from here for two conditions - Eric
-    // get condition to perform...
+    var fadeIn;
+    if (HW2.experimentParams.conditions[0] === "Baseline") {
+      fadeIn = false;
+    } else {
+      fadeIn = true;
+    }
 
     // construct experiment object
     var items = _.flatten(HW2.groups.slice(0, 12));
     HW2.groups = HW2.groups.slice(12); // jankily cut off the used groups
     var trials = HW2.experimentParams.selections.slice(0);
 
-    var exp = new HW2.Experiment(items, trials, false, HW2.finishMainExperiment);
+    var exp = new HW2.Experiment(items, trials, fadeIn, HW2.finishMainExperiment);
     exp.install();
 
     $("#experiment").show();
@@ -185,6 +197,7 @@ $(document).ready(function() {
       });
     }
 
+    $("#experiment").hide();
     $("#feedback-modal").modal(HW2.modalOptions);
 
     $("#submit-feedback").on("click", function() {
@@ -198,7 +211,9 @@ $(document).ready(function() {
           'efficiency': $("input[name=efficiency]:checked").val()
         },
         'success': function() {
-          if (HW2.experimentParams.conditions.length == 0)
+          // show next experiment if a condition remains
+          HW2.experimentParams.conditions = HW2.experimentParams.conditions.slice(1);
+          if (HW2.experimentParams.conditions.length === 0)
             HW2.prepareGoodbye();
           else
             HW2.preparePracticeExperiment();
@@ -260,7 +275,11 @@ $(document).ready(function() {
     // * SELECTION HANDLING LOGIC *
     // ****************************
 
-    // TODO pick options for fade-in
+    // pre-select 80% of trials for correct fade-ins
+    var numCorrectTrials = Math.floor(selections.length * 0.8);
+    var numIncorrectTrials = selections.length - numCorrectTrials;
+    this.fadeCorrect = _.shuffle(Array(numCorrectTrials).fill(true)
+      .concat(Array(numIncorrectTrials).fill(false)));
 
     // pick a random menu permutation
     var menuPerm = _.shuffle(_.range(3));
@@ -274,19 +293,80 @@ $(document).ready(function() {
       return [menu, opt];
     };
 
-    // get prompt text for current selection
-    this.getPrompt = function() {
+    this.showTrial = function() {
       var loc = this.getSelection();
-      return `Menu ${loc[0] + 1} > ${this.menuItems[loc[0] * 16 + loc[1]]}`
-    };
 
-    this.updatePrompt = function() {
-      $("#experiment-prompt").text(this.getPrompt());
+      // set prompt
+      var promptText = `Menu ${loc[0]+1} > ${this.menuItems[loc[0] * 16 + loc[1]]}`;
+      $("#experiment-prompt").text(promptText);
+
+      // set fade-ins
+      if (fadeIn) {
+        $(".experiment-menu-option .menu-option-text").addClass("fade-in");
+
+        if (this.fadeCorrect[0]) {
+          // unfade correct item
+          $(`#experiment-menu-${loc[0]+1}-option-${loc[1]+1} .menu-option-text`).removeClass("fade-in");
+
+          // unfade two incorrect in same menu
+          var wrong = _.shuffle(_.range(16));
+          var unfaded = 0;
+          for (var o = 0; unfaded < 2; o++) {
+            if (wrong[o] !== loc[1]) {
+              $(`#experiment-menu-${loc[0]+1}-option-${wrong[o]+1} .menu-option-text`).removeClass("fade-in");
+              unfaded++;
+            }
+          }
+          
+          // unfade three in each other menu
+          for (var m = 0; m < 3; m++) {
+            if (m !== loc[0]) {
+              var wrong = _.shuffle(_.range(16));
+              for (var o = 0; o < 3; o++) {
+                $(`#experiment-menu-${m+1}-option-${wrong[o]+1} .menu-option-text`).removeClass("fade-in");
+              }
+            }
+          }
+        } else {
+          // select three incorrect items per menu
+          for (var m = 0; m < 3; m++) {
+            var wrong = _.shuffle(_.range(16));
+            var unfaded = 0;
+            for (var o = 0; unfaded < 3; o++) {
+              if (m !== loc[0] || wrong[o] !== loc[1]) {
+                $(`#experiment-menu-${m+1}-option-${wrong[o]+1} .menu-option-text`).removeClass("fade-in");
+                unfaded++;
+              }
+            }
+          }
+        }
+      }
     }
 
-    // *****************************************
-    // * VARIABLES FOR STORING EXPERIMENT DATA *
-    // *****************************************
+    this.nextTrial = function() {
+      this.finishTrial();
+
+      this.selections = this.selections.slice(1);
+      this.fadeCorrect = this.fadeCorrect.slice(1);
+
+      if (this.selections.length === 0) {
+        // pack up the measurements and pass out to the hook
+        var exp = {
+          "condition": fadeIn ? "Ephemeral" : "Baseline",
+          "permutation": menuPerm,
+          "selection": selections,
+          "trials": this.trials
+        };
+
+        finishHook(exp);
+      } else {
+        this.showTrial();
+      }
+    }
+
+    // **********************
+    // * TRIAL DATA LOGGING *
+    // **********************
 
     this.trials = [];
     this.curTrial = {
@@ -345,24 +425,7 @@ $(document).ready(function() {
       // advance to next trial if appropriate
       var loc = this.getSelection();
       if (menuNum - 1 === loc[0] && optionNum - 1 === loc[1]) {
-        this.finishTrial();
-
-        // TODO determine next fade-ins (pick here for consistency)
-
-        this.selections = this.selections.slice(1);
-        if (this.selections.length === 0) {
-          // pack up the measurements and pass out to the hook
-          var exp = {
-            "condition": fadeIn ? "Ephemeral" : "Baseline",
-            "permutation": menuPerm,
-            "selection": selections,
-            "trials": this.trials
-          };
-
-          finishHook(exp);
-        } else {
-          this.updatePrompt();
-        }
+        this.nextTrial();
       } else {
         this.trialSetIncorrect();
       }
@@ -377,8 +440,8 @@ $(document).ready(function() {
       $(".experiment-menubar").empty();
       $(".experiment-menubar").append(this.menuElements);
 
-      // update prompt text
-      this.updatePrompt(); // XXX why does this appear after a lag?
+      // update prompt text and menu fade-ins
+      this.showTrial();
 
       // install measurement handlers
       $(".experiment-menu-button").on("click", function (e) {
@@ -397,7 +460,7 @@ $(document).ready(function() {
         $("#experiment-menu-dropdown-1").toggle();
         $("#experiment-menu-dropdown-2").hide();
         $("#experiment-menu-dropdown-3").hide();
-        $(".fade-in").hide().fadeIn(500); // XXX hopefully rapid clicking-about doesn't bug this
+        $(".fade-in").hide().fadeIn(500);
       });
       $("#experiment-menu-button-2").on("click", function() {
         $("#experiment-menu-dropdown-1").hide();
