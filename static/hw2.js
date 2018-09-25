@@ -63,7 +63,7 @@ $(document).ready(function() {
   for (var m = 0; m < 3; m++) {
     var picked = _.shuffle(_.range(16)).slice(0, 8)
     for (var i = 0; i < 8; i++) {
-      selections += Array(copies[i]).fill(picked[i] + m * 16);
+      selections = selections.concat(Array(copies[i]).fill(picked[i] + m * 16));
     }
   }
   HW2.experimentParams.selections = _.shuffle(selections);
@@ -72,6 +72,12 @@ $(document).ready(function() {
   HW2.begin = function() {
     if (window.location.hash.indexOf('skip') != -1) {
       HW2.preparePracticeExperiment();
+    } else if (window.location.hash.indexOf('baseline') != -1) {
+      HW2.experimentParams.conditions = ["Baseline"];
+      HW2.finishPracticeExperiment();
+    } else if (window.location.hash.indexOf('ephemeral') != -1) {
+      HW2.experimentParams.conditions = ["Ephemeral"];
+      HW2.finishPracticeExperiment();
     } else if (window.location.hash.indexOf('survey') != -1) {
       HW2.finishMainExperiment(null);
     } else {
@@ -120,9 +126,9 @@ $(document).ready(function() {
   };
   
   HW2.preparePracticeExperiment = function() {
-    $("#practice-modal").modal('hide');
+    console.log("preparePracticeExperiment");
 
-    console.log("starting");
+    $("#practice-modal").modal('hide');
 
     // construct experiment object
     var items = _.flatten(HW2.practiceGroups);
@@ -135,6 +141,8 @@ $(document).ready(function() {
   }
 
   HW2.finishPracticeExperiment = function(exp) {
+    console.log("finishPracticeExperiment");
+
     $("#experiment").hide();
     $("#intermission-modal").modal(HW2.modalOptions);
     
@@ -144,14 +152,17 @@ $(document).ready(function() {
   };
 
   HW2.prepareMainExperiment = function() {
+    console.log("prepareMainExperiment");
+
     $("#intermission-modal").modal('hide');
 
+    // TODO modify flow from here for two conditions - Eric
     // get condition to perform...
 
     // construct experiment object
-    // TODO modify flow from here for two conditions - Eric
-    var items = _.flatten(HW2.groups.slice(0, 12)); // TODO pick per condition - Eric
-    var trials = HW2.experimentParams.selections.slice(0); // TODO should be selections - Eric
+    var items = _.flatten(HW2.groups.slice(0, 12));
+    HW2.groups = HW2.groups.slice(12); // jankily cut off the used groups
+    var trials = HW2.experimentParams.selections.slice(0);
 
     var exp = new HW2.Experiment(items, trials, false, HW2.finishMainExperiment);
     exp.install();
