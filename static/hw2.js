@@ -146,6 +146,8 @@ $(document).ready(function() {
   HW2.prepareMainExperiment = function() {
     $("#intermission-modal").modal('hide');
 
+    // get condition to perform...
+
     // construct experiment object
     // TODO modify flow from here for two conditions - Eric
     var items = _.flatten(HW2.groups.slice(0, 12)); // TODO pick per condition - Eric
@@ -243,15 +245,19 @@ $(document).ready(function() {
     }
     this.menuElements = menuElements;
 
+    // ****************************
+    // * SELECTION HANDLING LOGIC *
+    // ****************************
+
     // TODO pick options for fade-in
 
     // pick a random menu permutation
-    this.menuPerm = _.shuffle(_.range(3));
+    var menuPerm = _.shuffle(_.range(3));
 
     // get [menu, opt] intended by current selection
     this.selections = selections.slice(0);
     this.getSelection = function () {
-      var menu = this.menuPerm[Math.floor(this.selections[0] / 16)];
+      var menu = menuPerm[Math.floor(this.selections[0] / 16)];
       var opt = this.selections[0] % 16;
 
       return [menu, opt];
@@ -267,26 +273,87 @@ $(document).ready(function() {
       $("#experiment-prompt").text(this.getPrompt());
     }
 
-    // handle menu clicks
-    this.menuButtonClicked = function(menuNum, timestamp) {
-      console.log(`menu-button clicked: ${timestamp}, menu = ${menuNum}`);
+    // *****************************************
+    // * VARIABLES FOR STORING EXPERIMENT DATA *
+    // *****************************************
+
+    this.trials = [];
+    this.curTrial = {
+      "correct" : true,
+      "expected" : this.getSelection(),
+      "events" : []
     };
 
-    this.menuOptionClicked = function(menuNum, optionNum, timestamp) {
-      console.log(`menu-option clicked: ${timestamp}, menu = ${menuNum}, opt = ${optionNum}`);
+    this.finishTrial = function () {
+      this.trials.push(this.curTrial);
+      this.curTrial = {
+        "correct" : true,
+        "expected" : this.getSelection(),
+        "events" : []
+      };
+    };
 
+    this.trialSetIncorrect = function () {
+      this.curTrial["correct"] = false;
+    }
+
+    this.trialLogMenuButtonEvent = function(menuNum, timestamp) {
+      var e = {
+        "type" : "button",
+        "timestamp" : timestamp,
+        "menuNum" : menuNum
+      };
+
+      this.curTrial.events.push(e);
+    }
+
+    this.trialLogMenuOptionEvent = function(menuNum, optionNum, timestamp) {
+      var e = {
+        "type" : "option",
+        "timestamp" : timestamp,
+        "menuNum" : menuNum,
+        "optionNum" : optionNum
+      };
+
+      this.curTrial.events.push(e);
+    }
+
+    // ******************************
+    // * DISPLAY AND EVENT HANDLING *
+    // ******************************
+
+    // handle menu clicks
+    this.menuButtonClicked = function(menuNum, timestamp) {
+      this.trialLogMenuButtonEvent(menuNum, timestamp);
+    };
+
+    // handle option clicks
+    this.menuOptionClicked = function(menuNum, optionNum, timestamp) {
+      this.trialLogMenuOptionEvent(menuNum, optionNum, timestamp);
+
+      // advance to next trial if appropriate
       var loc = this.getSelection();
       if (menuNum - 1 === loc[0] && optionNum - 1 === loc[1]) {
-        console.log("correct selection");
+        this.finishTrial();
 
         // TODO determine next fade-ins (pick here for consistency)
 
         this.selections = this.selections.slice(1);
         if (this.selections.length === 0) {
-          finishHook(this);
+          // pack up the measurements and pass out to the hook
+          var exp = {
+            "condition": fadeIn ? "Ephemeral" : "Baseline",
+            "permutation": menuPerm,
+            "selection": selections,
+            "trials": this.trials
+          };
+
+          finishHook(exp);
         } else {
           this.updatePrompt();
         }
+      } else {
+        this.trialSetIncorrect();
       }
     };
 
