@@ -58,7 +58,7 @@ $(document).ready(function() {
   HW2.experimentParams = {};
 
   // selections: 8 items per menu, weighted as 15, 8, 5, 4, 3, 3, 2, 2 (= 42) ("Zipfian")
-  var EASY_MODE = true;
+  var EASY_MODE = false;
   var copies = EASY_MODE ? [1, 1] : [15, 8, 5, 4, 3, 3, 2, 2];
   var selections = [];
   for (var m = 0; m < 3; m++) {
