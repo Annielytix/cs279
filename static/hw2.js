@@ -167,7 +167,6 @@ $(document).ready(function() {
           'condition': exp.condition,
           'permutation': exp.permutation,
           'selection': exp.selection,
-          'fadeIns': exp.fadeIns,
           'trials': exp.trials
         }
       });
