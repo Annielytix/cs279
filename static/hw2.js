@@ -59,10 +59,10 @@ $(document).ready(function() {
 
   // selections: 8 items per menu, weighted as 15, 8, 5, 4, 3, 3, 2, 2 (= 42) ("Zipfian")
   var copies = [15, 8, 5, 4, 3, 3, 2, 2];
-  // var copies = [1, 1];
+  var copies = [1, 1];
   var selections = [];
   for (var m = 0; m < 3; m++) {
-    var picked = _.shuffle(_.range(16)).slice(0, 8)
+    var picked = _.shuffle(_.range(16)).slice(0, 8);
     for (var i = 0; i < copies.length; i++) {
       selections = selections.concat(Array(copies[i]).fill(picked[i] + m * 16));
     }
@@ -141,7 +141,7 @@ $(document).ready(function() {
     exp.install();
 
     $("#experiment").show();
-  }
+  };
 
   HW2.finishPracticeExperiment = function(exp) {
     console.log("finishPracticeExperiment");
@@ -224,29 +224,29 @@ $(document).ready(function() {
    * finishHook - hook to call when done with experiment */
   HW2.Experiment = function(items, selections, fadeIn, finishHook) {
     var mkMenu = function(menuNum, dropdown) {
-      return `
-        <div class="experiment-menu">
-        <div id="experiment-menu-button-${menuNum}" class="experiment-menu-button">Menu ${menuNum}</div>
-        ${dropdown}
-        </div>`;
-    }
+      return _.template('\
+        <div class="experiment-menu">\
+        <div id="experiment-menu-button-<%= menuNum %>" class="experiment-menu-button">Menu <%= menuNum %></div>\
+        <%= dropdown %>\
+        </div>')({menuNum: menuNum, dropdown: dropdown});
+    };
 
     var mkMenuDropdown = function(menuNum, options) {
-      return `
-        <div id="experiment-menu-dropdown-${menuNum}" class="experiment-menu-dropdown" style="display:none;">
-        ${options}
-        </div>`;
-    }
+      return _.template('\
+        <div id="experiment-menu-dropdown-<%= menuNum %>" class="experiment-menu-dropdown" style="display:none;">\
+        <%= options %>\
+        </div>')({menuNum: menuNum, options: options});
+    };
 
     var mkMenuOption = function(menuNum, optionNum, text) {
-      return `
-        <div id="experiment-menu-${menuNum}-option-${optionNum}" class="experiment-menu-option">
-        <span class="menu-option-text">${text}</span>
-        </div>`;
-    }
+      return _.template('\
+        <div id="experiment-menu-<%= menuNum %>-option-<%= optionNum %>" class="experiment-menu-option">\
+        <span class="menu-option-text"><%= text %></span>\
+        </div>')({menuNum: menuNum, optionNum: optionNum, text: text});
+    };
 
     // construct menu HTML
-    var menuElements = ""
+    var menuElements = "";
     var menuItems = items.slice(0);
     this.menuItems = []; // save item order
     for (var m = 1; m <= 3; m++) {
@@ -272,7 +272,7 @@ $(document).ready(function() {
 
     // get [menu, opt] intended by current selection
     this.selections = selections.slice(0);
-    this.getSelection = function () {
+    this.getSelection = function() {
       var menu = menuPerm[Math.floor(this.selections[0] / 16)];
       var opt = this.selections[0] % 16;
 
@@ -282,12 +282,15 @@ $(document).ready(function() {
     // get prompt text for current selection
     this.getPrompt = function() {
       var loc = this.getSelection();
-      return `Menu ${loc[0] + 1} > ${this.menuItems[loc[0] * 16 + loc[1]]}`
+      return _.template('Menu <%= loc %> > <%= menuItems %>')({
+        loc: loc[0] + 1,
+        menuItems: this.menuItems[loc[0]*16 + loc[1]]
+      });
     };
 
     this.updatePrompt = function() {
       $("#experiment-prompt").text(this.getPrompt());
-    }
+    };
 
     // *****************************************
     // * VARIABLES FOR STORING EXPERIMENT DATA *
@@ -311,7 +314,7 @@ $(document).ready(function() {
 
     this.trialSetIncorrect = function () {
       this.curTrial["correct"] = false;
-    }
+    };
 
     this.trialLogMenuButtonEvent = function(menuNum, timestamp) {
       var e = {
@@ -321,7 +324,7 @@ $(document).ready(function() {
       };
 
       this.curTrial.events.push(e);
-    }
+    };
 
     this.trialLogMenuOptionEvent = function(menuNum, optionNum, timestamp) {
       var e = {
@@ -332,7 +335,7 @@ $(document).ready(function() {
       };
 
       this.curTrial.events.push(e);
-    }
+    };
 
     // ******************************
     // * DISPLAY AND EVENT HANDLING *
@@ -387,13 +390,13 @@ $(document).ready(function() {
 
       // install measurement handlers
       $(".experiment-menu-button").on("click", function (e) {
-        m = /experiment-menu-button-(\d+)/.exec($(this).attr("id"))
+        m = /experiment-menu-button-(\d+)/.exec($(this).attr("id"));
         // XXX timeStamp is NOT supported in Firefox
         // XXX timeStamp in Chrome is time since page loaded
         instance.menuButtonClicked(m[1], e.timeStamp);
       });
       $(".experiment-menu-option").on("click", function (e) {
-        m = /experiment-menu-(\d+)-option-(\d+)/.exec($(this).attr("id"))
+        m = /experiment-menu-(\d+)-option-(\d+)/.exec($(this).attr("id"));
         instance.menuOptionClicked(m[1], m[2], e.timeStamp);
       });
 
