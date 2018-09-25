@@ -147,7 +147,7 @@ $(document).ready(function() {
     $("#intermission-modal").modal('hide');
 
     // construct experiment object
-    // TODO two conditions
+    // TODO modify flow from here for two conditions
     var items = _.flatten(HW2.groups.slice(0, 12)); // TODO pick per condition
     var trials = HW2.experimentParams.selections.slice(0); // TODO should be selections
 
@@ -158,8 +158,10 @@ $(document).ready(function() {
   };
   
   HW2.finishMainExperiment = function(exp) {
-    $("#feedback-modal").modal(HW2.modalOptions);
+    // TODO send the experimental results off to the server
     
+    $("#feedback-modal").modal(HW2.modalOptions);
+
     $("#submit-feedback").on("click", function() {
       $.ajax({
         'type': "POST",
@@ -226,6 +228,8 @@ $(document).ready(function() {
     }
     this.menuElements = menuElements;
 
+    // TODO pick options for fade-in
+
     // pick a random menu permutation
     this.menuPerm = _.shuffle(_.range(3));
 
@@ -260,9 +264,11 @@ $(document).ready(function() {
       if (menuNum - 1 === loc[0] && optionNum - 1 === loc[1]) {
         console.log("correct selection");
 
+        // TODO determine next fade-ins (pick here for consistency)
+
         this.selections = this.selections.slice(1);
         if (this.selections.length === 0) {
-          finishHook();
+          finishHook(this);
         } else {
           this.updatePrompt();
         }
