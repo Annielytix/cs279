@@ -58,7 +58,7 @@ $(document).ready(function() {
   HW2.experimentParams = {};
 
   // selections: 8 items per menu, weighted as 15, 8, 5, 4, 3, 3, 2, 2 (= 42) ("Zipfian")
-  var EASY_MODE = false;
+  var EASY_MODE = true;
   var copies = EASY_MODE ? [1, 1] : [15, 8, 5, 4, 3, 3, 2, 2];
   var selections = [];
   for (var m = 0; m < 3; m++) {
@@ -214,6 +214,13 @@ $(document).ready(function() {
           'efficiency': $("input[name=efficiency]:checked").val()
         },
         'success': function() {
+          // clear radio buttons
+          console.log("CLEARING");
+          $("input[name=difficulty]:checked").prop("checked", false);
+          $("input[name=satisfaction]:checked").prop("checked", false);
+          $("input[name=frustration]:checked").prop("checked", false);
+          $("input[name=efficiency]:checked").prop("checked", false);
+
           // show next experiment if a condition remains
           HW2.experimentParams.conditions = HW2.experimentParams.conditions.slice(1);
           if (HW2.experimentParams.conditions.length === 0)
