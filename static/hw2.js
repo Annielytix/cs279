@@ -368,7 +368,8 @@ $(document).ready(function() {
           "condition": fadeIn ? "Ephemeral" : "Baseline",
           "permutation": menuPerm,
           "selection": selections,
-          "trials": this.trials
+          "trials": this.trials,
+          "fadeIns": [] //TODO: ADD WHICH OPTIONS WERE SUPPOSED TO FADE IN HERE
         };
 
         finishHook(exp);

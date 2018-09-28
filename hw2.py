@@ -57,7 +57,8 @@ def taskdata():
         "condition": result.get('condition'),
         "permutation": result.get("permutation"),
         "selection": result.get("selection"),
-        "trials": result.get("trials")
+        "trials": result.get("trials"),
+        "fadeIns": result.get("fadeIns")
     })
     return jsonify(dict(message="OK", form=request.form))
 
