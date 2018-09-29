@@ -291,6 +291,8 @@ $(document).ready(function() {
     this.fadeCorrect = _.shuffle(Array(numCorrectTrials).fill(true)
       .concat(Array(numIncorrectTrials).fill(false)));
 
+    this.fadeDecided = this.fadeCorrect.slice(0);
+
     // pick a random menu permutation
     var menuPerm = _.shuffle(_.range(3));
 
@@ -376,7 +378,7 @@ $(document).ready(function() {
           "permutation": menuPerm,
           "selection": selections,
           "trials": this.trials,
-          "fadeIns": [] //TODO: ADD WHICH OPTIONS WERE SUPPOSED TO FADE IN HERE
+          "fadeIns": this.fadeDecided
         };
 
         finishHook(exp);
