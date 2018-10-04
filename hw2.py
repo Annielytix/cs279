@@ -182,9 +182,15 @@ def xlsx():
             data.write(row, col, d['uuid']); col += 1;
             data.write_datetime(row, col, date, date_format); col += 1;
             data.write(row, col, d['condition']); col += 1;
-            data.write(row, col, d['fadeIns'][t]); col += 1;
+            if len(d['fadeIns']) > t:
+                data.write(row, col, d['fadeIns'][t]); col += 1;
+            else:
+                data.write(row, col, ""); col += 1;
             data.write(row, col, ', '.join([str(p) for p in d['permutation']])); col += 1;
-            data.write(row, col, d['selection'][t]); col += 1;
+            if len(d['selection']) > t:
+                data.write(row, col, d['selection'][t]); col += 1;
+            else:
+                data.write(row, col, ""); col += 1;
             data.write(row, col, trial['correct']); col += 1;
             data.write(row, col, trial['events'][-1]['timestamp']); col += 1;
             data.write(row, col, trial['events'][-2]['timestamp']); col += 1;
