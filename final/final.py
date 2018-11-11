@@ -11,16 +11,16 @@ from flask_pymongo import PyMongo
 from flask import send_file
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb://localhost:27017/hw2"
+app.config["MONGO_URI"] = "mongodb://localhost:27017/final"
 mongo = PyMongo(app)
 
 @app.route("/")
 def experiment():
-    hw2uuid = request.cookies.get('hw2uuid')
+    finaluuid = request.cookies.get('finaluuid')
     response = make_response(render_template('index.html', random=randint(0, 100000)))
     
-    if not hw2uuid:
-        response.set_cookie('hw2uuid', str(uuid.uuid4()))
+    if not finaluuid:
+        response.set_cookie('finaluuid', str(uuid.uuid4()))
 
     return response
 
@@ -28,7 +28,7 @@ def experiment():
 def demographics():
     print(" ---> Submitting demographics: %s" % request.form)
     mongo.db.demographics.insert({
-        "uuid": request.cookies.get('hw2uuid'),
+        "uuid": request.cookies.get('finaluuid'),
         "gender": request.form.get("gender"),
         "age": request.form.get("age"),
         "education": request.form.get("education"),
@@ -43,7 +43,7 @@ def demographics():
 def feedback():
     print(" ---> Submitting feedback: %s" % request.form)
     mongo.db.feedback.insert({
-        "uuid": request.cookies.get('hw2uuid'),
+        "uuid": request.cookies.get('finaluuid'),
         "difficulty": request.form.get("difficulty"),
         "satisfaction": request.form.get("satisfaction"),
         "frustration": request.form.get("frustration"),
@@ -56,7 +56,7 @@ def taskdata():
     result = request.get_json()
     print(" ---> Submitting task data: %s" % result)
     mongo.db.taskdata.insert({
-        "uuid": request.cookies.get('hw2uuid'),
+        "uuid": request.cookies.get('finaluuid'),
         "condition": result.get('condition'),
         "permutation": result.get("permutation"),
         "selection": result.get("selection"),

@@ -1,12 +1,12 @@
 $(document).ready(function() {
-  window.HW2 = {};
-  HW2.modalOptions = {
+  window.final = {};
+  final.modalOptions = {
     'keyboard': false,
     'backdrop': 'static'
   };
 
   // option groups
-  HW2.groups = [
+  final.groups = [
     ["Butterfly", "Mosquito", "Moth", "Cicada"],
     ["Grapes", "Cranberry", "Lemon", "Apple"],
     ["English", "French", "Chinese", "Arabic"],
@@ -31,12 +31,12 @@ $(document).ready(function() {
     ["Airplane", "Helicopter", "Blimp", "Rocket"],
     ["Daffodil", "Rose", "Tulip", "Pansy"],
     ["Rucksack", "Bag", "Backpack", "Satchel"]];
-  HW2.groups = _.shuffle(HW2.groups);
-  for (var i = 0; i < HW2.groups.length; i++) {
-    HW2.groups[i] = _.shuffle(HW2.groups[i]);
+  final.groups = _.shuffle(final.groups);
+  for (var i = 0; i < final.groups.length; i++) {
+    final.groups[i] = _.shuffle(final.groups[i]);
   }
 
-  HW2.practiceGroups = [
+  final.practiceGroups = [
     ["Starfruit", "Durian", "Pomegranate", "Passionfruit"],
     ["Alphonso", "Chaunsa", "Fazli", "Raspuri"],
     ["Flounder", "Bream", "Haddock", "Mackerel"],
@@ -49,13 +49,13 @@ $(document).ready(function() {
     ["Mewtwo", "Ghastly", "Meowth", "Pikachu"],
     ["Mouse", "Keyboard", "Monitor", "Webcam"],
     ["Hamster", "Gerbil", "Chinchilla", "Guinea Pig"]];
-  HW2.practiceGroups = _.shuffle(HW2.practiceGroups);
-  for (var i = 0; i < HW2.practiceGroups.length; i++) {
-    HW2.practiceGroups[i] = _.shuffle(HW2.practiceGroups[i]);
+  final.practiceGroups = _.shuffle(final.practiceGroups);
+  for (var i = 0; i < final.practiceGroups.length; i++) {
+    final.practiceGroups[i] = _.shuffle(final.practiceGroups[i]);
   }
 
   // set up experimental params
-  HW2.experimentParams = {};
+  final.experimentParams = {};
 
   // selections: 8 items per menu, weighted as 15, 8, 5, 4, 3, 3, 2, 2 (= 42) ("Zipfian")
   var EASY_MODE = false;
@@ -67,37 +67,37 @@ $(document).ready(function() {
       selections = selections.concat(Array(copies[i]).fill(picked[i] + m * 16));
     }
   }
-  HW2.experimentParams.selections = _.shuffle(selections);
-  HW2.experimentParams.conditions = _.shuffle(["Baseline", "Ephemeral"]);
+  final.experimentParams.selections = _.shuffle(selections);
+  final.experimentParams.conditions = _.shuffle(["Baseline", "Ephemeral"]);
 
-  HW2.begin = function() {
+  final.begin = function() {
     if (window.location.hash.indexOf('skip') != -1) {
-      HW2.preparePracticeExperiment();
+      final.preparePracticeExperiment();
     } else if (window.location.hash.indexOf('baseline') != -1) {
-      HW2.experimentParams.conditions = ["Baseline"];
-      HW2.finishPracticeExperiment();
+      final.experimentParams.conditions = ["Baseline"];
+      final.finishPracticeExperiment();
     } else if (window.location.hash.indexOf('ephemeral') != -1) {
-      HW2.experimentParams.conditions = ["Ephemeral"];
-      HW2.finishPracticeExperiment();
+      final.experimentParams.conditions = ["Ephemeral"];
+      final.finishPracticeExperiment();
     } else if (window.location.hash.indexOf('survey') != -1) {
-      HW2.finishMainExperiment(null);
+      final.finishMainExperiment(null);
     } else {
-      $('#begin-modal').modal(HW2.modalOptions);
+      $('#begin-modal').modal(final.modalOptions);
       $('#submit-begin').on("click", function() {
-        HW2.prepareDemographicsForm();
+        final.prepareDemographicsForm();
       });
     }
   };
   
-  HW2.prepareDemographicsForm = function() {
+  final.prepareDemographicsForm = function() {
     $('#begin-modal').modal('hide');
-    $('#demographics-modal').modal(HW2.modalOptions);
+    $('#demographics-modal').modal(final.modalOptions);
     $("#demographics-submit").on("click", function() {
-      HW2.submitDemographicsForm();
+      final.submitDemographicsForm();
     });
   };
   
-  HW2.submitDemographicsForm = function() {
+  final.submitDemographicsForm = function() {
     $("#demographics-modal").modal('hide');
 
     $.ajax({
@@ -113,79 +113,79 @@ $(document).ready(function() {
         'experience': $("select[name=experience]").val()
       },
       'success': function() {
-        HW2.preparePracticeModal();
+        final.preparePracticeModal();
       }
     });
   };
 
-  HW2.preparePracticeModal = function() {
-    $("#practice-modal").modal(HW2.modalOptions);
+  final.preparePracticeModal = function() {
+    $("#practice-modal").modal(final.modalOptions);
 
     $("#submit-begin-experiment").off(".begin").on("click.begin", function() {
-      HW2.preparePracticeExperiment();
+      final.preparePracticeExperiment();
     });
   };
 
-  HW2.preparePracticeExperiment = function() {
+  final.preparePracticeExperiment = function() {
     console.log("preparePracticeExperiment");
     $("#practice-modal").modal('hide');
     $("#intermission-modal").modal('hide');
     $("#feedback-modal").modal('hide');
 
     var fadeIn;
-    if (HW2.experimentParams.conditions[0] === "Baseline") {
+    if (final.experimentParams.conditions[0] === "Baseline") {
       fadeIn = false;
     } else {
       fadeIn = true;
     }
 
     // construct experiment object
-    var items = _.flatten(HW2.practiceGroups);
+    var items = _.flatten(final.practiceGroups);
     var trials = _.shuffle(_.range(48)).slice(0, EASY_MODE ? 2 : 8); // just pick 8 menu items
 
-    var exp = new HW2.Experiment(items, trials, fadeIn, HW2.finishPracticeExperiment);
+    var exp = new final.Experiment(items, trials, fadeIn, final.finishPracticeExperiment);
     exp.install();
 
     $("#experiment").show();
   };
 
-  HW2.finishPracticeExperiment = function(exp) {
+  final.finishPracticeExperiment = function(exp) {
     console.log("finishPracticeExperiment");
     $("#experiment").hide();
 
-    if (HW2.experimentParams.conditions.length === 1) {
+    if (final.experimentParams.conditions.length === 1) {
       $("#intermission-modal-title").text("Almost finished!");
     }
-    $("#intermission-modal").modal(HW2.modalOptions);
+    $("#intermission-modal").modal(final.modalOptions);
 
     $("#submit-intermission").off(".intermission").on("click.intermission", function() {
-      HW2.prepareMainExperiment();
+      final.prepareMainExperiment();
     });
   };
 
-  HW2.prepareMainExperiment = function() {
+  final.prepareMainExperiment = function() {
     console.log("prepareMainExperiment");
     $("#intermission-modal").modal('hide');
 
     var fadeIn;
-    if (HW2.experimentParams.conditions[0] === "Baseline") {
+    if (final.experimentParams.conditions[0] === "Baseline") {
       fadeIn = false;
     } else {
       fadeIn = true;
     }
 
     // construct experiment object
-    var items = _.flatten(HW2.groups.slice(0, 12));
-    HW2.groups = HW2.groups.slice(12); // jankily cut off the used groups
-    var trials = HW2.experimentParams.selections.slice(0);
+    var items = _.flatten(final.groups.slice(0, 12));
+    final.groups = final.groups.slice(12); // jankily cut off the used groups
+    var trials = final.experimentParams.selections.slice(0);
 
-    var exp = new HW2.Experiment(items, trials, fadeIn, HW2.finishMainExperiment);
+    var exp = new final.Experiment(items, trials, fadeIn, final.finishMainExperiment);
     exp.install();
 
     $("#experiment").show();
   };
   
-  HW2.finishMainExperiment = function(exp) {
+  final.finishMainExperiment = function(exp) {
     console.log("finishMainExperiment");
     console.log(exp);
 
@@ -201,7 +201,7 @@ $(document).ready(function() {
     }
 
     $("#experiment").hide();
-    $("#feedback-modal").modal(HW2.modalOptions);
+    $("#feedback-modal").modal(final.modalOptions);
 
     $("#submit-feedback").off(".feedback").on("click.feedback", function() {
       $.ajax({
@@ -222,19 +222,19 @@ $(document).ready(function() {
           $("input[name=efficiency]:checked").prop("checked", false);
 
           // show next experiment if a condition remains
-          HW2.experimentParams.conditions = HW2.experimentParams.conditions.slice(1);
-          if (HW2.experimentParams.conditions.length === 0)
-            HW2.prepareGoodbye();
+          final.experimentParams.conditions = final.experimentParams.conditions.slice(1);
+          if (final.experimentParams.conditions.length === 0)
+            final.prepareGoodbye();
           else
-            HW2.preparePracticeExperiment();
+            final.preparePracticeExperiment();
         }
       });
     });
   };
 
-  HW2.prepareGoodbye = function() {
+  final.prepareGoodbye = function() {
     $("#feedback-modal").modal("hide");
-    $("#goodbye-modal").modal(HW2.modalOptions);
+    $("#goodbye-modal").modal(final.modalOptions);
   };
 
   /* expected arguments:
@@ -242,7 +242,7 @@ $(document).ready(function() {
    * selections - order to prompt item selection (will be obfuscated by menu permutation)
    * fadeIn - experimental condition
    * finishHook - hook to call when done with experiment */
-  HW2.Experiment = function(items, selections, fadeIn, finishHook) {
+  final.Experiment = function(items, selections, fadeIn, finishHook) {
     var mkMenu = function(menuNum, dropdown) {
       return _.template('\
         <div class="experiment-menu">\
@@ -505,5 +505,5 @@ $(document).ready(function() {
     };
   };
 
-  HW2.begin();
+  final.begin();
 });
