@@ -1,0 +1,70 @@
+html, body {
+	height: 100%;
+	width: 100%;
+}
+
+#practice-experiment {
+  display: none;
+  height: 100%;
+  width: 100%;
+}
+
+#experiment-nav {
+	width: 100%;
+	height: 102px;
+	background: #dce0e8
+}
+#experiment-prompt {
+	font-size: 24px;
+	padding: 5px;
+}
+.experiment-menubar {
+	width: 100%;
+	height: 50px;
+	display: inline-block;
+}
+.experiment-menu {
+	width: 100px;
+	border: 1px solid black;
+	padding: 5px;
+	margin: 0;
+	display: inline-block;
+	background: #ddd;
+	position: relative;
+	cursor: pointer;
+	-webkit-user-select: none; /* webkit (safari, chrome) browsers */
+    -moz-user-select: none; /* mozilla browsers */
+    -khtml-user-select: none; /* webkit (konqueror) browsers */
+    -ms-user-select: none; /* IE10+ */
+
+}
+.experiment-menu-button {
+	height: 44px;
+	position: relative;
+	padding: 10px;
+	-webkit-user-select: none; /* webkit (safari, chrome) browsers */
+    -moz-user-select: none; /* mozilla browsers */
+    -khtml-user-select: none; /* webkit (konqueror) browsers */
+    -ms-user-select: none; /* IE10+ */
+}
+.experiment-menu-dropdown {
+	position: absolute;
+	top: 54px;
+	left: 0px;
+	width: 200px !important;
+}
+.experiment-menu-option {
+	border: 1px solid black;
+	padding: 5px;
+	width: 200px;
+	background: #ddd;
+	height: 40px;
+	-webkit-user-select: none; /* webkit (safari, chrome) browsers */
+    -moz-user-select: none; /* mozilla browsers */
+    -khtml-user-select: none; /* webkit (konqueror) browsers */
+    -ms-user-select: none; /* IE10+ */
+}
+
+#feedback-modal label {
+  font-weight: bold;
+}
