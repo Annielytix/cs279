@@ -1,8 +1,12 @@
 html, body {
 	height: 100%;
 	width: 100%;
+  background: url(/static/bg.jpg);
 }
 
+.modal-backdrop {
+  display: none;
+}
 #practice-experiment {
   display: none;
   height: 100%;

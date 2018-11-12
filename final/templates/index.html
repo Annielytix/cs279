@@ -5,7 +5,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>CS279 Ephemeral Experiment</title>
+  <title>CS279 Bias Experiment</title>
     
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -29,9 +29,9 @@
           </button>
         </div>
         <div class="modal-body">
-          <p>Thank you for volunteering to participate in this experiment. This experiment will be in three parts. In the first part, you will be asked several demographic questions.</p>
-          <p>In the second part, you will practice a task. Finally, you will be asked to complete two tasks that will be similar to the practice task. You will have the opportunity to take breaks in between the tasks.</p>
-          <p>This experiment is based on a paper called     <a href="https://www.cs.ubc.ca/labs/imager/tr/2009/findlater_chi_ephemeral/findlater-2009-chi-ephemeral.pdf">Ephemeral Adaptation: The Use of Gradual Onset to Improve Menu Selection Performance</a>.</p>
+          <p>Thank you for volunteering to participate in this experiment.</p>
+          <p>This experiment is split into three parts.</p>
+          <p>This experiment is based on the results of a Pew Research Center report     <a href="http://www.journalism.org/2018/06/18/distinguishing-between-factual-and-opinion-statements-in-the-news/">Distinguishing Between Factual and Opinion Statements in the News</a>.</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" id="submit-begin">Begin</button>
@@ -43,16 +43,15 @@
   
 
   <div class="modal" tabindex="-1" role="dialog" id="demographics-modal">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">CS 279: Before we begin, let's get your demographics</h5>
-          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
-            <!-- <span aria-hidden="true">&times;</span> -->
+          <h5 class="modal-title">CS 279: Before we begin, please tell us a little about yourself and your preferences.</h5>
           </button>
         </div>
         <div class="modal-body">
           <form>
+            <h2>About you</h2>
             <div class="form-group row">
               <label for="inputGender" class="col-sm-4 col-form-label">Gender</label>
               <div class="col-sm-8">
@@ -79,39 +78,176 @@
               </div>
             </div>
             <div class="form-group row">
-              <label for="inputPointer" class="col-sm-4 col-form-label">Pointer input type</label>
+              <label for="inputZipcode" class="col-sm-4 col-form-label">Zip code</label>
               <div class="col-sm-8">
-                <select class="form-control" name="pointer" id="inputPointer">
-                  <option value="mouse">Mouse</option>
-                  <option value="trackpad">Trackpad</option>
-                </select>
+                <input type="number" class="form-control" placeholder="" name="zipcode" id="inputZipcode">
               </div>
             </div>
-            <div class="form-group row">
-              <label for="inputHandedness" class="col-sm-4 col-form-label">Handedness</label>
-              <div class="col-sm-8">
-                <select class="form-control" name="handedness" id="inputHandedness">
-                  <option value="right">Right-handed</option>
-                  <option value="left">Left-handed</option>
-                </select>
+            
+            <h2>How would you rate your...</h2>
+            
+
+            <div>
+              <label for="inputAwareness" class="col-form-label">Political Awareness</label>
+            </div>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                Very low
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="awareness" id="awareness1" value="1">
+                <label class="form-check-label" for="awareness1">1</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="awareness" id="awareness2" value="2">
+                <label class="form-check-label" for="awareness2">2</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="awareness" id="awareness3" value="3">
+                <label class="form-check-label" for="awareness3">3</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="awareness" id="awareness4" value="4">
+                <label class="form-check-label" for="awareness4">4</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="awareness" id="awareness5" value="5">
+                <label class="form-check-label" for="awareness5">5</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="awareness" id="awareness6" value="6">
+                <label class="form-check-label" for="awareness6">6</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="awareness" id="awareness7" value="7">
+                <label class="form-check-label" for="awareness7">7</label>
+              </div>
+              <div class="form-check form-check-inline">
+                Very High
               </div>
             </div>
-            <div class="form-group row">
-              <label for="inputLang" class="col-sm-4 col-form-label">Native language</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" placeholder="" name="language" id="inputLang">
+          
+            <div>
+              <label for="inputSavviness" class="col-form-label">Digital Savviness</label>
+            </div>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                Least low
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="savviness" id="savviness1" value="1">
+                <label class="form-check-label" for="savviness1">1</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="savviness" id="savviness2" value="2">
+                <label class="form-check-label" for="savviness2">2</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="savviness" id="savviness3" value="3">
+                <label class="form-check-label" for="savviness3">3</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="savviness" id="savviness4" value="4">
+                <label class="form-check-label" for="savviness4">4</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="savviness" id="savviness5" value="5">
+                <label class="form-check-label" for="savviness5">5</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="savviness" id="savviness6" value="6">
+                <label class="form-check-label" for="savviness6">6</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="savviness" id="savviness7" value="7">
+                <label class="form-check-label" for="savviness7">7</label>
+              </div>
+              <div class="form-check form-check-inline">
+                Most high
               </div>
             </div>
-            <div class="form-group row">
-              <label for="inputExperience" class="col-sm-4 col-form-label">Experience with computers</label>
-              <div class="col-sm-8">
-                <select class="form-control" name="experience" id="inputExperience">
-                  <option value="inexperienced">Inexperienced</option>
-                  <option value="familiar">Familiar</option>
-                  <option value="expert">Expert</option>
-                </select>
+
+            <div>
+              <label for="inputTrust" class="col-form-label">News Trust</label>
+            </div>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                Least low
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="trust" id="trust1" value="1">
+                <label class="form-check-label" for="trust1">1</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="trust" id="trust2" value="2">
+                <label class="form-check-label" for="trust2">2</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="trust" id="trust3" value="3">
+                <label class="form-check-label" for="trust3">3</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="trust" id="trust4" value="4">
+                <label class="form-check-label" for="trust4">4</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="trust" id="trust5" value="5">
+                <label class="form-check-label" for="trust5">5</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="trust" id="trust6" value="6">
+                <label class="form-check-label" for="trust6">6</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="trust" id="trust7" value="7">
+                <label class="form-check-label" for="trust7">7</label>
+              </div>
+              <div class="form-check form-check-inline">
+                Most high
               </div>
             </div>
+          
+
+            <div>
+              <label for="inputInterest" class="col-form-label">News Interest</label>
+            </div>
+            <div class="form-group">
+              <div class="form-check form-check-inline">
+                Least low
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="interest" id="interest1" value="1">
+                <label class="form-check-label" for="interest1">1</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="interest" id="interest2" value="2">
+                <label class="form-check-label" for="interest2">2</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="interest" id="interest3" value="3">
+                <label class="form-check-label" for="interest3">3</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="interest" id="interest4" value="4">
+                <label class="form-check-label" for="interest4">4</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="interest" id="interest5" value="5">
+                <label class="form-check-label" for="interest5">5</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="interest" id="interest6" value="6">
+                <label class="form-check-label" for="interest6">6</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="interest" id="interest7" value="7">
+                <label class="form-check-label" for="interest7">7</label>
+              </div>
+              <div class="form-check form-check-inline">
+                Most high
+              </div>
+            </div>
+              
           </form>
         </div>
         <div class="modal-footer">

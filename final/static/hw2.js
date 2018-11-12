@@ -4,14 +4,75 @@ $(document).ready(function() {
     'keyboard': false,
     'backdrop': 'static'
   };
-  
-  
-  
+
+  // option groups
+  final.groups = [
+    ["Butterfly", "Mosquito", "Moth", "Cicada"],
+    ["Grapes", "Cranberry", "Lemon", "Apple"],
+    ["English", "French", "Chinese", "Arabic"],
+    ["Bass", "Trout", "Salmon", "Tuna"],
+    ["Sofa", "Table", "Bed", "Chair"],
+    ["Ammonia", "Chlorine", "Acetone", "Ethanol"],
+    ["Car", "Boat", "Bus", "Train"],
+    ["Celery", "Broccoli", "Cabbage", "Cauliflower"],
+    ["Merlot", "Champagne", "Cabernet", "Chardonnay"],
+    ["Oak", "Maple", "Walnut", "Mahogany"],
+    ["Padauk", "Bubinga", "Cocobolo", "Poculi"],
+    ["Sunflower", "Canola", "Sesame", "Olive"],
+    ["Cup", "Goblet", "Glass", "Mug"],
+    ["Sapphire", "Ruby", "Diamond", "Pearl"],
+    ["Toothpaste", "Floss", "Mouthwash", "Toothbrush"],
+    ["Python", "Java", "Ruby", "Go"],
+    ["Rock", "Jazz", "Pop", "Country"],
+    ["Windows", "iOS", "Linux", "MacOS"],
+    ["Ruler", "Compass", "Protractor", "Angle"],
+    ["Adidas", "Nike", "Reebok", "Puma"],
+    ["Beyonce", "Prince", "Beatles", "Katy Perry"],
+    ["Airplane", "Helicopter", "Blimp", "Rocket"],
+    ["Daffodil", "Rose", "Tulip", "Pansy"],
+    ["Rucksack", "Bag", "Backpack", "Satchel"]];
+  final.groups = _.shuffle(final.groups);
+  for (var i = 0; i < final.groups.length; i++) {
+    final.groups[i] = _.shuffle(final.groups[i]);
+  }
+
+  final.practiceGroups = [
+    ["Starfruit", "Durian", "Pomegranate", "Passionfruit"],
+    ["Alphonso", "Chaunsa", "Fazli", "Raspuri"],
+    ["Flounder", "Bream", "Haddock", "Mackerel"],
+    ["Sicilian", "Chicago", "New York", "Thin Crust"],
+    ["Tree", "Flower", "Bamboo", "Seaweed"],
+    ["MongoDB", "Postgres", "MonetDB", "Firebase"],
+    ["Fir", "Alder", "Cedar", "Poplar"],
+    ["Tomato", "Eggplant", "Cucumber", "Squash"],
+    ["Drawer", "Shelves", "Wardrobe", "Desk"],
+    ["Mewtwo", "Ghastly", "Meowth", "Pikachu"],
+    ["Mouse", "Keyboard", "Monitor", "Webcam"],
+    ["Hamster", "Gerbil", "Chinchilla", "Guinea Pig"]];
+  final.practiceGroups = _.shuffle(final.practiceGroups);
+  for (var i = 0; i < final.practiceGroups.length; i++) {
+    final.practiceGroups[i] = _.shuffle(final.practiceGroups[i]);
+  }
+
+  // set up experimental params
+  final.experimentParams = {};
+
+  // selections: 8 items per menu, weighted as 15, 8, 5, 4, 3, 3, 2, 2 (= 42) ("Zipfian")
+  var EASY_MODE = false;
+  var copies = EASY_MODE ? [1, 1] : [15, 8, 5, 4, 3, 3, 2, 2];
+  var selections = [];
+  for (var m = 0; m < 3; m++) {
+    var picked = _.shuffle(_.range(16));
+    for (var i = 0; i < copies.length; i++) {
+      selections = selections.concat(Array(copies[i]).fill(picked[i] + m * 16));
+    }
+  }
+  final.experimentParams.selections = _.shuffle(selections);
+  final.experimentParams.conditions = _.shuffle(["Baseline", "Ephemeral"]);
+
   final.begin = function() {
     if (window.location.hash.indexOf('skip') != -1) {
       final.preparePracticeExperiment();
-    } else if (window.location.hash.indexOf('demographics') != -1) {
-      final.prepareDemographicsForm();
     } else if (window.location.hash.indexOf('baseline') != -1) {
       final.experimentParams.conditions = ["Baseline"];
       final.finishPracticeExperiment();
@@ -45,22 +106,21 @@ $(document).ready(function() {
       'data': {
         'gender': $("input[name=gender]").val(),
         'age': $("input[name=age]").val(),
-        'zipcode': $("input[name=zipcode]").val(),
         'education': $("select[name=education]").val(),
-        'awareness': $("input[name=awareness]:checked").val(),
-        'savviness': $("input[name=savviness]:checked").val(),
-        'trust': $("input[name=trust]:checked").val(),
-        'interest': $("input[name=interest]:checked").val()
+        'pointer': $("select[name=pointer]").val(),
+        'handedness': $("select[name=handedness]").val(),
+        'language': $("input[name=language]").val(),
+        'experience': $("select[name=experience]").val()
       },
       'success': function() {
         final.preparePracticeModal();
       }
     });
   };
-  
+
   final.preparePracticeModal = function() {
     $("#practice-modal").modal(final.modalOptions);
-    
+
     $("#submit-begin-experiment").off(".begin").on("click.begin", function() {
       final.preparePracticeExperiment();
     });

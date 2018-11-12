@@ -11,7 +11,7 @@ from flask_pymongo import PyMongo
 from flask import send_file
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb://localhost:27017/final"
+app.config["MONGO_URI"] = "mongodb://localhost:27017/cs279final"
 mongo = PyMongo(app)
 
 @app.route("/")
@@ -31,11 +31,12 @@ def demographics():
         "uuid": request.cookies.get('finaluuid'),
         "gender": request.form.get("gender"),
         "age": request.form.get("age"),
+        "zipcode": request.form.get("zipcode"),
         "education": request.form.get("education"),
-        "pointer": request.form.get("pointer"),
-        "handedness": request.form.get("handedness"),
-        "language": request.form.get("language"),
-        "experience": request.form.get("experience"),
+        "awareness": request.form.get("awareness"),
+        "savviness": request.form.get("savviness"),
+        "trust": request.form.get("trust"),
+        "interest": request.form.get("interest"),
     })
     return jsonify(dict(message="OK", form=request.form))
 
