@@ -87,167 +87,194 @@
             <h2>How would you rate your...</h2>
             
 
-            <div>
-              <label for="inputAwareness" class="col-form-label">Political Awareness</label>
-            </div>
-            <div class="form-group">
-              <div class="form-check form-check-inline">
-                Very low
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="awareness" id="awareness1" value="1">
-                <label class="form-check-label" for="awareness1">1</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="awareness" id="awareness2" value="2">
-                <label class="form-check-label" for="awareness2">2</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="awareness" id="awareness3" value="3">
-                <label class="form-check-label" for="awareness3">3</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="awareness" id="awareness4" value="4">
-                <label class="form-check-label" for="awareness4">4</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="awareness" id="awareness5" value="5">
-                <label class="form-check-label" for="awareness5">5</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="awareness" id="awareness6" value="6">
-                <label class="form-check-label" for="awareness6">6</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="awareness" id="awareness7" value="7">
-                <label class="form-check-label" for="awareness7">7</label>
-              </div>
-              <div class="form-check form-check-inline">
-                Very High
-              </div>
-            </div>
-          
-            <div>
-              <label for="inputSavviness" class="col-form-label">Digital Savviness</label>
-            </div>
-            <div class="form-group">
-              <div class="form-check form-check-inline">
-                Least low
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="savviness" id="savviness1" value="1">
-                <label class="form-check-label" for="savviness1">1</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="savviness" id="savviness2" value="2">
-                <label class="form-check-label" for="savviness2">2</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="savviness" id="savviness3" value="3">
-                <label class="form-check-label" for="savviness3">3</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="savviness" id="savviness4" value="4">
-                <label class="form-check-label" for="savviness4">4</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="savviness" id="savviness5" value="5">
-                <label class="form-check-label" for="savviness5">5</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="savviness" id="savviness6" value="6">
-                <label class="form-check-label" for="savviness6">6</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="savviness" id="savviness7" value="7">
-                <label class="form-check-label" for="savviness7">7</label>
-              </div>
-              <div class="form-check form-check-inline">
-                Most high
-              </div>
-            </div>
-
-            <div>
-              <label for="inputTrust" class="col-form-label">News Trust</label>
-            </div>
-            <div class="form-group">
-              <div class="form-check form-check-inline">
-                Least low
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="trust" id="trust1" value="1">
-                <label class="form-check-label" for="trust1">1</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="trust" id="trust2" value="2">
-                <label class="form-check-label" for="trust2">2</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="trust" id="trust3" value="3">
-                <label class="form-check-label" for="trust3">3</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="trust" id="trust4" value="4">
-                <label class="form-check-label" for="trust4">4</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="trust" id="trust5" value="5">
-                <label class="form-check-label" for="trust5">5</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="trust" id="trust6" value="6">
-                <label class="form-check-label" for="trust6">6</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="trust" id="trust7" value="7">
-                <label class="form-check-label" for="trust7">7</label>
-              </div>
-              <div class="form-check form-check-inline">
-                Most high
+            <div class="form-group row">
+              <label for="inputAwareness" class="col-form-label col-sm-4">Political Awareness</label>
+              <div class="col-sm-8 demographics-likert">
+                <div class="form-check form-check-inline">
+                  Very low
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="awareness" id="awareness1" value="1">
+                  <label class="form-check-label" for="awareness1">1</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="awareness" id="awareness2" value="2">
+                  <label class="form-check-label" for="awareness2">2</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="awareness" id="awareness3" value="3">
+                  <label class="form-check-label" for="awareness3">3</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="awareness" id="awareness4" value="4">
+                  <label class="form-check-label" for="awareness4">4</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="awareness" id="awareness5" value="5">
+                  <label class="form-check-label" for="awareness5">5</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="awareness" id="awareness6" value="6">
+                  <label class="form-check-label" for="awareness6">6</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="awareness" id="awareness7" value="7">
+                  <label class="form-check-label" for="awareness7">7</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  Very High
+                </div>
               </div>
             </div>
           
+            <div class="form-group row">
+              <label for="inputSavviness" class="col-form-label col-sm-4">Digital Savviness</label>
+              <div class="col-sm-8 demographics-likert">
+                <div class="form-check form-check-inline">
+                  Very low
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="savviness" id="savviness1" value="1">
+                  <label class="form-check-label" for="savviness1">1</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="savviness" id="savviness2" value="2">
+                  <label class="form-check-label" for="savviness2">2</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="savviness" id="savviness3" value="3">
+                  <label class="form-check-label" for="savviness3">3</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="savviness" id="savviness4" value="4">
+                  <label class="form-check-label" for="savviness4">4</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="savviness" id="savviness5" value="5">
+                  <label class="form-check-label" for="savviness5">5</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="savviness" id="savviness6" value="6">
+                  <label class="form-check-label" for="savviness6">6</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="savviness" id="savviness7" value="7">
+                  <label class="form-check-label" for="savviness7">7</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  Very high
+                </div>
+              </div>
+            </div>
 
-            <div>
-              <label for="inputInterest" class="col-form-label">News Interest</label>
+            <div class="form-group row">
+              <label for="inputTrust" class="col-form-label col-sm-4">News Trust</label>
+              <div class="col-sm-8 demographics-likert">
+                <div class="form-check form-check-inline">
+                  Very low
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="trust" id="trust1" value="1">
+                  <label class="form-check-label" for="trust1">1</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="trust" id="trust2" value="2">
+                  <label class="form-check-label" for="trust2">2</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="trust" id="trust3" value="3">
+                  <label class="form-check-label" for="trust3">3</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="trust" id="trust4" value="4">
+                  <label class="form-check-label" for="trust4">4</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="trust" id="trust5" value="5">
+                  <label class="form-check-label" for="trust5">5</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="trust" id="trust6" value="6">
+                  <label class="form-check-label" for="trust6">6</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="trust" id="trust7" value="7">
+                  <label class="form-check-label" for="trust7">7</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  Very high
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-              <div class="form-check form-check-inline">
-                Least low
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="interest" id="interest1" value="1">
-                <label class="form-check-label" for="interest1">1</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="interest" id="interest2" value="2">
-                <label class="form-check-label" for="interest2">2</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="interest" id="interest3" value="3">
-                <label class="form-check-label" for="interest3">3</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="interest" id="interest4" value="4">
-                <label class="form-check-label" for="interest4">4</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="interest" id="interest5" value="5">
-                <label class="form-check-label" for="interest5">5</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="interest" id="interest6" value="6">
-                <label class="form-check-label" for="interest6">6</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="interest" id="interest7" value="7">
-                <label class="form-check-label" for="interest7">7</label>
-              </div>
-              <div class="form-check form-check-inline">
-                Most high
+          
+
+            <div class="form-group row">
+              <label for="inputInterest" class="col-form-label col-sm-4">News Interest</label>
+              <div class="col-sm-8 demographics-likert">
+                <div class="form-check form-check-inline">
+                  Very low
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="interest" id="interest1" value="1">
+                  <label class="form-check-label" for="interest1">1</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="interest" id="interest2" value="2">
+                  <label class="form-check-label" for="interest2">2</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="interest" id="interest3" value="3">
+                  <label class="form-check-label" for="interest3">3</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="interest" id="interest4" value="4">
+                  <label class="form-check-label" for="interest4">4</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="interest" id="interest5" value="5">
+                  <label class="form-check-label" for="interest5">5</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="interest" id="interest6" value="6">
+                  <label class="form-check-label" for="interest6">6</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="interest" id="interest7" value="7">
+                  <label class="form-check-label" for="interest7">7</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  Very high
+                </div>
               </div>
             </div>
-              
+            
+            <h2>Preferred news source</h2>
+            
+            <div class="form-group row">
+              <label for="inputEducation" class="col-sm-4 col-form-label">Most used (choose one)</label>
+              <div class="col-sm-8 demographics-likert">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="newssource" id="newssource4" value="socialnetworks">
+                  <label class="form-check-label" for="newssource4">Social Network (Facebook, Twitter, Instagram, etc)</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="newssource" id="newssource5" value="cable">
+                  <label class="form-check-label" for="newssource5">Cable News (CNN, Fox News, NBC, etc)</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="newssource" id="newssource6" value="newspaper">
+                  <label class="form-check-label" for="newssource6">Newspaper (NYT, WSJ, WaPo, etc)</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="newssource" id="newssource7" value="friends">
+                  <label class="form-check-label" for="newssource7">Friends and Family</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="newssource" id="newssource8" value="nonews">
+                  <label class="form-check-label" for="newssource8">I don't actively seek out news'</label>
+                </div>
+              </div>
+            </div>
           </form>
         </div>
         <div class="modal-footer">

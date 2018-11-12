@@ -37,6 +37,7 @@ def demographics():
         "savviness": request.form.get("savviness"),
         "trust": request.form.get("trust"),
         "interest": request.form.get("interest"),
+        "newssource": request.form.get("newssource"),
     })
     return jsonify(dict(message="OK", form=request.form))
 

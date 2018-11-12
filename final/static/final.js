@@ -50,7 +50,8 @@ $(document).ready(function() {
         'awareness': $("input[name=awareness]:checked").val(),
         'savviness': $("input[name=savviness]:checked").val(),
         'trust': $("input[name=trust]:checked").val(),
-        'interest': $("input[name=interest]:checked").val()
+        'interest': $("input[name=interest]:checked").val(),
+        'newssource': $("input[name=newssource]:checked").val()
       },
       'success': function() {
         final.preparePracticeModal();
