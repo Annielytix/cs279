@@ -15,6 +15,8 @@
   <script src="https://underscorejs.org/underscore-min.js" crossorigin="anonymous"></script>
 
   <script src="/static/final.js?r={{ random }}"></script>
+  
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans" rel="stylesheet">
   <link rel="stylesheet" href="/static/final.css?r={{ random }}" />
   
 </head>
@@ -522,67 +524,59 @@
   </div>
   
   <div id="experiment" style="display: none;">
-    <div id="experiment-nav">
-      <div id="experiment-prompt">Menu 1 > Option 3</div>
-      <div class="experiment-menubar">
-        <div class="experiment-menu">
-          <div id="experiment-menu-button-1" class="experiment-menu-button">Menu 1</div>
-          <div id="experiment-menu-dropdown-1" class="experiment-menu-dropdown" style="display: none;">
-            <div id="experiment-menu-1-option-1" class="experiment-menu-option">
-              <span class="menu-option-text fade-in">Option text</span>
-            </div>
-            <div id="experiment-menu-1-option-2" class="experiment-menu-option">
-              <span class="menu-option-text">Cucumber</span>
-            </div>
-            <div id="experiment-menu-1-option-3" class="experiment-menu-option">
-              <span class="menu-option-text fade-in">Pineapple</span>
-            </div>
-            <div id="experiment-menu-1-option-4" class="experiment-menu-option">
-              <span class="menu-option-text fade-in">Broccoli</span>
-            </div>
-            <div id="experiment-menu-1-option-5" class="experiment-menu-option">
-              <span class="menu-option-text fade-in">Pizza</span>
-            </div>
-            <div id="experiment-menu-1-option-6" class="experiment-menu-option">
-              <span class="menu-option-text">Word</span>
-            </div>
-            <div id="experiment-menu-1-option-7" class="experiment-menu-option">
-              <span class="menu-option-text fade-in">Apple</span>
-            </div>
-            <div id="experiment-menu-1-option-8" class="experiment-menu-option">
-              <span class="menu-option-text fade-in">Golden Retriever</span>
-            </div>
-            <div id="experiment-menu-1-option-9" class="experiment-menu-option">
-              <span class="menu-option-text">Piano</span>
-            </div>
-            <div id="experiment-menu-1-option-10" class="experiment-menu-option">
-              <span class="menu-option-text fade-in">Sameric</span>
-            </div>
-          </div>
+    <div class="container">
+
+      <h2>FACT v. OPINION</h2>
+
+      <div class="explainer">
+        Select the option that you think best represents the statement.
+      </div>
+      
+      <div class="cards">
+        <div class="card" style="top: 0px; left: 0px; z-index: 100">
+          <div class="card-text">Health care costs per person in the U.S. are the highest in the developed world</div>
         </div>
-        <div class="experiment-menu">
-          <div id="experiment-menu-button-2" class="experiment-menu-button">Menu 2</div>
-          <div id="experiment-menu-dropdown-2" class="experiment-menu-dropdown" style="display: none;">
-            <div id="experiment-menu-2-option-1" class="experiment-menu-option">
-              <span class="menu-option-text">Option text</span>
-            </div>
-            <div id="experiment-menu-2-option-2" class="experiment-menu-option">
-              <span class="menu-option-text fade-in">Option text</span>
-            </div>
-          </div>
+        <div class="card" style="top: 2px; left: 2px; z-index: 99">
+          <div class="card-text">Health care costs per person in the U.S. are the highest in the developed world</div>
         </div>
-        <div class="experiment-menu">
-          <div id="experiment-menu-button-3" class="experiment-menu-button">Menu 3</div>
-          <div id="experiment-menu-dropdown-3" class="experiment-menu-dropdown" style="display: none;">
-            <div id="experiment-menu-3-option-1" class="experiment-menu-option">
-              <span class="menu-option-text">Option text</span>
-            </div>
-            <div id="experiment-menu-3-option-2" class="experiment-menu-option">
-              <span class="menu-option-text fade-in">Option text</span>
-            </div>
-          </div>
+        <div class="card" style="top: 4px; left: 4px; z-index: 98">
+          <div class="card-text">Health care costs per person in the U.S. are the highest in the developed world</div>
+        </div>
+        <div class="card" style="top: 6px; left: 6px; z-index: 97">
+          <div class="card-text">Health care costs per person in the U.S. are the highest in the developed world</div>
+        </div>
+        <div class="card" style="top: 8px; left: 8px; z-index: 96">
+          <div class="card-text">Health care costs per person in the U.S. are the highest in the developed world</div>
+        </div>
+        <div class="card" style="top: 10px; left: 10px; z-index: 95">
+          <div class="card-text">Health care costs per person in the U.S. are the highest in the developed world</div>
         </div>
       </div>
+      
+      <div class="explainer explainer-timer">
+        You have 5 seconds to read the statement before answering.
+      </div>
+      
+      <div class="buttons">
+        <div class="button button-fact">Fact</div>
+        <div class="button button-opinion">Opinion</div>
+      </div>
+      
+      <div class="social">
+        <div class="social-labels">
+          <div class="social-label fact">Fact</div>
+          <div class="social-label opinion">Opinion</div>
+        </div>
+        <div class="social-bars">
+          <div class="social-bar fact"></div>
+          <div class="social-bar opinion"></div>
+        </div>
+        <div class="social-users">
+          <div class="social-user fact">4 users</div>
+          <div class="social-user opinion">6 users</div>
+        </div>        
+      </div>
+      
     </div>
   </div>
 </body>
