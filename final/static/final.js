@@ -154,7 +154,7 @@ $(document).ready(function() {
 
       $("#experiment").show();
     
-      this.prepareCard(5);
+      this.prepareCard(4);
     },
     
     finishSimilarConditionExperiment: function(exp) {
@@ -181,7 +181,7 @@ $(document).ready(function() {
 
       $("#experiment").show();
     
-      this.prepareCard(9);
+      this.prepareCard(8);
     },
   
     prepareCard: function(cardNumber) {
@@ -198,7 +198,7 @@ $(document).ready(function() {
     arrangeCards: function() {
       if (this.currentCard > 0) {
         console.log(['arrangeCards', this.currentCard]);
-        $(".card").slice(0, this.currentCard-1).addClass('seen');
+        $(".card").slice(0, this.currentCard).addClass('seen');
       }
     },
   
@@ -244,7 +244,7 @@ $(document).ready(function() {
         'opinions': 0
       };
 
-      console.log(['updateSocialBars', secondsSince, this.currentCondition, times]);
+      // console.log(['updateSocialBars', secondsSince, this.currentCondition, times]);
       
       if (!times) return;
       
