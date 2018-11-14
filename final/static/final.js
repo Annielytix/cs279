@@ -6,7 +6,7 @@ $(document).ready(function() {
       'backdrop': 'static'
     },
   
-    BUTTON_DELAY: 1,
+    BUTTON_DELAY: 5,
     experimentParams: {},
     
     runningTimes: [],
@@ -246,6 +246,8 @@ $(document).ready(function() {
 
       console.log(['updateSocialBars', secondsSince, this.currentCondition, times]);
       
+      if (!times) return;
+      
       _.each(times, function(time) {
         if (secondsSince >= time[1]) {
           seenTimes[time[0] ? 'facts' : 'opinions'] += 1;
@@ -286,7 +288,9 @@ $(document).ready(function() {
       $(".button-opinion").off('click').toggleClass('chosen', choice == 'opinion');
       
       this.hasChosen = true;
-      this.conditionTimes[this.currentCard].push([choice == 'fact', 0]);
+      if (this.conditionTimes[this.currentCard]) {
+        this.conditionTimes[this.currentCard].push([choice == 'fact', 0]);
+      }
       this.updateSocialBars();
       
       if (!this.experimentTimes[this.currentCondition]) {
