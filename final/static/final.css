@@ -108,13 +108,15 @@ html, body {
 .buttons.active .button-opinion {
   background-color: #671fa5;
 }
-
+.social {
+  display: none;
+}
 .social-labels {
   text-transform: uppercase;
   overflow: hidden;
 }
 .social-label {
-  float: left;  
+  float: left;
   padding-right: 8px;
 }
 .social-label.fact {
