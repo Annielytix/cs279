@@ -6,11 +6,12 @@ $(document).ready(function() {
       'backdrop': 'static'
     },
   
-    BUTTON_DELAY: 5,
+    BUTTON_DELAY: 1,
     experimentParams: {},
     
     runningTimes: [],
     currentCondition: null,
+    experimentTimes: {},
     
     conditionTimes: [
       // Control
@@ -184,9 +185,21 @@ $(document).ready(function() {
     },
   
     prepareCard: function(cardNumber) {
+      this.hasChosen = false;
       this.currentCard = cardNumber;
+      
+      this.arrangeCards();
       this.beginButtonDelayCountdown();
       this.beginSocialCountdown();
+      this.attachButtons();
+      this.updateSocialBars();
+    },
+    
+    arrangeCards: function() {
+      if (this.currentCard > 0) {
+        console.log(['arrangeCards', this.currentCard]);
+        $(".card").slice(0, this.currentCard-1).addClass('seen');
+      }
     },
   
     beginButtonDelayCountdown: function() {
@@ -194,12 +207,14 @@ $(document).ready(function() {
       $(".explainer-timer").addClass('active');
       $(".social-label").css('opacity', 0);
       $(".social-user").css('opacity', 0);
+      $(".social-bars").css('opacity', 0);
       
       _.delay(function() {
         $(".buttons").addClass('active');
         $(".explainer-timer").removeClass('active');
         $(".social-label").animate({'opacity': 1}, 1000);
         $(".social-user").animate({'opacity': 1}, 1000);
+        $(".social-bars").animate({'opacity': 1}, 1000);
       }, this.BUTTON_DELAY*1000);
     },
     
@@ -230,13 +245,13 @@ $(document).ready(function() {
       console.log(['updateSocialBars', secondsSince, this.currentCondition, times]);
       
       _.each(times, function(time) {
-        if (secondsSince > time[1]) {
+        if (secondsSince >= time[1]) {
           seenTimes[time[0] ? 'facts' : 'opinions'] += 1;
         }
       });
       
       var width = $(".social").width();
-      var total = times.length + 1;
+      var total = times.length + (this.hasChosen ? 0 : 1);
       var factWidth = seenTimes['facts'] * (width / total);
       var opinionWidth = seenTimes['opinions'] * (width / total);
             
@@ -247,20 +262,58 @@ $(document).ready(function() {
       $(".social-user.opinion").text(seenTimes['opinions'] + " " + (seenTimes['opinions'] == 1 ? "person" : "people"));
     },
     
-    finishMainExperiment: function(exp) {
+    attachButtons: function() {
+      $(".button-fact").off('click').on('click', _.bind(this.clickFactButton, this));
+      $(".button-opinion").off('click').on('click', _.bind(this.clickOpinionButton, this));
+    },
+    
+    clickFactButton: function() {
+      this.clickButton('fact');      
+    },
+    
+    clickOpinionButton: function() {
+      this.clickButton('opinion');
+    },
+    
+    clickButton: function(choice) {
+      var secondsSince = ((new Date) - this.socialCountdownTime) / 1000 - this.BUTTON_DELAY;
+      console.log(['click', choice, secondsSince]);
+      if (secondsSince <= 0) return;
+            
+      $(".button-fact").off('click').toggleClass('chosen', choice == 'fact');
+      $(".button-opinion").off('click').toggleClass('chosen', choice == 'opinion');
+      
+      this.hasChosen = true;
+      this.conditionTimes[this.currentCard].push([choice == 'fact', 0]);
+      this.updateSocialBars();
+      
+      if (!this.experimentTimes[this.currentCondition]) {
+        this.experimentTimes[this.currentCondition] = [];
+      }
+      this.experimentTimes[this.currentCondition].push([choice, secondsSince]);
+      
+      if (this.currentCard == 3) {
+        this.prepareSimilarConditionExperiment();
+      } else if (this.currentCard == 7) {
+        this.prepareAdverseConditionExperiment();
+      } else if (this.currentCard == 11) {
+        _.delay(_.bind(this.finishMainExperiment, this), 1000);
+      } else {
+        this.prepareCard(this.currentCard + 1);
+      }
+    },
+    
+    finishMainExperiment: function() {
       console.log("finishMainExperiment");
-      console.log(exp);
 
       // send the experimental results off to the server
-      if (exp) {
-        $.ajax({
-          'type': "POST",
-          'url': '/taskdata',
-          'contentType': "application/json; charset=utf-8",
-          'dataType': "json",
-          'data': JSON.stringify( exp )
-        });
-      }
+      $.ajax({
+        'type': "POST",
+        'url': '/taskdata',
+        'contentType': "application/json; charset=utf-8",
+        'dataType': "json",
+        'data': JSON.stringify( this.experimentTimes )
+      });
 
       $("#experiment").hide();
       $("#feedback-modal").modal(this.modalOptions);

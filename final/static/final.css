@@ -58,6 +58,12 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 1s linear;
+  transition-property: opacity, transform;
+}
+.card.seen {
+  transform: translate(0, -24px);
+  opacity: 0;
 }
 .card-text {
   font-size: 31px;
