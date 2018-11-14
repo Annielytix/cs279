@@ -305,26 +305,39 @@
     </div>
   </div>
   
-  <div class="modal" tabindex="-1" role="dialog" id="intermission-modal">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 id="intermission-modal-title" class="modal-title">Thanks! Onto the next task!</h5>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Thank you for completing the previous task. Feel free to take a short break before continuing to the next section.</p>
-
-          <p>Next is the main task section. There will be three dropdown menus on the next screen. A prompt at the top of the page will ask you to select a certain menu and then select an option from the menu. There will be 126 different options so it could take a short while. Don’t worry if you select the wrong one; you will have an opportunity to try again.</p>
-
-          <p>Click “Continue” when you are ready to continue to the main task.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" id="submit-intermission">Continue</button>
+    <div class="modal" tabindex="-1" role="dialog" id="similar-condition-modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="similar-condition-modal-title" class="modal-title">One third completed</h5>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>For the next round, we’ve asked a panel of 15 other fellow users to weigh in on the same statements. You will have 5 seconds to read the statement before answering. You will see the others’ answers as they come in. You are free to take however long you need to answer the statement yourself.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="submit-similar-condition">Continue</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+    
+    <div class="modal" tabindex="-1" role="dialog" id="adverse-condition-modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="adverse-condition-modal-title" class="modal-title">Two thirds completed</h5>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>For the final round, we’ve placed you in a new panel of users who answered similarly to you in the previous round. Like before, you will have 5 seconds to read the statement before answering or seeing the others’ answers. You are still free to take however long you need to decide.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="submit-adverse-condition">Continue</button>
+          </div>
+        </div>
+      </div>
+    </div>
   
   
   <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
@@ -570,8 +583,8 @@
           <div class="social-bar opinion"></div>
         </div>
         <div class="social-users">
-          <div class="social-user fact">4 users</div>
-          <div class="social-user opinion">6 users</div>
+          <div class="social-user fact">0 people</div>
+          <div class="social-user opinion">0 people</div>
         </div>        
       </div>
       

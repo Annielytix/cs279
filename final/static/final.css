@@ -109,21 +109,23 @@ html, body {
   background-color: #671fa5;
 }
 .social {
-  display: none;
+/*  display: none;*/
 }
 .social-labels {
   text-transform: uppercase;
   overflow: hidden;
 }
 .social-label {
-  float: left;
-  padding-right: 8px;
+  transition: width .25s linear;
 }
 .social-label.fact {
-  width: 120px;
+  width: 0px;
+  float: left;
 }
 .social-label.opinion {
-  width: 180px;
+  float: right;
+  width: 200px;
+  text-align: right;
 }
 .social-bars {
   height: 20px;
@@ -133,29 +135,33 @@ html, body {
 }
 .social-bar {
   height: 20px;
-  transition: width 1s linear;
+  transition: width .25s linear;
   width: 0;
-  float: left;
 }
 .social-bar.fact {
   background-color: #c98cff;
-  width: 120px;
+  width: 0px;
+  float: left;
 }
 .social-bar.opinion {
   background-color: #671fa5;
-  width: 180px;
+  width: 0px;
+  float: right;
 }
 .social-users {
   font-weight: 600;
   overflow: hidden;
 }
 .social-user {
-  float: left;
-  padding-right: 8px;
+  white-space: nowrap;
+  transition: width .25s linear;
 }
 .social-user.fact {
-  width: 120px;
+  width: 0px;
+  float: left;
 }
 .social-user.opinion {
-  width: 180px;
+  width: 200px;
+  float: right;
+  text-align: right;
 }
