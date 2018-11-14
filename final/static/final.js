@@ -204,10 +204,12 @@ $(document).ready(function() {
   
     beginButtonDelayCountdown: function() {
       $(".buttons").removeClass('active');
+      $(".button").removeClass('chosen');
       $(".explainer-timer").addClass('active');
       $(".social-label").css('opacity', 0);
       $(".social-user").css('opacity', 0);
       $(".social-bars").css('opacity', 0);
+      
       
       _.delay(function() {
         $(".buttons").addClass('active');
@@ -293,13 +295,15 @@ $(document).ready(function() {
       this.experimentTimes[this.currentCondition].push([choice, secondsSince]);
       
       if (this.currentCard == 3) {
-        this.prepareSimilarConditionExperiment();
+        _.delay(_.bind(this.finishControlConditionExperiment, this), 1000);
       } else if (this.currentCard == 7) {
-        this.prepareAdverseConditionExperiment();
+        _.delay(_.bind(this.finishSimilarConditionExperiment, this), 1000);
       } else if (this.currentCard == 11) {
         _.delay(_.bind(this.finishMainExperiment, this), 1000);
       } else {
-        this.prepareCard(this.currentCard + 1);
+        _.delay(_.bind(function() {
+          this.prepareCard(this.currentCard + 1);
+        }, this), 1000);
       }
     },
     
@@ -328,7 +332,7 @@ $(document).ready(function() {
             'frustration': $("input[name=frustration]:checked").val(),
             'efficiency': $("input[name=efficiency]:checked").val()
           },
-          'success': function() {
+          'success': _.bind(function() {
             // clear radio buttons
             console.log("CLEARING");
             $("input[name=difficulty]:checked").prop("checked", false);
@@ -336,13 +340,8 @@ $(document).ready(function() {
             $("input[name=frustration]:checked").prop("checked", false);
             $("input[name=efficiency]:checked").prop("checked", false);
 
-            // show next experiment if a condition remains
-            this.experimentParams.conditions = this.experimentParams.conditions.slice(1);
-            if (this.experimentParams.conditions.length === 0)
-              this.prepareGoodbye();
-            else
-              this.prepareControlConditionExperiment();
-          }
+            this.prepareGoodbye();
+          }, this)
         });
       }, this));
     },

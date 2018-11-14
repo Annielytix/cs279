@@ -96,7 +96,7 @@ html, body {
   font-size: 24px;
   font-weight: 600;
   text-align: center;
-  transition: background 1s linear;
+  transition: background .25s linear;
   cursor: wait;
 }
 .buttons.active .button {
@@ -113,6 +113,9 @@ html, body {
 }
 .buttons.active .button-opinion {
   background-color: #671fa5;
+}
+.buttons.active .button.chosen {
+  background-color: rgba(0, 0, 0, 0.8);
 }
 .social {
 /*  display: none;*/
