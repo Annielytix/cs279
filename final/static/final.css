@@ -1,5 +1,4 @@
 html, body {
-	height: 100%;
 	width: 100%;
   background: url(/static/bg.jpg);
   font-family: 'IBM Plex Sans', sans-serif;
@@ -27,6 +26,11 @@ html, body {
 #experiment {
   margin: 48px auto;
   color: #4a4a4a;
+}
+@media (max-width: 1000px) {
+  #experiment {
+    margin-bottom: 12px;
+  }
 }
 #experiment h2 {
   display: block;
