@@ -49,6 +49,7 @@ $(document).ready(function() {
     ],
     
     questionOrder: [],
+    questionAdverse: [],
     
     conditionTimes: [
       [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
@@ -207,6 +208,11 @@ $(document).ready(function() {
       if (this.questionOrder.length == 0) {
         this.questionOrder = this.questionOrder.concat(_.shuffle(_.range(0, 30)));
       }
+      if (this.questionAdverse.length == 0) {
+        this.questionAdverse = _.map(_.range(30), function(q) {
+          return Math.random() <= .30;
+        });
+      }
       
       var $cards = $(".cards").empty();
       var order;
@@ -242,7 +248,7 @@ $(document).ready(function() {
         'url': '/demographics',
         'data': {
           'gender': $("input[name=gender]").val(),
-          'age': $("input[name=age]").val(),
+          'age': $("select[name=age]").val(),
           'zipcode': $("input[name=zipcode]").val(),
           'education': $("select[name=education]").val(),
           'awareness': $("input[name=awareness]:checked").val(),
@@ -392,20 +398,24 @@ $(document).ready(function() {
     },
     
     updateSocialBars: function() {
+      var isAdverse = this.questionAdverse[this.currentCard];
       var times = this.conditionTimes[this.currentCard];
       var secondsSince = ((new Date) - this.socialCountdownTime) / 1000 - this.BUTTON_DELAY;
       var seenTimes = {
         'facts': 0,
         'opinions': 0
       };
-
       // console.log(['updateSocialBars', secondsSince, this.currentCondition, times]);
       
       if (!times) return;
       
       _.each(times, function(time) {
         if (secondsSince >= time[1]) {
-          seenTimes[time[0] ? 'facts' : 'opinions'] += 1;
+          if (isAdverse) {
+            seenTimes[!time[0] ? 'facts' : 'opinions'] += 1;
+          } else {
+            seenTimes[time[0] ? 'facts' : 'opinions'] += 1;            
+          }
         }
       });
       
@@ -442,13 +452,23 @@ $(document).ready(function() {
       $(".button-opinion").off('click').toggleClass('chosen', choice == 'opinion');
       
       this.hasChosen = true;
+      var isAdverse = this.questionAdverse[this.currentCard];
       if (this.conditionTimes[this.currentCard]) {
-        this.conditionTimes[this.currentCard].push([choice == 'fact', 0]);
+        var selection = [choice == 'fact', 0];
+        if (isAdverse) selection[0] = !selection[0];
+        this.conditionTimes[this.currentCard].push(selection);
       }
       this.updateSocialBars();
       
       var questionOrdered = this.questionOrder[this.currentCard];
-      this.experimentTimes[questionOrdered] = [choice, secondsSince];
+      var isAdverse = this.questionAdverse[this.currentCard];
+      
+      this.experimentTimes[questionOrdered] = [
+        choice,
+        secondsSince,
+        this.currentCondition,
+        isAdverse
+      ];
       
       if (this.currentCard == 9) {
         _.delay(_.bind(this.finishControlConditionExperiment, this), this.CLICK_DELAY*1000);

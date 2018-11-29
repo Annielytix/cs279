@@ -122,15 +122,19 @@ def xlsx():
     demographics.set_column(col, col, 15); col += 1
     demographics.write(row, col, "Education", bold)
     demographics.set_column(col, col, 15); col += 1
-    demographics.write(row, col, "Experience", bold)
-    demographics.set_column(col, col, 15); col += 1
     demographics.write(row, col, "Gender", bold)
     demographics.set_column(col, col, 15); col += 1
-    demographics.write(row, col, "Handedness", bold)
+    demographics.write(row, col, "Zipcode", bold)
     demographics.set_column(col, col, 15); col += 1
-    demographics.write(row, col, "Language", bold)
+    demographics.write(row, col, "Awareness", bold)
     demographics.set_column(col, col, 15); col += 1
-    demographics.write(row, col, "Pointer", bold)
+    demographics.write(row, col, "Savviness", bold)
+    demographics.set_column(col, col, 15); col += 1
+    demographics.write(row, col, "Trust", bold)
+    demographics.set_column(col, col, 15); col += 1
+    demographics.write(row, col, "Interest", bold)
+    demographics.set_column(col, col, 15); col += 1
+    demographics.write(row, col, "News Source", bold)
     demographics.set_column(col, col, 15); col += 1
     
     for d in db_demographics:
@@ -142,11 +146,13 @@ def xlsx():
         demographics.write_datetime(row, col, date, date_format); col += 1;
         demographics.write(row, col, d.get('age', '')); col += 1;
         demographics.write(row, col, d.get('education', '')); col += 1;
-        demographics.write(row, col, d.get('experience', '')); col += 1;
         demographics.write(row, col, d.get('gender', '')); col += 1;
-        demographics.write(row, col, d.get('handedness', '')); col += 1;
-        demographics.write(row, col, d.get('language', '')); col += 1;
-        demographics.write(row, col, d.get('pointer', '')); col += 1;
+        demographics.write(row, col, d.get('zipcode', '')); col += 1;
+        demographics.write(row, col, d.get('awareness', '')); col += 1;
+        demographics.write(row, col, d.get('savviness', '')); col += 1;
+        demographics.write(row, col, d.get('trust', '')); col += 1;
+        demographics.write(row, col, d.get('interest', '')); col += 1;
+        demographics.write(row, col, d.get('newssource', '')); col += 1;
     
     row = 0
     col = 0
@@ -154,45 +160,63 @@ def xlsx():
     data.set_column(col, col, 15); col += 1
     data.write(row, col, "Date", bold)
     data.set_column(col, col, 20); col += 1
-    data.write(row, col, "Condition", bold)
+    data.write(row, col, "Statement", bold)
     data.set_column(col, col, 15); col += 1
-    data.write(row, col, "Fade in", bold)
+    data.write(row, col, "Time (s)", bold)
     data.set_column(col, col, 15); col += 1
-    data.write(row, col, "Permutation", bold)
+    data.write(row, col, "Round", bold)
     data.set_column(col, col, 15); col += 1
-    data.write(row, col, "Selection", bold)
+    data.write(row, col, "Adverse?", bold)
     data.set_column(col, col, 15); col += 1
     data.write(row, col, "Correct", bold)
     data.set_column(col, col, 15); col += 1
-    data.write(row, col, "Menu Timestamp", bold)
-    data.set_column(col, col, 15); col += 1
-    data.write(row, col, "Menu Option Timestamp", bold)
-    data.set_column(col, col, 15); col += 1
     
     # Task data
-    
+    questions = [
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+    ]
     for d in db_data:
-        for t, trial in enumerate(d['trials']):
+        for t, trial in enumerate(d['results']):
             print(d)
             row += 1
             col = 0
             date = generate_date(d)
             data.write(row, col, d['uuid']); col += 1;
             data.write_datetime(row, col, date, date_format); col += 1;
-            data.write(row, col, d['condition']); col += 1;
-            if d.get('fadeIns', None) and len(d['fadeIns']) > t:
-                data.write(row, col, d['fadeIns'][t]); col += 1;
-            else:
-                data.write(row, col, ""); col += 1;
-            data.write(row, col, ', '.join([str(p) for p in d['permutation']])); col += 1;
-            if d.get('selection', None) and len(d['selection']) > t:
-                data.write(row, col, d['selection'][t]); col += 1;
-            else:
-                data.write(row, col, ""); col += 1;
-            data.write(row, col, trial['correct']); col += 1;
-            data.write(row, col, trial['events'][-1]['timestamp']); col += 1;
-            data.write(row, col, trial['events'][-2]['timestamp']); col += 1;
-    
+            data.write(row, col, trial[0]); col += 1;
+            data.write(row, col, trial[1]); col += 1;
+            data.write(row, col, trial[2]); col += 1;
+            data.write(row, col, trial[3]); col += 1;
+            data.write(row, col, trial[0] == questions[t]); col += 1;
     
     workbook.close()
     
