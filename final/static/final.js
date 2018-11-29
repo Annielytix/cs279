@@ -48,142 +48,67 @@ $(document).ready(function() {
       "Voter fraud across the U.S. has undermined the results of our elections"
     ],
     
+    
+    
+    
+    
+    
+    
+    
+    
+    questionSocialFactCount: [
+      8,
+      11,
+      8,
+      10,
+      8,
+      11,
+      14,
+      12,
+      11,
+      13,
+      13,
+      9,
+      11,
+      11,
+      11,
+      2,
+      4,
+      3,
+      5,
+      4,
+      4,
+      2,
+      1,
+      2,
+      3,
+      1,
+      2,
+      2,
+      4,
+      3
+    ],
+    
     questionOrder: [],
     questionAdverse: [],
     
-    conditionTimes: [
-      [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-       [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-       [false, 2.1], [true, 4.3], [true, 2.0]
-      ],
-      [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-       [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-       [false, 2.1], [true, 4.3], [true, 2.0]
-      ],
-      [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-       [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-       [false, 2.1], [true, 4.3], [true, 2.0]
-      ],
-      [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-       [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-       [false, 2.1], [true, 4.3], [true, 2.0]
-      ],
-      [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-       [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-       [false, 2.1], [true, 4.3], [true, 2.0]
-      ],
-      [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-       [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-       [false, 2.1], [true, 4.3], [true, 2.0]
-      ],
-      [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-       [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-       [false, 2.1], [true, 4.3], [true, 2.0]
-      ],
-      [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-       [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-       [false, 2.1], [true, 4.3], [true, 2.0]
-      ],
-    [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-     [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-     [false, 2.1], [true, 4.3], [true, 2.0]
-    ],
-    [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-     [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-     [false, 2.1], [true, 4.3], [true, 2.0]
-    ],
-    [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-     [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-     [false, 2.1], [true, 4.3], [true, 2.0]
-    ],
-    [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-     [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-     [false, 2.1], [true, 4.3], [true, 2.0]
-    ],
-    [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-     [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-     [false, 2.1], [true, 4.3], [true, 2.0]
-    ],
-    [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-     [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-     [false, 2.1], [true, 4.3], [true, 2.0]
-    ],
-    [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-     [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-     [false, 2.1], [true, 4.3], [true, 2.0]
-    ],
-    [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-     [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-     [false, 2.1], [true, 4.3], [true, 2.0]
-    ],
-  [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-   [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-   [false, 2.1], [true, 4.3], [true, 2.0]
-  ],
-  [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-   [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-   [false, 2.1], [true, 4.3], [true, 2.0]
-  ],
-  [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-   [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-   [false, 2.1], [true, 4.3], [true, 2.0]
-  ],
-  [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-   [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-   [false, 2.1], [true, 4.3], [true, 2.0]
-  ],
-  [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-   [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-   [false, 2.1], [true, 4.3], [true, 2.0]
-  ],
-  [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-   [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-   [false, 2.1], [true, 4.3], [true, 2.0]
-  ],
-  [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-   [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-   [false, 2.1], [true, 4.3], [true, 2.0]
-  ],
-  [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
-   [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
-   [false, 2.1], [true, 4.3], [true, 2.0]
-  ],
-[[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
- [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
- [false, 2.1], [true, 4.3], [true, 2.0]
-],
-[[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
- [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
- [false, 2.1], [true, 4.3], [true, 2.0]
-],
-[[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
- [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
- [false, 2.1], [true, 4.3], [true, 2.0]
-],
-[[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
- [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
- [false, 2.1], [true, 4.3], [true, 2.0]
-],
-[[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
- [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
- [false, 2.1], [true, 4.3], [true, 2.0]
-],
-[[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
- [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
- [false, 2.1], [true, 4.3], [true, 2.0]
-],
-[[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
- [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
- [false, 2.1], [true, 4.3], [true, 2.0]
-],
-[[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
- [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
- [false, 2.1], [true, 4.3], [true, 2.0]
-]
-
-    ],
-  
+    
+    generateTimes: function() {
+      var factCount = this.questionSocialFactCount;
+      var times = _.map(_.range(30), function(q) {
+        return _.map(_.range(14), function(p) { 
+          var facts = factCount[q];
+          var time = Math.random() * 5;
+          return [p < facts, time];
+        });
+      });
+      
+      return times;
+    },
+    conditionTimes: [],
+    
     begin: function() {
+      this.conditionTimes = this.generateTimes();
       if (window.location.hash.indexOf('demographics') != -1) {
         this.prepareDemographicsForm();
       } else if (window.location.hash.indexOf('skip') != -1) {
@@ -382,7 +307,7 @@ $(document).ready(function() {
     },
     
     beginSocialCountdown: function() {
-      var times = this.conditionTimes[this.currentCard];
+      var times = this.conditionTimes[this.questionOrder[this.currentCard]];
       _.each(this.runningTimes, function(timeDelay) {
         clearTimeout(timeDelay);
       });
@@ -392,14 +317,14 @@ $(document).ready(function() {
       _.each(times, _.bind(function(time) {
         var timeDelay = _.delay(_.bind(function() {
           this.updateSocialBars();
-        }, this), this.BUTTON_DELAY*1000 + (time[1]*1000));
+        }, this), this.BUTTON_DELAY*1000 + (time[1]*1000) + 1);
         this.runningTimes.push(timeDelay);
       }, this));
     },
     
     updateSocialBars: function() {
-      var isAdverse = this.questionAdverse[this.currentCard];
-      var times = this.conditionTimes[this.currentCard];
+      var isAdverse = this.questionAdverse[this.questionOrder[this.currentCard]];
+      var times = this.conditionTimes[this.questionOrder[this.currentCard]];
       var secondsSince = ((new Date) - this.socialCountdownTime) / 1000 - this.BUTTON_DELAY;
       var seenTimes = {
         'facts': 0,
@@ -452,18 +377,15 @@ $(document).ready(function() {
       $(".button-opinion").off('click').toggleClass('chosen', choice == 'opinion');
       
       this.hasChosen = true;
-      var isAdverse = this.questionAdverse[this.currentCard];
-      if (this.conditionTimes[this.currentCard]) {
+      var isAdverse = this.questionAdverse[this.questionOrder[this.currentCard]];
+      if (this.conditionTimes[this.questionOrder[this.currentCard]]) {
         var selection = [choice == 'fact', 0];
         if (isAdverse) selection[0] = !selection[0];
-        this.conditionTimes[this.currentCard].push(selection);
+        this.conditionTimes[this.questionOrder[this.currentCard]].push(selection);
       }
       this.updateSocialBars();
       
-      var questionOrdered = this.questionOrder[this.currentCard];
-      var isAdverse = this.questionAdverse[this.currentCard];
-      
-      this.experimentTimes[questionOrdered] = [
+      this.experimentTimes[this.questionOrder[this.currentCard]] = [
         choice,
         secondsSince,
         this.currentCondition,
