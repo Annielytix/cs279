@@ -96,7 +96,8 @@ html, body {
   font-size: 24px;
   font-weight: 600;
   text-align: center;
-  transition: background .25s linear;
+  transition: background .25s linear, border .25s linear;
+  border: 1px solid #9b9b9b;
   cursor: wait;
 }
 .buttons.active .button {
@@ -106,15 +107,21 @@ html, body {
   float: left;
 }
 .buttons.active .button-fact {
-  background-color: #c98cff;
+  background-color: #671fa5;
+  border: 1px solid #c98cff;
 }
 .button-opinion {
   float: right;
 }
 .buttons.active .button-opinion {
   background-color: #671fa5;
+  border: 1px solid #c98cff;
 }
-.buttons.active .button.chosen {
+.buttons.active .button:hover {
+  background-color: #c98cff;
+}
+.buttons.active .button.chosen,
+.buttons.active .button.chosen:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 .social {
@@ -148,7 +155,7 @@ html, body {
   width: 0;
 }
 .social-bar.fact {
-  background-color: #c98cff;
+  background-color: #671fa5;
   width: 0px;
   float: left;
 }

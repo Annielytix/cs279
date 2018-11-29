@@ -59,9 +59,7 @@ def taskdata():
     print(" ---> Submitting task data: %s" % result)
     mongo.db.taskdata.insert({
         "uuid": request.cookies.get('finaluuid'),
-        "control": result.get("control"),
-        "similar": result.get("similar"),
-        "adverse": result.get("adverse"),
+        "results": result,
     })
     return jsonify(dict(message="OK", form=request.form))
 

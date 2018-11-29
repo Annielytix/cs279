@@ -6,18 +6,51 @@ $(document).ready(function() {
       'backdrop': 'static'
     },
   
-    BUTTON_DELAY: 5,
+    BUTTON_DELAY: .5,
+    CLICK_DELAY: .1,
+    
     experimentParams: {},
     
     runningTimes: [],
     currentCondition: null,
-    experimentTimes: {},
+    experimentTimes: _.map(_.range(0, 30), function() { return null; }),
+    
+    questions: [
+      "Health care costs per person in the U.S. are the highest in the developed world",
+      "President Barack Obama was born in the United States",
+      "Immigrants who are in the U.S. illegally have some rights under the Constitution",
+      "ISIS lost a significant portion of its territory in Iraq and Syria in 2017",
+      "Spending on Social Security, Medicare, and Medicaid make up the largest portion of the U.S. federal budget",
+      "There are more coal jobs and more coal produced in Ohio now than there were five years ago",
+      "The average family is bringing home $4,000 less than they did five years ago",
+      "If you want to vote in Texas, you can use a concealed-weapon permit as a valid form of identification, but not a valid student ID",
+      "The House has never failed to pass a budget in the modern era",
+      "There are more African American men in prison, jail, on probation or parole than were enslaved in 1850",
+      "The tax penalty the government imposes if you don't buy health insurance is lower than it would have cost to buy insurance",
+      "Federal programs have incentivized the militarization of local police precincts",
+      "U.S. debt will soon eclipse the size of the national economy (GDP)",
+      "There are almost as many guns in the United States as there are people",
+      "Among the developed nations, the United States is the least economically and socially mobile country in the world",
+      "Democracy is the greatest form of government",
+      "Increasing the federal minimum wage to $15 an hour is essential for the health of the U.S. economy",
+      "Abortion should be legal in most cases",
+      "Immigrants who are in the U.S. illegally are a very big problem for the country today",
+      "Government is almost always wasteful and inefficient",
+      "Infectious and emerging diseases will pose a major threat to the U.S. in the next few years",
+      "Antibiotic resistance is a big threat to public health",
+      "Fake news has brought us to a \"post-truth\" society",
+      "American STEM education is middling compared to other developed nations",
+      "There would be less crime if stricter gun policies are enforced",
+      "A Democrat will win the presidency in 2020",
+      "The solution for less unpleasant automobile-based commutes is increased public transportation",
+      "Immigration policy should be based on merit and skills, not family ties",
+      "Applying additional scrutiny to Muslim Americans would not reduce terrorism in the U.S.",
+      "Voter fraud across the U.S. has undermined the results of our elections"
+    ],
+    
+    questionOrder: [],
     
     conditionTimes: [
-      // Control
-      null, null, null, null,
-      
-      // Similar
       [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
        [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
        [false, 2.1], [true, 4.3], [true, 2.0]
@@ -34,8 +67,6 @@ $(document).ready(function() {
        [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
        [false, 2.1], [true, 4.3], [true, 2.0]
       ],
-      
-      // Adverse
       [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
        [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
        [false, 2.1], [true, 4.3], [true, 2.0]
@@ -51,7 +82,104 @@ $(document).ready(function() {
       [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
        [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
        [false, 2.1], [true, 4.3], [true, 2.0]
-      ]
+      ],
+    [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+     [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+     [false, 2.1], [true, 4.3], [true, 2.0]
+    ],
+    [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+     [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+     [false, 2.1], [true, 4.3], [true, 2.0]
+    ],
+    [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+     [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+     [false, 2.1], [true, 4.3], [true, 2.0]
+    ],
+    [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+     [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+     [false, 2.1], [true, 4.3], [true, 2.0]
+    ],
+    [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+     [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+     [false, 2.1], [true, 4.3], [true, 2.0]
+    ],
+    [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+     [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+     [false, 2.1], [true, 4.3], [true, 2.0]
+    ],
+    [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+     [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+     [false, 2.1], [true, 4.3], [true, 2.0]
+    ],
+    [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+     [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+     [false, 2.1], [true, 4.3], [true, 2.0]
+    ],
+  [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+   [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+   [false, 2.1], [true, 4.3], [true, 2.0]
+  ],
+  [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+   [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+   [false, 2.1], [true, 4.3], [true, 2.0]
+  ],
+  [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+   [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+   [false, 2.1], [true, 4.3], [true, 2.0]
+  ],
+  [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+   [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+   [false, 2.1], [true, 4.3], [true, 2.0]
+  ],
+  [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+   [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+   [false, 2.1], [true, 4.3], [true, 2.0]
+  ],
+  [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+   [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+   [false, 2.1], [true, 4.3], [true, 2.0]
+  ],
+  [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+   [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+   [false, 2.1], [true, 4.3], [true, 2.0]
+  ],
+  [[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+   [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+   [false, 2.1], [true, 4.3], [true, 2.0]
+  ],
+[[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+ [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+ [false, 2.1], [true, 4.3], [true, 2.0]
+],
+[[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+ [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+ [false, 2.1], [true, 4.3], [true, 2.0]
+],
+[[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+ [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+ [false, 2.1], [true, 4.3], [true, 2.0]
+],
+[[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+ [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+ [false, 2.1], [true, 4.3], [true, 2.0]
+],
+[[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+ [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+ [false, 2.1], [true, 4.3], [true, 2.0]
+],
+[[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+ [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+ [false, 2.1], [true, 4.3], [true, 2.0]
+],
+[[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+ [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+ [false, 2.1], [true, 4.3], [true, 2.0]
+],
+[[true, 1.0], [true, 2.0], [true, 3.0], [false, 4.0], [true, 2.2], [true, 2.8], 
+ [true, 1.6], [false, 4.5], [true, 4.2], [true, 3.5], [true, 3.4], [true, 3.2],
+ [false, 2.1], [true, 4.3], [true, 2.0]
+]
+
     ],
   
     begin: function() {
@@ -73,6 +201,29 @@ $(document).ready(function() {
           this.prepareDemographicsForm();
         }, this));
       }
+    },
+    
+    prepareQuestions: function() {
+      if (this.questionOrder.length == 0) {
+        this.questionOrder = this.questionOrder.concat(_.shuffle(_.range(0, 30)));
+      }
+      
+      var $cards = $(".cards").empty();
+      var order;
+      if (this.currentCondition == 'control') order = this.questionOrder.slice(0, 10);
+      if (this.currentCondition == 'similar') order = this.questionOrder.slice(10, 20);
+      if (this.currentCondition == 'adverse') order = this.questionOrder.slice(20, 30);
+
+      console.log(['prepareQuestions', order, this.questionOrder]);
+
+      _.each(order, _.bind(function(q, i) {
+        var $card = $("<div />").addClass('card').css({
+          top: 2 * i,
+          left: 2 * i,
+          zIndex: 100 - i
+        }).append($("<div>").addClass('card-text').text(this.questions[q]));
+        $cards.append($card);
+      }, this));
     },
   
     prepareDemographicsForm: function() {
@@ -118,6 +269,7 @@ $(document).ready(function() {
       console.log("prepareControlConditionExperiment");
 
       this.currentCondition = "control";
+      this.prepareQuestions();
 
       $("#control-condition-modal").modal('hide');
       $("#similar-condition-modal").modal('hide');
@@ -146,6 +298,7 @@ $(document).ready(function() {
       console.log("prepareSimilarConditionExperiment");
       
       this.currentCondition = "similar";
+      this.prepareQuestions();
       
       $("#similar-condition-modal").modal('hide');
 
@@ -154,7 +307,7 @@ $(document).ready(function() {
 
       $("#experiment").show();
     
-      this.prepareCard(4);
+      this.prepareCard(10);
     },
     
     finishSimilarConditionExperiment: function(exp) {
@@ -173,6 +326,7 @@ $(document).ready(function() {
       console.log("prepareAdverseConditionExperiment");
       
       this.currentCondition = "adverse";
+      this.prepareQuestions();
       
       $("#adverse-condition-modal").modal('hide');
       $(".social").css('opacity', 1);
@@ -181,7 +335,7 @@ $(document).ready(function() {
 
       $("#experiment").show();
     
-      this.prepareCard(8);
+      this.prepareCard(20);
     },
   
     prepareCard: function(cardNumber) {
@@ -196,9 +350,10 @@ $(document).ready(function() {
     },
     
     arrangeCards: function() {
-      if (this.currentCard > 0) {
-        console.log(['arrangeCards', this.currentCard]);
-        $(".card").slice(0, this.currentCard).addClass('seen');
+      var roundCard = this.currentCard % 10;
+      if (roundCard > 0) {
+        console.log(['arrangeCards', this.currentCard, roundCard]);
+        $(".card").slice(0, roundCard).addClass('seen');
       }
     },
   
@@ -211,13 +366,13 @@ $(document).ready(function() {
       $(".social-bars").css('opacity', 0);
       
       
-      _.delay(function() {
+      _.delay(_.bind(function() {
         $(".buttons").addClass('active');
         $(".explainer-timer").removeClass('active');
-        $(".social-label").animate({'opacity': 1}, 1000);
-        $(".social-user").animate({'opacity': 1}, 1000);
-        $(".social-bars").animate({'opacity': 1}, 1000);
-      }, this.BUTTON_DELAY*1000);
+        $(".social-label").animate({'opacity': 1}, this.CLICK_DELAY*1000);
+        $(".social-user").animate({'opacity': 1}, this.CLICK_DELAY*1000);
+        $(".social-bars").animate({'opacity': 1}, this.CLICK_DELAY*1000);
+      }, this), this.BUTTON_DELAY*1000);
     },
     
     beginSocialCountdown: function() {
@@ -281,7 +436,6 @@ $(document).ready(function() {
     
     clickButton: function(choice) {
       var secondsSince = ((new Date) - this.socialCountdownTime) / 1000 - this.BUTTON_DELAY;
-      console.log(['click', choice, secondsSince]);
       if (secondsSince <= 0) return;
             
       $(".button-fact").off('click').toggleClass('chosen', choice == 'fact');
@@ -293,22 +447,22 @@ $(document).ready(function() {
       }
       this.updateSocialBars();
       
-      if (!this.experimentTimes[this.currentCondition]) {
-        this.experimentTimes[this.currentCondition] = [];
-      }
-      this.experimentTimes[this.currentCondition].push([choice, secondsSince]);
+      var questionOrdered = this.questionOrder[this.currentCard];
+      this.experimentTimes[questionOrdered] = [choice, secondsSince];
       
-      if (this.currentCard == 3) {
-        _.delay(_.bind(this.finishControlConditionExperiment, this), 1000);
-      } else if (this.currentCard == 7) {
-        _.delay(_.bind(this.finishSimilarConditionExperiment, this), 1000);
-      } else if (this.currentCard == 11) {
-        _.delay(_.bind(this.finishMainExperiment, this), 1000);
+      if (this.currentCard == 9) {
+        _.delay(_.bind(this.finishControlConditionExperiment, this), this.CLICK_DELAY*1000);
+      } else if (this.currentCard == 19) {
+        _.delay(_.bind(this.finishSimilarConditionExperiment, this), this.CLICK_DELAY*1000);
+      } else if (this.currentCard == 29) {
+        _.delay(_.bind(this.finishMainExperiment, this), this.CLICK_DELAY*1000);
       } else {
         _.delay(_.bind(function() {
           this.prepareCard(this.currentCard + 1);
-        }, this), 1000);
+        }, this), this.CLICK_DELAY*1000);
       }
+      
+      console.log(['click', choice, secondsSince, this.experimentTimes]);
     },
     
     finishMainExperiment: function() {
