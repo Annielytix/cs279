@@ -6,8 +6,8 @@ $(document).ready(function() {
       'backdrop': 'static'
     },
   
-    BUTTON_DELAY: .5,
-    CLICK_DELAY: .1,
+    BUTTON_DELAY: 5,
+    CLICK_DELAY: 1,
     
     experimentParams: {},
     
