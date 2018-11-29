@@ -29,7 +29,7 @@ html, body {
 }
 @media (max-width: 1000px) {
   #experiment {
-    margin-bottom: 12px;
+/*    margin-bottom: 12px;*/
   }
 }
 #experiment h2 {
