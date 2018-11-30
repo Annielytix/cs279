@@ -8,6 +8,7 @@ $(document).ready(function() {
   
     BUTTON_DELAY: 5,
     CLICK_DELAY: 1,
+    ADVERSE_PROPORTION: 0.1,
     
     experimentParams: {},
     
@@ -135,7 +136,7 @@ $(document).ready(function() {
       }
       if (this.questionAdverse.length == 0) {
         this.questionAdverse = _.map(_.range(30), function(q) {
-          return Math.random() <= .30;
+          return Math.random() <= this.ADVERSE_PROPORTION;
         });
       }
       
