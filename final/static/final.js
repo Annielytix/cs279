@@ -349,8 +349,8 @@ $(document).ready(function() {
       var factWidth = seenTimes['facts'] * (width / total);
       var opinionWidth = seenTimes['opinions'] * (width / total);
             
-      $(".social-bar.fact").width(factWidth);
-      $(".social-bar.opinion").width(opinionWidth);
+      $(".social-bar-statement.fact").width(factWidth);
+      $(".social-bar-statement.opinion").width(opinionWidth);
       
       $(".social-user.fact").text(seenTimes['facts'] + " " + (seenTimes['facts'] == 1 ? "person":"people"));
       $(".social-user.opinion").text(seenTimes['opinions'] + " " + (seenTimes['opinions'] == 1 ? "person" : "people"));

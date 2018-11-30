@@ -154,17 +154,18 @@ html, body {
   background-color: #9b9b9b;
   overflow: hidden;
 }
-.social-bar {
+.social-bar-statement {
+  display: block;
   height: 20px;
   transition: width .25s linear;
   width: 0;
 }
-.social-bar.fact {
+.social-bar-statement.fact {
   background-color: #671fa5;
   width: 0px;
   float: left;
 }
-.social-bar.opinion {
+.social-bar-statement.opinion {
   background-color: #671fa5;
   width: 0px;
   float: right;
