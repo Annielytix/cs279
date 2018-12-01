@@ -353,6 +353,14 @@ $(document).ready(function() {
     },
     
     attachButtons: function() {
+      var $fact = $(".button-fact");
+      $fact.clone(true).insertAfter($fact);
+      $fact.remove();
+      
+      var $opinion = $(".button-opinion");
+      $opinion.clone(true).insertAfter($opinion);
+      $opinion.remove();
+      
       $(".button-fact").off('click').on('click', _.bind(this.clickFactButton, this));
       $(".button-opinion").off('click').on('click', _.bind(this.clickOpinionButton, this));
     },
