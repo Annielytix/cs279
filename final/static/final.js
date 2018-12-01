@@ -8,7 +8,7 @@ $(document).ready(function() {
   
     BUTTON_DELAY: 5,
     CLICK_DELAY: 1,
-    ADVERSE_PROPORTION: 0.1,
+    ADVERSE_PROPORTION: 0.2,
     
     experimentParams: {},
     
