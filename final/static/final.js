@@ -135,9 +135,9 @@ $(document).ready(function() {
         this.questionOrder = this.questionOrder.concat(_.shuffle(_.range(0, 30)));
       }
       if (this.questionAdverse.length == 0) {
-        this.questionAdverse = _.map(_.range(30), function(q) {
+        this.questionAdverse = _.map(_.range(30), _.bind(function(q) {
           return Math.random() <= this.ADVERSE_PROPORTION;
-        });
+        }, this));
       }
       
       var $cards = $(".cards").empty();
