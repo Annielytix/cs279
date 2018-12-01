@@ -12,6 +12,9 @@ html, body {
 .modal-backdrop {
   display: none;
 }
+.form-check-inline {
+  margin-right: 0.25rem;
+}
 .col-form-label {
   font-weight: 800;
 }
