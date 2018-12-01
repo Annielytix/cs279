@@ -126,11 +126,11 @@ html, body {
   background-color: #671fa5;
   border: 1px solid #c98cff;
 }
-.buttons.active .button:hover {
+.no-touch .buttons.active .button:hover {
   background-color: #c98cff;
 }
 .buttons.active .button.chosen,
-.buttons.active .button.chosen:hover {
+.no-touch .buttons.active .button.chosen:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 .social {
