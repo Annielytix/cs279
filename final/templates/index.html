@@ -5,8 +5,8 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=500">
 
-  <title>CS279 Bias Experiment</title>
-    
+  <title>Can you tell the difference between factual and opinion statements?</title>
+
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 
@@ -15,40 +15,47 @@
   <script src="https://underscorejs.org/underscore-min.js" crossorigin="anonymous"></script>
 
   <script src="/static/final.js?r={{ random }}"></script>
-  
+
   <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans" rel="stylesheet">
   <link rel="stylesheet" href="/static/final.css?r={{ random }}" />
-  
+
 </head>
 <body>
   <div class="modal" tabindex="-1" role="dialog" id="begin-modal">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Welcome to a CS 279 Experiment</h5>
+          <h5 class="modal-title">Welcome</h5>
           <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
             <!-- <span aria-hidden="true">&times;</span> -->
           </button>
         </div>
         <div class="modal-body">
-          <p>Thank you for volunteering to participate in this experiment.</p>
-          <p>This experiment is split into three parts.</p>
-          <p>This experiment is based on the results of a Pew Research Center report     <a href="http://www.journalism.org/2018/06/18/distinguishing-between-factual-and-opinion-statements-in-the-news/">Distinguishing Between Factual and Opinion Statements in the News</a>.</p>
+          <p>Thank you for participating in this experiment. Your contribution to your research allows us to learn more about how factual and opinion statements are presented in the news.</p>
+
+          <p><b>Please read the following information carefully before proceeding:</b></p>
+
+          <p>Your participation in this research is voluntary. You are free to refuse to take part, and you may stop the quiz at any time. Your will not be for personally identifying information, and your data will not be recorded unless you complete this experiment in its entirety.</p>
+
+          <p>This experiment is split into three parts. You will be shown simple tasks and instructions to finish them. We will not ask you for your name, and any data that we collect will be securely stored. The duration of this test is approximately <b>15 minutes</b>.</p>
+
         </div>
         <div class="modal-footer">
+          <p>By consenting to participate, you acknowledge that you have read and agree to this consent form, and agree to take part in this research.</p>
+
           <button type="button" class="btn btn-primary" id="submit-begin">Begin</button>
           <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
         </div>
       </div>
     </div>
   </div>
-  
+
 
   <div class="modal" tabindex="-1" role="dialog" id="demographics-modal">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">CS 279: Before we begin, please tell us a little about yourself and your preferences.</h5>
+          <h5 class="modal-title">Before we begin, please tell us a little about yourself and your preferences.</h5>
           </button>
         </div>
         <div class="modal-body">
@@ -93,9 +100,9 @@
                 <input type="number" class="form-control" placeholder="" name="zipcode" id="inputZipcode">
               </div>
             </div>
-            
+
             <h2>How would you rate your...</h2>
-            
+
 
             <div class="form-group row">
               <label for="inputAwareness" class="col-form-label col-sm-4">Political Awareness</label>
@@ -136,7 +143,7 @@
                 </div>
               </div>
             </div>
-          
+
             <div class="form-group row">
               <label for="inputSavviness" class="col-form-label col-sm-4">Digital Savviness</label>
               <div class="col-sm-8 demographics-likert">
@@ -216,7 +223,7 @@
                 </div>
               </div>
             </div>
-          
+
 
             <div class="form-group row">
               <label for="inputInterest" class="col-form-label col-sm-4">News Interest</label>
@@ -257,9 +264,9 @@
                 </div>
               </div>
             </div>
-            
+
             <h2>Preferred news source</h2>
-            
+
             <div class="form-group row">
               <label for="inputEducation" class="col-sm-4 col-form-label">Most used (choose one)</label>
               <div class="col-sm-8 demographics-likert">
@@ -297,18 +304,18 @@
       </div>
     </div>
   </div>
-  
+
   <div class="modal" tabindex="-1" role="dialog" id="control-condition-modal">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">About to begin...</h5>
+          <h5 class="modal-title">About to begin Part 1...</h5>
           </button>
         </div>
         <div class="modal-body">
           <p>Thank you for completing the survey.</p>
 
-          <p>For each of the statements listed on the cards, please select the option that you think best represents what the statement is: fact or opinion.</p>
+          <p><b>Instructions:</b> You will now be shown a series of statements that have been taken from news stories. Regardless of how knowledgeable you are about the topic, please select whether you consider the statement to be <em>factual</em> (whether you think its accurate or not) or <em>opinion</em> (whether you agree with it or not).</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" id="submit-begin-experiment">Begin</button>
@@ -316,16 +323,18 @@
       </div>
     </div>
   </div>
-  
+
     <div class="modal" tabindex="-1" role="dialog" id="similar-condition-modal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 id="similar-condition-modal-title" class="modal-title">One third completed</h5>
+            <h5 id="similar-condition-modal-title" class="modal-title">One thirds completed</h5>
             </button>
           </div>
           <div class="modal-body">
-            <p>For the next round, we’ve asked a panel of 15 other fellow users to weigh in on the same statements. You will have 5 seconds to read the statement before answering. You will see the others’ answers as they come in. You are free to take however long you need to answer the statement yourself.</p>
+            <p><b>Instructions:</b> For the next round, we’ve asked a <b>panel of 14 other fellow users</b> to weigh in on the same statements. You will have 5 seconds to read the statement before answering. You will see the others’ answers as they come in. You are free to take however long you need to answer the statement yourself.</p>
+
+            <p>As in the last round, regardless of how knowledgeable you are about the topic, please select whether you consider the statement to be <em>factual</em> (whether you think its accurate or not) or <em>opinion</em> (whether you agree with it or not).</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" id="submit-similar-condition">Continue</button>
@@ -333,7 +342,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="modal" tabindex="-1" role="dialog" id="adverse-condition-modal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -342,7 +351,9 @@
             </button>
           </div>
           <div class="modal-body">
-            <p>For the final round, we’ve placed you in a new panel of users who answered similarly to you in the previous round. Like before, you will have 5 seconds to read the statement before answering or seeing the others’ answers. You are still free to take however long you need to decide.</p>
+            <p><b>Instructions:</b> For the final round, we’ve placed you in a new panel of users who <b>answered similarly to you</b> in the previous round. Like before, you will have 5 seconds to read the statement before answering or seeing the others’ answers. You are still free to take however long you need to decide.</p>
+
+            <p>As in the last round, regardless of how knowledgeable you are about the topic, please select whether you consider the statement to be <em>factual</em> (whether you think its accurate or not) or <em>opinion</em> (whether you agree with it or not).</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary" id="submit-adverse-condition">Continue</button>
@@ -350,20 +361,20 @@
         </div>
       </div>
     </div>
-  
-  
+
+
   <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Thank you! Please complete this short feedback form...</h5>
+          <h5 class="modal-title">Almost there!</h5>
           </button>
         </div>
         <div class="modal-body">
           <p>Thank you so much for completing this task! Please complete the following survey based on your experience with the task.</p>
           <form>
             <div>
-              <label for="inputDifficulty" class="col-form-label">Difficulty?</label>
+              <label for="inputDifficulty" class="col-form-label">How difficult was this task?</label>
             </div>
             <div class="form-group">
               <div class="form-check form-check-inline">
@@ -401,9 +412,9 @@
                 Most difficult
               </div>
             </div>
-            
+
             <div>
-              <label for="inputSatisfaction" class="col-form-label">Satisfaction?</label>
+              <label for="inputSatisfaction" class="col-form-label">How satisfied are you with this task?</label>
             </div>
             <div class="form-group">
               <div class="form-check form-check-inline">
@@ -443,7 +454,7 @@
             </div>
 
             <div>
-              <label for="inputFrustration" class="col-form-label">Frustration?</label>
+              <label for="inputFrustration" class="col-form-label">How frustrated are you with this task?</label>
             </div>
             <div class="form-group">
               <div class="form-check form-check-inline">
@@ -481,10 +492,10 @@
                 Most frustrated
               </div>
             </div>
-            
+
 
             <div>
-              <label for="inputEfficiency" class="col-form-label">Efficiency?</label>
+              <label for="inputEfficiency" class="col-form-label">How efficient were you with this task?</label>
             </div>
             <div class="form-group">
               <div class="form-check form-check-inline">
@@ -530,8 +541,8 @@
       </div>
     </div>
   </div>
-  
-  
+
+
   <div class="modal" tabindex="-1" role="dialog" id="goodbye-modal">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -540,34 +551,34 @@
           </button>
         </div>
         <div class="modal-body">
-          <p>Thank you for completing our experiment. You are now eligible to receive a free cookie.</p>
+          <p>Thank you for completing our experiment. You can now close this window.</p>
         </div>
       </div>
     </div>
   </div>
-  
+
   <div id="experiment" style="display: none;">
     <div class="container">
 
-      <h2>FACT v. OPINION</h2>
+      <h2>Distinguishing Factual and Opinion Statements</h2>
 
       <div class="explainer">
         Select the option that you think best represents the statement.
       </div>
-      
+
       <div class="cards">
 
       </div>
-      
+
       <div class="explainer explainer-timer">
         You have 5 seconds to read the statement before answering.
       </div>
-      
+
       <div class="buttons">
         <div class="button button-fact">Factual</div>
         <div class="button button-opinion">Opinion</div>
       </div>
-      
+
       <div class="social">
         <div class="social-labels">
           <div class="social-label fact">Factual</div>
@@ -580,11 +591,10 @@
         <div class="social-users">
           <div class="social-user fact">0 people</div>
           <div class="social-user opinion">0 people</div>
-        </div>        
+        </div>
       </div>
-      
+
     </div>
   </div>
 </body>
 </html>
-
