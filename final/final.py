@@ -46,10 +46,11 @@ def feedback():
     print(" ---> Submitting feedback: %s" % request.form)
     mongo.db.feedback.insert({
         "uuid": request.cookies.get('finaluuid'),
-        "difficulty": request.form.get("difficulty"),
-        "satisfaction": request.form.get("satisfaction"),
-        "frustration": request.form.get("frustration"),
-        "efficiency": request.form.get("efficiency"),
+        "political": request.form.get("political"),
+        "confident_answers": request.form.get("confident_answers"),
+        "confident_distinguish": request.form.get("confident_distinguish"),
+        "helpful": request.form.get("helpful"),
+        "comments": request.form.get("comments"),
     })
     return jsonify(dict(message="OK", form=request.form))
 
@@ -88,27 +89,30 @@ def xlsx():
     feedback.set_column(col, col, 15); col += 1
     feedback.write(row, col, "Date", bold)
     feedback.set_column(col, col, 20); col += 1
-    feedback.write(row, col, "Difficulty", bold)
+    feedback.write(row, col, "Political", bold)
     feedback.set_column(col, col, 15); col += 1
-    feedback.write(row, col, "Efficiency", bold)
+    feedback.write(row, col, "Confident in Answers", bold)
     feedback.set_column(col, col, 15); col += 1
-    feedback.write(row, col, "Frustration", bold)
+    feedback.write(row, col, "Confidence Distinguishing", bold)
     feedback.set_column(col, col, 15); col += 1
-    feedback.write(row, col, "Satisfaction", bold)
+    feedback.write(row, col, "Helpful", bold)
     feedback.set_column(col, col, 15); col += 1
+    feedback.write(row, col, "Comments", bold)
+    feedback.set_column(col, col, 100); col += 1
     
     for f in db_feedback:
-        if not f.get('difficulty', None): continue
+        if not f.get('political', None): continue
         print(f)
         row += 1
         col = 0
         date = generate_date(f)
         feedback.write(row, col, f['uuid']); col += 1;
         feedback.write_datetime(row, col, date, date_format); col += 1;
-        feedback.write(row, col, f['difficulty']); col += 1;
-        feedback.write(row, col, f['efficiency']); col += 1;
-        feedback.write(row, col, f['frustration']); col += 1;
-        feedback.write(row, col, f['satisfaction']); col += 1;
+        feedback.write(row, col, f['political']); col += 1;
+        feedback.write(row, col, f['confident_answers']); col += 1;
+        feedback.write(row, col, f['confident_distinguish']); col += 1;
+        feedback.write(row, col, f['helpful']); col += 1;
+        feedback.write(row, col, f['comments']); col += 1;
     
     # Demographics
     
@@ -166,6 +170,8 @@ def xlsx():
     data.set_column(col, col, 15); col += 1
     data.write(row, col, "Round", bold)
     data.set_column(col, col, 15); col += 1
+    data.write(row, col, "Question #", bold)
+    data.set_column(col, col, 15); col += 1
     data.write(row, col, "Adverse?", bold)
     data.set_column(col, col, 15); col += 1
     data.write(row, col, "Correct", bold)
@@ -215,7 +221,8 @@ def xlsx():
             data.write(row, col, trial[0]); col += 1;
             data.write(row, col, trial[1]); col += 1;
             data.write(row, col, trial[2]); col += 1;
-            data.write(row, col, trial[3]); col += 1;
+            data.write(row, col, trial[3]+1); col += 1;
+            data.write(row, col, trial[4]); col += 1;
             data.write(row, col, trial[0] == questions[t]); col += 1;
     
     workbook.close()

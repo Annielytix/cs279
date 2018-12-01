@@ -6,7 +6,8 @@ $(document).ready(function() {
       'backdrop': 'static'
     },
   
-    BUTTON_DELAY: 5,
+    BUTTON_DELAY: 1,
+    SOCIAL_DELAY: 3,
     CLICK_DELAY: 1,
     ADVERSE_PROPORTION: 0.2,
     
@@ -48,15 +49,7 @@ $(document).ready(function() {
       "Applying additional scrutiny to Muslim Americans would not reduce terrorism in the U.S.",
       "Voter fraud across the U.S. has undermined the results of our elections"
     ],
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     questionSocialFactCount: [
       8,
       11,
@@ -92,7 +85,6 @@ $(document).ready(function() {
     
     questionOrder: [],
     questionAdverse: [],
-    
     
     generateTimes: function() {
       var factCount = this.questionSocialFactCount;
@@ -299,11 +291,14 @@ $(document).ready(function() {
       
       
       _.delay(_.bind(function() {
-        $(".buttons").addClass('active');
-        $(".explainer-timer").removeClass('active');
         $(".social-label").animate({'opacity': 1}, this.CLICK_DELAY*1000);
         $(".social-user").animate({'opacity': 1}, this.CLICK_DELAY*1000);
         $(".social-bars").animate({'opacity': 1}, this.CLICK_DELAY*1000);
+      }, this), this.BUTTON_DELAY*1000);
+      
+      _.delay(_.bind(function() {
+        $(".buttons").addClass('active');
+        $(".explainer-timer").removeClass('active');
       }, this), this.BUTTON_DELAY*1000);
     },
     
@@ -318,7 +313,7 @@ $(document).ready(function() {
       _.each(times, _.bind(function(time) {
         var timeDelay = _.delay(_.bind(function() {
           this.updateSocialBars();
-        }, this), this.BUTTON_DELAY*1000 + (time[1]*1000) + 1);
+        }, this), (this.SOCIAL_DELAY*1000 + time[1]*1000));
         this.runningTimes.push(timeDelay);
       }, this));
     },
@@ -326,7 +321,7 @@ $(document).ready(function() {
     updateSocialBars: function() {
       var isAdverse = this.questionAdverse[this.questionOrder[this.currentCard]];
       var times = this.conditionTimes[this.questionOrder[this.currentCard]];
-      var secondsSince = ((new Date) - this.socialCountdownTime) / 1000 - this.BUTTON_DELAY;
+      var secondsSince = ((new Date) - this.socialCountdownTime) / 1000 - this.SOCIAL_DELAY;
       var seenTimes = {
         'facts': 0,
         'opinions': 0
@@ -390,6 +385,7 @@ $(document).ready(function() {
         choice,
         secondsSince,
         this.currentCondition,
+        this.questionOrder[this.currentCard],
         isAdverse
       ];
       
@@ -428,18 +424,19 @@ $(document).ready(function() {
           'type': "POST",
           'url': '/feedback',
           'data': {
-            'difficulty': $("input[name=difficulty]:checked").val(),
-            'satisfaction': $("input[name=satisfaction]:checked").val(),
-            'frustration': $("input[name=frustration]:checked").val(),
-            'efficiency': $("input[name=efficiency]:checked").val()
+            'political': $("input[name=political]:checked").val(),
+            'confident_answers': $("input[name=confident_answers]:checked").val(),
+            'confident_distinguish': $("input[name=confident_distinguish]:checked").val(),
+            'helpful': $("input[name=helpful]:checked").val(),
+            'comments': $("input[name=comments]").val()
           },
           'success': _.bind(function() {
             // clear radio buttons
             console.log("CLEARING");
-            $("input[name=difficulty]:checked").prop("checked", false);
-            $("input[name=satisfaction]:checked").prop("checked", false);
-            $("input[name=frustration]:checked").prop("checked", false);
-            $("input[name=efficiency]:checked").prop("checked", false);
+            $("input[name=political]:checked").prop("checked", false);
+            $("input[name=confident_answers]:checked").prop("checked", false);
+            $("input[name=confident_distinguish]:checked").prop("checked", false);
+            $("input[name=helpful]:checked").prop("checked", false);
 
             this.prepareGoodbye();
           }, this)

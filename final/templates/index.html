@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=500">
+  <meta name="viewport" content="width=400">
 
   <title>Can you tell the difference between factual and opinion statements?</title>
 
@@ -26,9 +26,6 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Welcome</h5>
-          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
-            <!-- <span aria-hidden="true">&times;</span> -->
-          </button>
         </div>
         <div class="modal-body">
           <p>Thank you for participating in this experiment. Your contribution to your research allows us to learn more about how factual and opinion statements are presented in the news.</p>
@@ -42,9 +39,8 @@
         </div>
         <div class="modal-footer">
           <p>By consenting to participate, you acknowledge that you have read and agree to this consent form, and agree to take part in this research.</p>
-
+          <br>
           <button type="button" class="btn btn-primary" id="submit-begin">Begin</button>
-          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
         </div>
       </div>
     </div>
@@ -62,14 +58,14 @@
           <form>
             <h2>About you</h2>
             <div class="form-group row">
-              <label for="inputGender" class="col-sm-4 col-form-label">Gender</label>
-              <div class="col-sm-8">
+              <label for="inputGender" class="col-sm-3 col-form-label">Gender</label>
+              <div class="col-sm-9">
                 <input type="text" class="form-control" placeholder="" name="gender" id="inputGender">
               </div>
             </div>
             <div class="form-group row">
-              <label for="inputAge" class="col-sm-4 col-form-label">Age</label>
-              <div class="col-sm-8">
+              <label for="inputAge" class="col-sm-3 col-form-label">Age</label>
+              <div class="col-sm-9">
                 <select class="form-control" name="age" id="inputAge">
                   <option>18-24</option>
                   <option>25-34</option>
@@ -82,8 +78,8 @@
               </div>
             </div>
             <div class="form-group row">
-              <label for="inputEducation" class="col-sm-4 col-form-label">Level of education</label>
-              <div class="col-sm-8">
+              <label for="inputEducation" class="col-sm-3 col-form-label">Level of education</label>
+              <div class="col-sm-9">
                 <select class="form-control" name="education" id="inputEducation">
                   <option>Some high school</option>
                   <option>High school graduate</option>
@@ -95,8 +91,8 @@
               </div>
             </div>
             <div class="form-group row">
-              <label for="inputZipcode" class="col-sm-4 col-form-label">Zip code</label>
-              <div class="col-sm-8">
+              <label for="inputZipcode" class="col-sm-3 col-form-label">Zip code</label>
+              <div class="col-sm-9">
                 <input type="number" class="form-control" placeholder="" name="zipcode" id="inputZipcode">
               </div>
             </div>
@@ -105,8 +101,8 @@
 
 
             <div class="form-group row">
-              <label for="inputAwareness" class="col-form-label col-sm-4">Political Awareness</label>
-              <div class="col-sm-8 demographics-likert">
+              <label for="inputAwareness" class="col-form-label col-sm-3">Political Awareness</label>
+              <div class="col-sm-9 demographics-likert">
                 <div class="form-check form-check-inline">
                   Very low
                 </div>
@@ -145,8 +141,8 @@
             </div>
 
             <div class="form-group row">
-              <label for="inputSavviness" class="col-form-label col-sm-4">Digital Savviness</label>
-              <div class="col-sm-8 demographics-likert">
+              <label for="inputSavviness" class="col-form-label col-sm-3">Digital Savviness</label>
+              <div class="col-sm-9 demographics-likert">
                 <div class="form-check form-check-inline">
                   Very low
                 </div>
@@ -185,8 +181,8 @@
             </div>
 
             <div class="form-group row">
-              <label for="inputTrust" class="col-form-label col-sm-4">News Trust</label>
-              <div class="col-sm-8 demographics-likert">
+              <label for="inputTrust" class="col-form-label col-sm-3">News Trust</label>
+              <div class="col-sm-9 demographics-likert">
                 <div class="form-check form-check-inline">
                   Very low
                 </div>
@@ -226,8 +222,8 @@
 
 
             <div class="form-group row">
-              <label for="inputInterest" class="col-form-label col-sm-4">News Interest</label>
-              <div class="col-sm-8 demographics-likert">
+              <label for="inputInterest" class="col-form-label col-sm-3">News Interest</label>
+              <div class="col-sm-9 demographics-likert">
                 <div class="form-check form-check-inline">
                   Very low
                 </div>
@@ -268,8 +264,8 @@
             <h2>Preferred news source</h2>
 
             <div class="form-group row">
-              <label for="inputEducation" class="col-sm-4 col-form-label">Most used (choose one)</label>
-              <div class="col-sm-8 demographics-likert">
+              <label for="inputEducation" class="col-sm-3 col-form-label">Most used (choose one)</label>
+              <div class="col-sm-9 demographics-likert">
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="newssource" id="newssource4" value="socialnetworks">
                   <label class="form-check-label" for="newssource4">Social Network (Facebook, Twitter, Instagram, etc)</label>
@@ -374,165 +370,172 @@
           <p>Thank you so much for completing this task! Please complete the following survey based on your experience with the task.</p>
           <form>
             <div>
-              <label for="inputDifficulty" class="col-form-label">How difficult was this task?</label>
+              <label for="inputPolitical" class="col-form-label">How would you describe your political leanings?</label>
             </div>
             <div class="form-group">
               <div class="form-check form-check-inline">
-                Least difficult
+                Very conservative
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="difficulty" id="difficulty1" value="1">
-                <label class="form-check-label" for="difficulty1">1</label>
+                <input class="form-check-input" type="radio" name="political" id="political1" value="1">
+                <label class="form-check-label" for="political1">1</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="difficulty" id="difficulty2" value="2">
-                <label class="form-check-label" for="difficulty2">2</label>
+                <input class="form-check-input" type="radio" name="political" id="political2" value="2">
+                <label class="form-check-label" for="political2">2</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="difficulty" id="difficulty3" value="3">
-                <label class="form-check-label" for="difficulty3">3</label>
+                <input class="form-check-input" type="radio" name="political" id="political3" value="3">
+                <label class="form-check-label" for="political3">3</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="difficulty" id="difficulty4" value="4">
-                <label class="form-check-label" for="difficulty4">4</label>
+                <input class="form-check-input" type="radio" name="political" id="political4" value="4">
+                <label class="form-check-label" for="political4">4</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="difficulty" id="difficulty5" value="5">
-                <label class="form-check-label" for="difficulty5">5</label>
+                <input class="form-check-input" type="radio" name="political" id="political5" value="5">
+                <label class="form-check-label" for="political5">5</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="difficulty" id="difficulty6" value="6">
-                <label class="form-check-label" for="difficulty6">6</label>
+                <input class="form-check-input" type="radio" name="political" id="political6" value="6">
+                <label class="form-check-label" for="political6">6</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="difficulty" id="difficulty7" value="7">
-                <label class="form-check-label" for="difficulty7">7</label>
+                <input class="form-check-input" type="radio" name="political" id="political7" value="7">
+                <label class="form-check-label" for="political7">7</label>
               </div>
               <div class="form-check form-check-inline">
-                Most difficult
+                Very liberal
               </div>
             </div>
 
             <div>
-              <label for="inputSatisfaction" class="col-form-label">How satisfied are you with this task?</label>
+              <label for="inputConfidentAnswers" class="col-form-label">How confident are you in your answers?</label>
             </div>
             <div class="form-group">
               <div class="form-check form-check-inline">
-                Least satisfied
+                Not at all confident
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="satisfaction" id="satisfaction1" value="1">
-                <label class="form-check-label" for="satisfaction1">1</label>
+                <input class="form-check-input" type="radio" name="confident_answers" id="confident_answers1" value="1">
+                <label class="form-check-label" for="confident_answers1">1</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="satisfaction" id="satisfaction2" value="2">
-                <label class="form-check-label" for="satisfaction2">2</label>
+                <input class="form-check-input" type="radio" name="confident_answers" id="confident_answers2" value="2">
+                <label class="form-check-label" for="confident_answers2">2</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="satisfaction" id="satisfaction3" value="3">
-                <label class="form-check-label" for="satisfaction3">3</label>
+                <input class="form-check-input" type="radio" name="confident_answers" id="confident_answers3" value="3">
+                <label class="form-check-label" for="confident_answers3">3</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="satisfaction" id="satisfaction4" value="4">
-                <label class="form-check-label" for="satisfaction4">4</label>
+                <input class="form-check-input" type="radio" name="confident_answers" id="confident_answers4" value="4">
+                <label class="form-check-label" for="confident_answers4">4</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="satisfaction" id="satisfaction5" value="5">
-                <label class="form-check-label" for="satisfaction5">5</label>
+                <input class="form-check-input" type="radio" name="confident_answers" id="confident_answers5" value="5">
+                <label class="form-check-label" for="confident_answers5">5</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="satisfaction" id="satisfaction6" value="6">
-                <label class="form-check-label" for="satisfaction6">6</label>
+                <input class="form-check-input" type="radio" name="confident_answers" id="confident_answers6" value="6">
+                <label class="form-check-label" for="confident_answers6">6</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="satisfaction" id="satisfaction7" value="7">
-                <label class="form-check-label" for="satisfaction7">7</label>
+                <input class="form-check-input" type="radio" name="confident_answers" id="confident_answers7" value="7">
+                <label class="form-check-label" for="confident_answers7">7</label>
               </div>
               <div class="form-check form-check-inline">
-                Most satisfied
+                Most confident
               </div>
             </div>
 
             <div>
-              <label for="inputFrustration" class="col-form-label">How frustrated are you with this task?</label>
+              <label for="inputConfidentDistinguish" class="col-form-label">How confident are you in your ability to distinguish factual from opinion statements?</label>
             </div>
             <div class="form-group">
               <div class="form-check form-check-inline">
-                Least frustrated
+                Not at all confident
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="frustration" id="frustration1" value="1">
-                <label class="form-check-label" for="frustration1">1</label>
+                <input class="form-check-input" type="radio" name="confident_distinguish" id="confident_distinguish1" value="1">
+                <label class="form-check-label" for="confident_distinguish1">1</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="frustration" id="frustration2" value="2">
-                <label class="form-check-label" for="frustration2">2</label>
+                <input class="form-check-input" type="radio" name="confident_distinguish" id="confident_distinguish2" value="2">
+                <label class="form-check-label" for="confident_distinguish2">2</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="frustration" id="frustration3" value="3">
-                <label class="form-check-label" for="frustration3">3</label>
+                <input class="form-check-input" type="radio" name="confident_distinguish" id="confident_distinguish3" value="3">
+                <label class="form-check-label" for="confident_distinguish3">3</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="frustration" id="frustration4" value="4">
-                <label class="form-check-label" for="frustration4">4</label>
+                <input class="form-check-input" type="radio" name="confident_distinguish" id="confident_distinguish4" value="4">
+                <label class="form-check-label" for="confident_distinguish4">4</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="frustration" id="frustration5" value="5">
-                <label class="form-check-label" for="frustration5">5</label>
+                <input class="form-check-input" type="radio" name="confident_distinguish" id="confident_distinguish5" value="5">
+                <label class="form-check-label" for="confident_distinguish5">5</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="frustration" id="frustration6" value="6">
-                <label class="form-check-label" for="frustration6">6</label>
+                <input class="form-check-input" type="radio" name="confident_distinguish" id="confident_distinguish6" value="6">
+                <label class="form-check-label" for="confident_distinguish6">6</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="frustration" id="frustration7" value="7">
-                <label class="form-check-label" for="frustration7">7</label>
+                <input class="form-check-input" type="radio" name="confident_distinguish" id="confident_distinguish7" value="7">
+                <label class="form-check-label" for="confident_distinguish7">7</label>
               </div>
               <div class="form-check form-check-inline">
-                Most frustrated
+                Most confident
               </div>
             </div>
-
-
+            
             <div>
-              <label for="inputEfficiency" class="col-form-label">How efficient were you with this task?</label>
+              <label for="inputHelpful" class="col-form-label">How helpful was it to see your peers' opinions?</label>
             </div>
             <div class="form-group">
               <div class="form-check form-check-inline">
-                Least efficient
+                Not helpful at all
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="efficiency" id="efficiency1" value="1">
-                <label class="form-check-label" for="efficiency1">1</label>
+                <input class="form-check-input" type="radio" name="helpful" id="helpful1" value="1">
+                <label class="form-check-label" for="helpful1">1</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="efficiency" id="efficiency2" value="2">
-                <label class="form-check-label" for="efficiency2">2</label>
+                <input class="form-check-input" type="radio" name="helpful" id="helpful2" value="2">
+                <label class="form-check-label" for="helpful2">2</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="efficiency" id="efficiency3" value="3">
-                <label class="form-check-label" for="efficiency3">3</label>
+                <input class="form-check-input" type="radio" name="helpful" id="helpful3" value="3">
+                <label class="form-check-label" for="helpful3">3</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="efficiency" id="efficiency4" value="4">
-                <label class="form-check-label" for="efficiency4">4</label>
+                <input class="form-check-input" type="radio" name="helpful" id="helpful4" value="4">
+                <label class="form-check-label" for="helpful4">4</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="efficiency" id="efficiency5" value="5">
-                <label class="form-check-label" for="efficiency5">5</label>
+                <input class="form-check-input" type="radio" name="helpful" id="helpful5" value="5">
+                <label class="form-check-label" for="helpful5">5</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="efficiency" id="efficiency6" value="6">
-                <label class="form-check-label" for="efficiency6">6</label>
+                <input class="form-check-input" type="radio" name="helpful" id="helpful6" value="6">
+                <label class="form-check-label" for="helpful6">6</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="efficiency" id="efficiency7" value="7">
-                <label class="form-check-label" for="efficiency7">7</label>
+                <input class="form-check-input" type="radio" name="helpful" id="helpful7" value="7">
+                <label class="form-check-label" for="helpful7">7</label>
               </div>
               <div class="form-check form-check-inline">
-                Most efficient
+                Very helpful
               </div>
             </div>
+            
+            <div class="form-group row">
+              <label for="inputComments" class="col-sm-3 col-form-label">Any comments?</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="" name="comments" id="inputComments">
+              </div>
+            </div>
+            
           </form>
         </div>
         <div class="modal-footer">
@@ -552,6 +555,7 @@
         </div>
         <div class="modal-body">
           <p>Thank you for completing our experiment. You can now close this window.</p>
+          <p>If you are from Amazon Mechanical Turk, please enter "<b>NEWSIES</b>" to finish the HIT.</p>
         </div>
       </div>
     </div>
@@ -563,7 +567,7 @@
       <h2>Distinguishing Factual and Opinion Statements</h2>
 
       <div class="explainer">
-        Select the option that you think best represents the statement.
+        Regardless of how knowledgeable you are about the topic, select whether you consider the statement to be a <b>factual statement</b> (whether you think its accurate or not) or <b>opinion statement</b> (whether you agree with it or not).
       </div>
 
       <div class="cards">
@@ -571,7 +575,8 @@
       </div>
 
       <div class="explainer explainer-timer">
-        You have 5 seconds to read the statement before answering.
+        &nbsp; 
+        <!-- You have 1 second to read the statement before answering. -->
       </div>
 
       <div class="buttons">
