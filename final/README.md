@@ -13,17 +13,17 @@ SAM
 - [ ] Add: “have you taken test before?”, “did you have technical difficulties/cheating”
 
 LUCY: 
-- [ ] Finalize IRB forms by 3/8
-- [ ] Reconcile with IRB consent forms
+- [x] Finalize IRB forms by 3/8
+- [x] Reconcile with IRB consent forms
 - [ ] Add in more hard questions (to fight saturation): "Data/Experiment Statements" gdoc
 - [ ] Clean up and convert to ACM for CSCW (check constraints)
 - [ ] Reread intro of paper
 
 JENNY: Jenny send designs to Sam before 3/8
-- [ ] Redo the UI of who’s in the room (change to icons)
-- [ ] Design the Hook page
-- [ ] Design the Results page + deception debrief
-- [ ] Running the code
+- [x] Redo the UI of who’s in the room (change to icons)
+- [x] Design the Hook page
+- [x] Design the Results page + deception debrief
+- [x] Running the code
 
 ## Later
 - Sam shows run/update
