@@ -193,38 +193,6 @@ def xlsx():
     data.set_column(col, col, 15); col += 1
     
     # Task data
-    questions = [
-        "fact",
-        "fact",
-        "fact",
-        "fact",
-        "fact",
-        "fact",
-        "fact",
-        "fact",
-        "fact",
-        "fact",
-        "fact",
-        "fact",
-        "fact",
-        "fact",
-        "fact",
-        "opinion",
-        "opinion",
-        "opinion",
-        "opinion",
-        "opinion",
-        "opinion",
-        "opinion",
-        "opinion",
-        "opinion",
-        "opinion",
-        "opinion",
-        "opinion",
-        "opinion",
-        "opinion",
-        "opinion",
-    ]
     for d in db_data:
         for t, trial in enumerate(d['results']):
             print(d)
@@ -238,7 +206,7 @@ def xlsx():
             data.write(row, col, trial[2]); col += 1;
             data.write(row, col, trial[3]+1); col += 1;
             data.write(row, col, trial[4]); col += 1;
-            data.write(row, col, trial[0] == questions[t]); col += 1;
+            data.write(row, col, trial[5]); col += 1;
     
     workbook.close()
     

@@ -6,9 +6,9 @@ $(document).ready(function() {
       'backdrop': 'static'
     },
   
-    BUTTON_DELAY: 5, // Delay before enabling buttons
-    SOCIAL_DELAY: 5, // Delay before first social answers come in
-    CLICK_DELAY: 1, // Delay after clicking on a button
+    BUTTON_DELAY: .15, // Delay before enabling buttons
+    SOCIAL_DELAY: .15, // Delay before first social answers come in
+    CLICK_DELAY: .1, // Delay after clicking on a button
     ADVERSE_PROPORTION: 0.2,
     
     experimentParams: {},
@@ -19,70 +19,170 @@ $(document).ready(function() {
     experimentTimes: _.map(_.range(0, 30), function() { return null; }),
     
     questions: [
-      "Health care costs per person in the U.S. are the highest in the developed world",
       "President Barack Obama was born in the United States",
-      "Immigrants who are in the U.S. illegally have some rights under the Constitution",
+      "If you want to vote in Texas, you can use a concealed-weapon permit as a valid form of identification, but not a valid student ID.",
+      "There are more African American men in prison, jail, on probation or parole than were enslaved in 1850.",
+      "The tax penalty the government imposes if you don't buy health insurance is lower than it would have cost to buy insurance.",
+      "The House has never failed to pass a budget in the modern era.",
+      "U.S. debt will soon eclipse the size of the national economy (GDP).",
+      "Among the developed nations, the United States is the least economically and socially mobile country in the world.",
       "ISIS lost a significant portion of its territory in Iraq and Syria in 2017",
+      "There are more coal jobs and more coal produced in Ohio now than there were five years ago.",
+      "There are almost as many guns in the United States as there are people.",
+      "The average family is bringing home $4,000 less than they did five years ago.",
+      "Health care costs per person in the U.S. are the highest in the developed world",
+      "Immigrants who are in the U.S. illegally have some rights under the Constitution",
       "Spending on Social Security, Medicare, and Medicaid make up the largest portion of the U.S. federal budget",
-      "There are more coal jobs and more coal produced in Ohio now than there were five years ago",
-      "The average family is bringing home $4,000 less than they did five years ago",
-      "If you want to vote in Texas, you can use a concealed-weapon permit as a valid form of identification, but not a valid student ID",
-      "The House has never failed to pass a budget in the modern era",
-      "There are more African American men in prison, jail, on probation or parole than were enslaved in 1850",
-      "The tax penalty the government imposes if you don't buy health insurance is lower than it would have cost to buy insurance",
-      "Federal programs have incentivized the militarization of local police precincts",
-      "U.S. debt will soon eclipse the size of the national economy (GDP)",
-      "There are almost as many guns in the United States as there are people",
-      "Among the developed nations, the United States is the least economically and socially mobile country in the world",
+      "Federal programs have incentivized the militarization of local police precincts.",
       "Democracy is the greatest form of government",
       "Increasing the federal minimum wage to $15 an hour is essential for the health of the U.S. economy",
       "Abortion should be legal in most cases",
       "Immigrants who are in the U.S. illegally are a very big problem for the country today",
       "Government is almost always wasteful and inefficient",
-      "Infectious and emerging diseases will pose a major threat to the U.S. in the next few years",
-      "Antibiotic resistance is a big threat to public health",
-      "Fake news has brought us to a \"post-truth\" society",
-      "American STEM education is middling compared to other developed nations",
-      "There would be less crime if stricter gun policies are enforced",
-      "A Democrat will win the presidency in 2020",
-      "The solution for less unpleasant automobile-based commutes is increased public transportation",
-      "Immigration policy should be based on merit and skills, not family ties",
+      "Infectious and emerging diseases will pose a major threat to the U.S. in the next few years.",
+      "Antibiotic resistance is a big threat to public health.",
+      "Fake news has brought us to a \"post-truth\" society.",
+      "American STEM education is middling compared to other developed nations.",
+      "There would be less crime if stricter gun policies are enforced.",
+      "A Democrat will win the presidency in 2020.",
+      "The solution for less unpleasant automobile-based commutes is increased public transportation.",
+      "Immigration policy should be based on merit and skills, not family ties.",
       "Applying additional scrutiny to Muslim Americans would not reduce terrorism in the U.S.",
       "Voter fraud across the U.S. has undermined the results of our elections"
     ],
     
+    questionAnswers: [
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "fact",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion",
+        "opinion"
+    ],
+    
+    questionSources: [
+      "Pew",
+      "LIAR Dataset",
+      "LIAR Dataset",
+      "LIAR Dataset",
+      "LIAR Dataset",
+      "LIAR Dataset",
+      "LIAR Dataset",
+      "Pew",
+      "LIAR Dataset",
+      "LIAR Dataset",
+      "LIAR Dataset",
+      "Pew",
+      "Pew",
+      "Pew",
+      "LIAR Dataset",
+      "Pew",
+      "Pew",
+      "Pew",
+      "Pew",
+      "Pew",
+      "Authors (from Public Opinion polls)",
+      "Authors (from Public Opinion polls)",
+      "Authors (from Public Opinion polls)",
+      "Authors (from Public Opinion polls)",
+      "Authors (from Public Opinion polls)",
+      "Authors (from Public Opinion polls)",
+      "Authors (from Public Opinion polls)",
+      "Authors (from Public Opinion polls)",
+      "Pew",
+      "Pew"
+    ],
+    
+    questionSourceLink: [
+      "https://www.snopes.com/fact-check/birth-certificate/",
+      "https://www.politifact.com/texas/statements/2015/jun/26/hillary-clinton/hillary-clinton-says-you-can-vote-texas-concealed-/",
+      "https://www.politifact.com/rhode-island/statements/2014/dec/07/diego-arene-morley/brown-u-student-leader-more-african-american-men-p/",
+      "https://www.politifact.com/truth-o-meter/statements/2009/sep/28/republican-national-committee-republican/tax-not-having-insurance-health-reform/",
+      "https://www.politifact.com/truth-o-meter/statements/2010/jun/14/john-boehner/boehner-says-house-has-always-passed-budget-resolu/",
+      "https://www.politifact.com/truth-o-meter/statements/2011/jan/25/paul-ryan/paul-ryan-state-union-response-says-us-debt-will-s/",
+      "https://www.politifact.com/florida/statements/2014/nov/06/jeb-bush/us-workers-least-mobile-developed-world-jeb-bush/",
+      "https://www.bbc.com/news/world-middle-east-27838034",
+      "https://www.politifact.com/ohio/statements/2012/oct/31/sherrod-brown/sherrod-brown-says-coal-jobs-and-coal-production-b/",
+      "https://www.politifact.com/new-jersey/statements/2013/mar/07/james-florio/jim-florio-claims-number-guns-us-almost-big-popula/",
+      "https://www.politifact.com/truth-o-meter/promises/obameter/promise/521/cut-cost-typical-familys-health-insurance-premium-/",
+      "https://www.politifact.com/truth-o-meter/statements/2015/dec/20/bernie-s/fact-checking-bernie-sanders-claim-us-spends-three/",
+      "https://www.politifact.com/florida/statements/2017/mar/29/florida-immigrant-coalition/do-undocumented-immigrants-have-constitutional-rig/",
+      "https://www.politifact.com/truth-o-meter/statements/2015/aug/17/facebook-posts/pie-chart-federal-spending-circulating-internet-mi/",
+      "https://www.politifact.com/truth-o-meter/statements/2014/aug/21/rand-paul/rand-paul-says-federal-program-incentivizes-police/",
+      "http://www.pewresearch.org/quiz/news-statements-quiz/",
+      "http://www.pewresearch.org/quiz/news-statements-quiz/",
+      "http://www.pewresearch.org/quiz/news-statements-quiz/",
+      "http://www.pewresearch.org/quiz/news-statements-quiz/",
+      "http://www.pewresearch.org/quiz/news-statements-quiz/",
+    "https://www.researchamerica.org/sites/default/files/October%20AMR%20survey%20Press%20Release%20slides_FINAL_0.pdf",
+  "https://www.researchamerica.org/sites/default/files/October%20AMR%20survey%20Press%20Release%20slides_FINAL_0.pdf",
+"https://www.monmouth.edu/polling-institute/reports/monmouthpoll_us_040218/",
+  "http://www.pewsocialtrends.org/2018/01/09/women-and-men-in-stem-often-at-odds-over-workplace-equity/",
+"https://news.gallup.com/poll/1645/guns.aspx",
+"https://www.cnn.com/2018/10/14/politics/cnn-poll-trump-biden-bernie-sanders-2020",
+"http://t4america.org/maps-tools/polling/",
+  "https://caps.gov.harvard.edu/news/caps-harris-poll-immigration-and-foreign-policy",
+  "http://harvardharrispoll.com/wp-content/uploads/2018/01/Final_HHP_Jan2018-Refield_RegisteredVoters_XTab.pdf",
+      "https://www.factcheck.org/2017/02/facts-on-trumps-immigration-order/",
+      "https://www.brennancenter.org/analysis/debunking-voter-fraud-myth"
+    ],
+    
     // Facts + Opinions = # of social (30). Just using fact counts as shorthand.
     questionSocialFactCount: [
-      8,
       11,
-      8,
-      10,
-      8,
-      11,
-      14,
       12,
+      12,
+      13,
+      10,
+      10,
+      11,
+      10,
+      11,
       11,
       13,
-      13,
+      8,
+      8,
+      8,
       9,
-      11,
-      11,
-      11,
-      2,
-      4,
-      3,
-      5,
-      4,
-      4,
-      2,
-      1,
-      2,
-      3,
-      1,
-      2,
-      2,
-      4,
-      3
+      15 - 12,
+      15 - 10,
+      15 - 11,
+      15 - 9,
+      15 - 10,
+      15 - 11,
+      15 - 12,
+      15 - 14,
+      15 - 13,
+      15 - 11,
+      15 - 13,
+      15 - 11,
+      15 - 13,
+      15 - 11,
+      15 - 11
     ],
     
     questionOrder: [],
@@ -116,6 +216,8 @@ $(document).ready(function() {
         this.prepareAdverseConditionExperiment();
       } else if (window.location.hash.indexOf('survey') != -1) {
         this.finishMainExperiment(null);
+      } else if (window.location.hash.indexOf('total') != -1) {
+        this.prepareGoodbye();
       } else {
         $('#begin-modal').modal(this.modalOptions);
         $('#submit-begin').on("click", _.bind(function() {
@@ -150,37 +252,6 @@ $(document).ready(function() {
         }).append($("<div>").addClass('card-text').text(this.questions[q]));
         $cards.append($card);
       }, this));
-    },
-  
-    prepareDemographicsForm: function() {
-      $('#begin-modal').modal('hide');
-      $('#demographics-modal').modal(this.modalOptions);
-      $("#demographics-submit").on("click", _.bind(function() {
-        this.submitDemographicsForm();
-      }, this));
-    },
-  
-    submitDemographicsForm: function() {
-      $("#demographics-modal").modal('hide');
-
-      $.ajax({
-        'type': "POST",
-        'url': '/demographics',
-        'data': {
-          'gender': $("input[name=gender]").val(),
-          'age': $("select[name=age]").val(),
-          'zipcode': $("input[name=zipcode]").val(),
-          'education': $("select[name=education]").val(),
-          'awareness': $("input[name=awareness]:checked").val(),
-          'savviness': $("input[name=savviness]:checked").val(),
-          'trust': $("input[name=trust]:checked").val(),
-          'interest': $("input[name=interest]:checked").val(),
-          'newssource': $("input[name=newssource]:checked").val()
-        },
-        'success': _.bind(function() {
-          this.prepareFeedbackForm();
-        }, this)
-      });
     },
   
     prepareControlConditionModal: function() {
@@ -339,7 +410,7 @@ $(document).ready(function() {
           if (isAdverse) {
             seenTimes[!time[0] ? 'facts' : 'opinions'] += 1;
           } else {
-            seenTimes[time[0] ? 'facts' : 'opinions'] += 1;            
+            seenTimes[time[0] ? 'facts' : 'opinions'] += 1;
           }
         }
       });
@@ -390,7 +461,8 @@ $(document).ready(function() {
         secondsSince,
         this.currentCondition,
         this.questionOrder[this.currentCard],
-        isAdverse
+        isAdverse,
+        this.questionAnswers[this.questionOrder[this.currentCard]] == choice
       ];
       
       if (this.currentCard == 9) {
@@ -425,6 +497,37 @@ $(document).ready(function() {
       this.prepareDemographicsForm();
   },
   
+  prepareDemographicsForm: function() {
+    $('#begin-modal').modal('hide');
+    $('#demographics-modal').modal(this.modalOptions);
+    $("#demographics-submit").on("click", _.bind(function() {
+      this.submitDemographicsForm();
+    }, this));
+  },
+
+  submitDemographicsForm: function() {
+    $("#demographics-modal").modal('hide');
+
+    $.ajax({
+      'type': "POST",
+      'url': '/demographics',
+      'data': {
+        'gender': $("input[name=gender]").val(),
+        'age': $("select[name=age]").val(),
+        'zipcode': $("input[name=zipcode]").val(),
+        'education': $("select[name=education]").val(),
+        'awareness': $("input[name=awareness]:checked").val(),
+        'savviness': $("input[name=savviness]:checked").val(),
+        'trust': $("input[name=trust]:checked").val(),
+        'interest': $("input[name=interest]:checked").val(),
+        'newssource': $("input[name=newssource]:checked").val()
+      },
+      'success': _.bind(function() {
+        this.prepareFeedbackForm();
+      }, this)
+    });
+  },
+  
   prepareFeedbackForm: function() {
       $("#feedback-modal").modal(this.modalOptions);
 
@@ -456,6 +559,28 @@ $(document).ready(function() {
     prepareGoodbye: function() {
       $("#feedback-modal").modal("hide");
       $("#goodbye-modal").modal(this.modalOptions);
+      var totalCorrect = 0;
+      
+      _.each(this.questionOrder, _.bind(function(q, i) {
+        var question = this.questions[q];
+        var answer = this.questionAnswers[q];
+        var source = this.questionSources[q];
+        var sourceLink = this.questionSourceLink[q];
+        var choice = this.experimentTimes[q][0];
+        var $question = $(".total-question").first().clone();
+        var correct = answer == choice;
+        
+        if (correct) totalCorrect += 1;
+        
+        $(".total-question-statement", $question).text(question);
+        $(".total-question-answer", $question).text(answer);
+        $(".total-question-youranswer", $question).html(correct ? $("<span class='answer-correct'></span>") : $("<span class='answer-wrong'></span>"));
+        $(".total-question-source", $question).html($("<a href=\""+sourceLink+"\">"+source+"</a>"));
+        
+        $(".total-questions").append($question);
+      }, this));
+      
+      $(".total-percentage").text(Math.round(totalCorrect / 30. * 100));
     }
   };
 

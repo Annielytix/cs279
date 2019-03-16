@@ -194,3 +194,28 @@ html, body {
   float: right;
   text-align: right;
 }
+
+.total-row {
+  margin: 16px 0;
+}
+
+.answer-correct::before {
+  color: #14d442;
+  content: "✓";
+}
+
+.answer-wrong::before {
+  color: #ff5252;
+  content: "X";
+}
+
+.total-question-answer {
+  font-weight: bold;
+}
+
+.total-header {
+  margin-top: 36px;
+  font-size: .8em;
+  font-weight: bold;
+  text-transform: uppercase;
+}

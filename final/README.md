@@ -9,6 +9,8 @@ SAM
 - [ ] Change data labeling to 0/1
 - [x] Prevent dupes
 - [ ] Change wording around Round 3 intro to be more order neutral
+- [x] Update to Pew/LIAR questions
+- [x] Show total correct page at the end of the experiment
 - [x] Move demographics to the back, make optional
 - [x] Timing: wait till 5 seconds
 - [ ] Add: “have you taken test before?”, “did you have technical difficulties/cheating”

@@ -545,26 +545,27 @@
 
 
   <div class="modal" tabindex="-1" role="dialog" id="goodbye-modal">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Thank you!<h5>
-          </button>
+          <h5 class="modal-title text-center">Thank you!<h5>
         </div>
         <div class="modal-body">
-          <p>How did you do?</p>
-          <h5 class="modal-title"><b><span class="total-percentage"></span>% correct</b></h5>
-          <div class="total-row total-headers">
-            <div class="total-header total-1">Statement</div>
-            <div class="total-header total-2">Answer</div>
-            <div class="total-header total-3">Your answer</div>
-            <div class="total-header total-4">Source</div>
+          <h6 class="text-center">How did you do?</h6>
+          <h5 class="modal-title text-center"><b><span class="total-percentage"></span>% correct</b></h5>
+          <div class="total-row row total-headers">
+            <div class="total-header col-12 col-md-6 total-1">Statement</div>
+            <div class="total-header col-4 col-md-2 total-2">Answer</div>
+            <div class="total-header col-4 col-md-2 total-3">Your answer</div>
+            <div class="total-header col-4 col-md-2 total-4">Source</div>
           </div>
-          <div class="total-row total-question">
-            <div class="total-question-statement total-1"></div>
-            <div class="total-question-answer total-2"></div>
-            <div class="total-question-youranswer total-3"></div>
-            <div class="total-question-source total-4"></div>
+          <div class="total-questions">
+            <div class="total-row row total-question">
+              <div class="total-question-statement col-12 col-md-6 total-1"></div>
+              <div class="total-question-answer col-4 col-md-2 total-2"></div>
+              <div class="total-question-youranswer col-4 col-md-2 total-3"></div>
+              <div class="total-question-source col-4 col-md-2 total-4"></div>
+            </div>
           </div>
           <h5 class="modal-title">What was this test about?</h5>
           <p>TODO - debrief on deception</p>
