@@ -208,8 +208,12 @@ $(document).ready(function() {
         this.prepareDemographicsForm();
       } else if (window.location.hash.indexOf('skip') != -1) {
         this.prepareControlConditionExperiment();
+      } else if (window.location.hash.indexOf('control-dialog') != -1) {
+        this.prepareControlConditionModal();
       } else if (window.location.hash.indexOf('control') != -1) {
         this.prepareControlConditionExperiment();
+      } else if (window.location.hash.indexOf('similar-dialog') != -1) {
+        this.prepareSimilarConditionExperiment();
       } else if (window.location.hash.indexOf('similar') != -1) {
         this.prepareSimilarConditionExperiment();
       } else if (window.location.hash.indexOf('adverse') != -1) {
@@ -255,6 +259,7 @@ $(document).ready(function() {
     },
   
     prepareControlConditionModal: function() {
+      console.log(['prepareControlConditionModal']);
       $('#begin-modal').modal('hide');
       
       $("#control-condition-modal").modal(this.modalOptions);
@@ -282,7 +287,7 @@ $(document).ready(function() {
     },
 
     finishControlConditionExperiment: function(exp) {
-      console.log("finishControlConditionExperiment");
+      console.log("finishControlConditionExperiment", this.modalOptions);
       
       $("#experiment").hide();
       
