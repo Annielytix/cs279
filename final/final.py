@@ -11,7 +11,7 @@ from flask_pymongo import PyMongo
 from flask import send_file
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb://localhost:27017/cs279final"
+app.config["MONGO_URI"] = "mongodb://localhost:27017/cs279CSCW"
 mongo = PyMongo(app)
 
 @app.route("/")
@@ -27,6 +27,11 @@ def experiment():
 @app.route("/demographics", methods=["POST"])
 def demographics():
     print(" ---> Submitting demographics: %s" % request.form)
+
+    if mongo.db.demographics.find({"uuid": request.cookies.get('finaluuid')}).count() > 0:
+        print(" ***> Already submitted demographics: %s" % request.form)
+        return jsonify(dict(message="IGNORED REPEAT", form=request.form))
+        
     mongo.db.demographics.insert({
         "uuid": request.cookies.get('finaluuid'),
         "gender": request.form.get("gender"),
@@ -44,6 +49,11 @@ def demographics():
 @app.route("/feedback", methods=["POST"])
 def feedback():
     print(" ---> Submitting feedback: %s" % request.form)
+    
+    if mongo.db.feedback.find({"uuid": request.cookies.get('finaluuid')}).count() > 0:
+        print(" ***> Already submitted demographics: %s" % request.form)
+        return jsonify(dict(message="IGNORED REPEAT", form=request.form))
+    
     mongo.db.feedback.insert({
         "uuid": request.cookies.get('finaluuid'),
         "political": request.form.get("political"),
@@ -58,6 +68,11 @@ def feedback():
 def taskdata():
     result = request.get_json()
     print(" ---> Submitting task data: %s" % result)
+
+    if mongo.db.taskdata.find({"uuid": request.cookies.get('finaluuid')}).count() > 0:
+        print(" ***> Already submitted demographics: %s" % request.form)
+        return jsonify(dict(message="IGNORED REPEAT", form=request.form))
+    
     mongo.db.taskdata.insert({
         "uuid": request.cookies.get('finaluuid'),
         "results": result,

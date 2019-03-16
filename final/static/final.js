@@ -6,13 +6,14 @@ $(document).ready(function() {
       'backdrop': 'static'
     },
   
-    BUTTON_DELAY: 1,
-    SOCIAL_DELAY: 3,
-    CLICK_DELAY: 1,
+    BUTTON_DELAY: 5, // Delay before enabling buttons
+    SOCIAL_DELAY: 5, // Delay before first social answers come in
+    CLICK_DELAY: 1, // Delay after clicking on a button
     ADVERSE_PROPORTION: 0.2,
     
     experimentParams: {},
     
+    // Sent to server
     runningTimes: [],
     currentCondition: null,
     experimentTimes: _.map(_.range(0, 30), function() { return null; }),
@@ -49,7 +50,8 @@ $(document).ready(function() {
       "Applying additional scrutiny to Muslim Americans would not reduce terrorism in the U.S.",
       "Voter fraud across the U.S. has undermined the results of our elections"
     ],
-
+    
+    // Facts + Opinions = # of social (30). Just using fact counts as shorthand.
     questionSocialFactCount: [
       8,
       11,
@@ -117,7 +119,7 @@ $(document).ready(function() {
       } else {
         $('#begin-modal').modal(this.modalOptions);
         $('#submit-begin').on("click", _.bind(function() {
-          this.prepareDemographicsForm();
+          this.prepareControlConditionModal();
         }, this));
       }
     },
@@ -176,12 +178,14 @@ $(document).ready(function() {
           'newssource': $("input[name=newssource]:checked").val()
         },
         'success': _.bind(function() {
-          this.prepareControlConditionModal();
+          this.prepareFeedbackForm();
         }, this)
       });
     },
   
     prepareControlConditionModal: function() {
+      $('#begin-modal').modal('hide');
+      
       $("#control-condition-modal").modal(this.modalOptions);
     
       $("#submit-begin-experiment").off(".begin").on("click.begin", _.bind(function() {
@@ -417,6 +421,11 @@ $(document).ready(function() {
       });
 
       $("#experiment").hide();
+      
+      this.prepareDemographicsForm();
+  },
+  
+  prepareFeedbackForm: function() {
       $("#feedback-modal").modal(this.modalOptions);
 
       $("#submit-feedback").off(".feedback").on("click.feedback", _.bind(function() {

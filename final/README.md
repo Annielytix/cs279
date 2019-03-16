@@ -7,9 +7,10 @@ SAM
 - [ ] Rename rounds: control, social, social similar
 - [ ] Between subject (1-2, 1-3) vs. *within subject (1-2-3 vs. 1-3-2)*
 - [ ] Change data labeling to 0/1
+- [x] Prevent dupes
 - [ ] Change wording around Round 3 intro to be more order neutral
-- [ ] Move demographics to the back, make optional
-- [ ] Timing: wait till 5 seconds
+- [x] Move demographics to the back, make optional
+- [x] Timing: wait till 5 seconds
 - [ ] Add: “have you taken test before?”, “did you have technical difficulties/cheating”
 
 LUCY: 
