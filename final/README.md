@@ -13,6 +13,7 @@ SAM
 - [x] Show total correct page at the end of the experiment
 - [x] Move demographics to the back, make optional
 - [x] Timing: wait till 5 seconds
+- [x] Switch social bars for social people
 - [ ] Add: “have you taken test before?”, “did you have technical difficulties/cheating”
 
 LUCY: 
