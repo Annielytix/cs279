@@ -6,9 +6,9 @@ $(document).ready(function() {
       'backdrop': 'static'
     },
   
-    BUTTON_DELAY: .15, // Delay before enabling buttons
-    SOCIAL_DELAY: .15, // Delay before first social answers come in
-    CLICK_DELAY: .1, // Delay after clicking on a button
+    BUTTON_DELAY: 5, // Delay before enabling buttons
+    SOCIAL_DELAY: 5, // Delay before first social answers come in
+    CLICK_DELAY: 1, // Delay after clicking on a button
     ADVERSE_PROPORTION: 0.2,
     
     experimentParams: {},
