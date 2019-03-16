@@ -219,3 +219,26 @@ html, body {
   font-weight: bold;
   text-transform: uppercase;
 }
+
+.social-people {
+  clear: both;
+  overflow: hidden;
+}
+
+.social-person {
+  width: 24px;
+  height: 50px;
+  float: left;
+  margin: 12px 6px 0 0;
+  background: url(/static/icon_person.svg) no-repeat 0 0;
+  transition: background-image .25s linear;
+  fill: #eee;
+}
+.social-person-fact {
+  background-image: url(/static/icon_person_fact.svg);
+  fill: #671fa5;
+}
+.social-person-opinion {
+  background-image: url(/static/icon_person_opinion.svg);
+  fill: #671fa5;
+}

@@ -105,3 +105,4 @@ venv.bak/
 hw2env
 finalenv
 *.xlsx
+.DS_Store

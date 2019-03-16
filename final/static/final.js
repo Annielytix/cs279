@@ -7,7 +7,8 @@ $(document).ready(function() {
     },
   
     BUTTON_DELAY: 5, // Delay before enabling buttons
-    SOCIAL_DELAY: 5, // Delay before first social answers come in
+    SOCIAL_DELAY: 5.5, // Delay before first social answers come in
+    SOCIAL_DURATION: 10, // Duration of time that social answers come in
     CLICK_DELAY: 1, // Delay after clicking on a button
     ADVERSE_PROPORTION: 0.2,
     
@@ -189,11 +190,12 @@ $(document).ready(function() {
     questionAdverse: [],
     
     generateTimes: function() {
+      var SOCIAL_DURATION = this.SOCIAL_DURATION;
       var factCount = this.questionSocialFactCount;
       var times = _.map(_.range(30), function(q) {
         return _.map(_.range(14), function(p) { 
           var facts = factCount[q];
-          var time = Math.random() * 5;
+          var time = Math.random() * SOCIAL_DURATION;
           return [p < facts, time];
         });
       });
@@ -351,6 +353,7 @@ $(document).ready(function() {
       this.beginSocialCountdown();
       this.attachButtons();
       this.updateSocialBars();
+      this.updateSocialPeople();
     },
     
     arrangeCards: function() {
@@ -368,12 +371,14 @@ $(document).ready(function() {
       $(".social-label").css('opacity', 0);
       $(".social-user").css('opacity', 0);
       $(".social-bars").css('opacity', 0);
+      $(".social-people").css('opacity', 0);
       
       
       _.delay(_.bind(function() {
         $(".social-label").animate({'opacity': 1}, this.CLICK_DELAY*1000);
         $(".social-user").animate({'opacity': 1}, this.CLICK_DELAY*1000);
         $(".social-bars").animate({'opacity': 1}, this.CLICK_DELAY*1000);
+        $(".social-people").animate({'opacity': 1}, this.CLICK_DELAY*1000);
       }, this), this.BUTTON_DELAY*1000);
       
       _.delay(_.bind(function() {
@@ -393,6 +398,7 @@ $(document).ready(function() {
       _.each(times, _.bind(function(time) {
         var timeDelay = _.delay(_.bind(function() {
           this.updateSocialBars();
+          this.updateSocialPeople();
         }, this), (this.SOCIAL_DELAY*1000 + time[1]*1000));
         this.runningTimes.push(timeDelay);
       }, this));
@@ -432,6 +438,42 @@ $(document).ready(function() {
       $(".social-user.opinion").text(seenTimes['opinions'] + " " + (seenTimes['opinions'] == 1 ? "person" : "people"));
     },
     
+    updateSocialPeople: function() {
+      var isAdverse = this.questionAdverse[this.questionOrder[this.currentCard]];
+      var times = this.conditionTimes[this.questionOrder[this.currentCard]];
+      var secondsSince = ((new Date) - this.socialCountdownTime) / 1000 - this.SOCIAL_DELAY;
+      var seenTimes = {
+        'facts': 0,
+        'opinions': 0
+      };
+      // console.log(['updateSocialPeople', secondsSince, this.currentCondition, times]);
+      
+      if (!times) return;
+      
+      _.each(times, function(time) {
+        if (secondsSince >= time[1]) {
+          if (isAdverse) {
+            seenTimes[!time[0] ? 'facts' : 'opinions'] += 1;
+          } else {
+            seenTimes[time[0] ? 'facts' : 'opinions'] += 1;
+          }
+        }
+      });
+      
+      $(".social-person").removeClass("social-person-fact").removeClass("social-person-opinion");
+      
+      _.each([seenTimes['facts'], seenTimes['opinions']], _.bind(function(times, t) {
+        _.each(_.range(times), _.bind(function(p) {
+          var o = t == 0 ? p : 14 - p;
+          console.log(['updateSocialPeople', t, o, seenTimes['facts'], seenTimes['opinion']]);
+          $(".social-person.social-"+o).addClass(t == 0 ? "social-person-fact" : "social-person-opinion");
+        }, this));
+      }, this));
+
+      $(".social-user.fact").text(seenTimes['facts'] + " " + (seenTimes['facts'] == 1 ? "person":"people"));
+      $(".social-user.opinion").text(seenTimes['opinions'] + " " + (seenTimes['opinions'] == 1 ? "person" : "people"));
+    },
+    
     attachButtons: function() {
       $(".button-fact").off('click').on('click', _.bind(this.clickFactButton, this));
       $(".button-opinion").off('click').on('click', _.bind(this.clickOpinionButton, this));
@@ -460,6 +502,7 @@ $(document).ready(function() {
         this.conditionTimes[this.questionOrder[this.currentCard]].push(selection);
       }
       this.updateSocialBars();
+      this.updateSocialPeople();
       
       this.experimentTimes[this.questionOrder[this.currentCard]] = [
         choice,
@@ -571,7 +614,7 @@ $(document).ready(function() {
         var answer = this.questionAnswers[q];
         var source = this.questionSources[q];
         var sourceLink = this.questionSourceLink[q];
-        var choice = this.experimentTimes[q][0];
+        var choice = this.experimentTimes[q] && this.experimentTimes[q][0] || "wrong";
         var $question = $(".total-question").first().clone();
         var correct = answer == choice;
         
