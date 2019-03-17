@@ -5,10 +5,10 @@
 
 SAM
 - [ ] Rename rounds: control, social, social similar
-- [ ] Between subject (1-2, 1-3) vs. *within subject (1-2-3 vs. 1-3-2)*
+- [ ] (IGNORE) Between subject (1-2, 1-3) vs. *within subject (1-2-3 vs. 1-3-2)*
+- [ ] (IGNORE) Change wording around Round 3 intro to be more order neutral
 - [ ] Change data labeling to 0/1
 - [x] Prevent dupes
-- [ ] Change wording around Round 3 intro to be more order neutral
 - [x] Update to Pew/LIAR questions
 - [x] Show total correct page at the end of the experiment
 - [x] Move demographics to the back, make optional
