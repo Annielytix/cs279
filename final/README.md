@@ -5,8 +5,7 @@
 
 SAM
 - [ ] Rename rounds: control, social, social similar
-- [ ] (IGNORE) Between subject (1-2, 1-3) vs. *within subject (1-2-3 vs. 1-3-2)*
-- [ ] (IGNORE) Change wording around Round 3 intro to be more order neutral
+- [x] Between subject (1-2, 1-3) vs. *within subject (1-2-3 vs. 1-3-2)*
 - [ ] Change data labeling to 0/1
 - [x] Prevent dupes
 - [x] Update to Pew/LIAR questions
@@ -28,7 +27,9 @@ JENNY: Jenny send designs to Sam before 3/8
 - [x] Design the Hook page
 - [x] Design the Results page + deception debrief
 - [x] Running the code
-
+- [ ] Change wording around Round 3 intro to be more order neutral
+- [ ] "What was this test about? TODO - debrief on deception"
+ 
 ## Later
 - Sam shows run/update
 - Remind how to pull data

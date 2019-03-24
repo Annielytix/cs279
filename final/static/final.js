@@ -11,12 +11,18 @@ $(document).ready(function() {
     SOCIAL_DURATION: 10, // Duration of time that social answers come in
     CLICK_DELAY: 1, // Delay after clicking on a button
     ADVERSE_PROPORTION: 0.2,
+
+    // Uncomment below to debug
+    // BUTTON_DELAY: .05, // Delay before enabling buttons
+    // SOCIAL_DELAY: .5, // Delay before first social answers come in
+    // CLICK_DELAY: .01, // Delay after clicking on a button
     
     experimentParams: {},
     
     // Sent to server
     runningTimes: [],
     currentCondition: null,
+    conditionOrder: null,
     experimentTimes: _.map(_.range(0, 30), function() { return null; }),
     
     questions: [
@@ -206,6 +212,10 @@ $(document).ready(function() {
     
     begin: function() {
       this.conditionTimes = this.generateTimes();
+
+      // Also choose an order for conditions
+      this.conditionOrder = (Math.random() >= 0.5 ? "123" : "132");
+
       if (window.location.hash.indexOf('demographics') != -1) {
         this.prepareDemographicsForm();
       } else if (window.location.hash.indexOf('skip') != -1) {
@@ -245,8 +255,14 @@ $(document).ready(function() {
       var $cards = $(".cards").empty();
       var order;
       if (this.currentCondition == 'control') order = this.questionOrder.slice(0, 10);
-      if (this.currentCondition == 'similar') order = this.questionOrder.slice(10, 20);
-      if (this.currentCondition == 'adverse') order = this.questionOrder.slice(20, 30);
+      if (this.conditionOrder == "123") {
+        if (this.currentCondition == 'similar') order = this.questionOrder.slice(10, 20);
+        if (this.currentCondition == 'adverse') order = this.questionOrder.slice(20, 30);
+      } else {
+        if (this.currentCondition == 'similar') order = this.questionOrder.slice(20, 30);
+        if (this.currentCondition == 'adverse') order = this.questionOrder.slice(10, 20);
+      }
+      
 
       console.log(['prepareQuestions', order, this.questionOrder]);
 
@@ -288,10 +304,16 @@ $(document).ready(function() {
       this.prepareCard(0);
     },
 
-    finishControlConditionExperiment: function(exp) {
-      console.log("finishControlConditionExperiment", this.modalOptions);
+    prepareSimilarConditionDialog: function(exp) {
+      console.log("prepareSimilarConditionDialog", this.modalOptions);
       
       $("#experiment").hide();
+      
+      if (this.conditionOrder == "123") {
+        $("#similar-condition-modal-title").text("One third completed");
+      } else {
+        $("#similar-condition-modal-title").text("Two thirds completed");
+      }
       
       $("#similar-condition-modal").modal(this.modalOptions);
 
@@ -312,19 +334,29 @@ $(document).ready(function() {
       $(".social").css('opacity', 1);
 
       $("#experiment").show();
-    
-      this.prepareCard(10);
+
+      if (this.conditionOrder == "123") {
+        this.prepareCard(10);
+      } else {
+        this.prepareCard(20);
+      }
     },
     
-    finishSimilarConditionExperiment: function(exp) {
-      console.log("finishSimilarConditionExperiment");
+    prepareAdverseConditionDialog: function(exp) {
+      console.log("prepareAdverseConditionDialog");
       
       $("#experiment").hide();
+      
+      if (this.conditionOrder == "123") {
+        $("#adverse-condition-modal-title").text("Two thirds completed");
+      } else {
+        $("#adverse-condition-modal-title").text("One third completed");
+      }
       
       $("#adverse-condition-modal").modal(this.modalOptions);
 
       $("#submit-adverse-condition").off(".adverse-condition").on("click.adverse-condition", _.bind(function() {
-        this.prepareAdverseConditionExperiment();
+        this.prepareAdverseConditionExperiment();          
       }, this));
     },
 
@@ -341,9 +373,13 @@ $(document).ready(function() {
 
       $("#experiment").show();
     
-      this.prepareCard(20);
+      if (this.conditionOrder == "123") {
+        this.prepareCard(20);
+      } else {
+        this.prepareCard(10);
+      }
     },
-  
+    
     prepareCard: function(cardNumber) {
       this.hasChosen = false;
       this.currentCard = cardNumber;
@@ -465,7 +501,7 @@ $(document).ready(function() {
       _.each([seenTimes['facts'], seenTimes['opinions']], _.bind(function(times, t) {
         _.each(_.range(times), _.bind(function(p) {
           var o = t == 0 ? p : 14 - p;
-          console.log(['updateSocialPeople', t, o, seenTimes['facts'], seenTimes['opinion']]);
+          // console.log(['updateSocialPeople', t, o, seenTimes['facts'], seenTimes['opinion']]);
           $(".social-person.social-"+o).addClass(t == 0 ? "social-person-fact" : "social-person-opinion");
         }, this));
       }, this));
@@ -510,13 +546,22 @@ $(document).ready(function() {
         this.currentCondition,
         this.questionOrder[this.currentCard],
         isAdverse,
-        this.questionAnswers[this.questionOrder[this.currentCard]] == choice
+        this.questionAnswers[this.questionOrder[this.currentCard]] == choice,
+        this.conditionOrder
       ];
       
       if (this.currentCard == 9) {
-        _.delay(_.bind(this.finishControlConditionExperiment, this), this.CLICK_DELAY*1000);
+        if (this.conditionOrder == "123") {
+          _.delay(_.bind(this.prepareSimilarConditionDialog, this), this.CLICK_DELAY*1000);
+        } else {
+          _.delay(_.bind(this.prepareAdverseConditionDialog, this), this.CLICK_DELAY*1000);
+        }
       } else if (this.currentCard == 19) {
-        _.delay(_.bind(this.finishSimilarConditionExperiment, this), this.CLICK_DELAY*1000);
+        if (this.conditionOrder == "123") {
+          _.delay(_.bind(this.prepareAdverseConditionDialog, this), this.CLICK_DELAY*1000);
+        } else {
+          _.delay(_.bind(this.prepareSimilarConditionDialog, this), this.CLICK_DELAY*1000);
+        }
       } else if (this.currentCard == 29) {
         _.delay(_.bind(this.finishMainExperiment, this), this.CLICK_DELAY*1000);
       } else {
