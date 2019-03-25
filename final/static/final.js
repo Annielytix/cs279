@@ -13,9 +13,9 @@ $(document).ready(function() {
     ADVERSE_PROPORTION: 0.2,
 
     // Uncomment below to debug
-    BUTTON_DELAY: .05, // Delay before enabling buttons
-    SOCIAL_DELAY: .5, // Delay before first social answers come in
-    CLICK_DELAY: .01, // Delay after clicking on a button
+    // BUTTON_DELAY: .05, // Delay before enabling buttons
+    // SOCIAL_DELAY: .5, // Delay before first social answers come in
+    // CLICK_DELAY: .01, // Delay after clicking on a button
     
     experimentParams: {},
     
