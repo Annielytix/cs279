@@ -98,10 +98,10 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 206px;
-  height: 50px;
+  width: 212px;
+  height: 56px;
   opacity: 0.8;
-  border-radius: 8px;
+  border-radius: 12px;
   background-color: #9b9b9b;
   text-transform: uppercase;
   color: white;
@@ -109,7 +109,7 @@ html, body {
   font-weight: 600;
   text-align: center;
   transition: background .25s linear, border .25s linear;
-  border: 1px solid #9b9b9b;
+  border: 3px solid rgba(255, 255, 255, 1);
   cursor: wait;
 }
 .buttons.active .button {
@@ -118,23 +118,29 @@ html, body {
 .button-fact {
   float: left;
 }
-.buttons.active .button-fact {
-  background-color: #671fa5;
-  border: 1px solid #c98cff;
-}
 .button-opinion {
   float: right;
 }
-.buttons.active .button-opinion {
+.buttons.active .button-fact {
   background-color: #671fa5;
-  border: 1px solid #c98cff;
+  border: 3px solid rgba(255, 255, 255, 1);
 }
-.no-touch .buttons.active .button:hover {
+.buttons.active .button-opinion {
   background-color: #c98cff;
+  border: 3px solid rgba(255, 255, 255, 1);
+}
+.buttons.active .button-fact:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 3px solid rgba(255, 255, 255, 1);
+}
+.buttons.active .button-opinion:hover {
+  background-color: rgba(0, 0, 0, 0.8);  
+  border: 3px solid rgba(255, 255, 255, 1);
 }
 .buttons.active .button.chosen,
 .no-touch .buttons.active .button.chosen:hover {
   background-color: rgba(0, 0, 0, 0.8);
+  border: 3px solid #B5B8B9;
 }
 .social {
 /*  display: none;*/
@@ -240,5 +246,5 @@ html, body {
 }
 .social-person-opinion {
   background-image: url(/static/icon_person_opinion.svg);
-  fill: #671fa5;
+  fill: #c98cff;
 }
