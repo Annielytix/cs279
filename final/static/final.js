@@ -6,9 +6,9 @@ $(document).ready(function() {
       'backdrop': 'static'
     },
   
-    BUTTON_DELAY: 5, // Delay before enabling buttons
-    SOCIAL_DELAY: 5.5, // Delay before first social answers come in
-    SOCIAL_DURATION: 10, // Duration of time that social answers come in
+    BUTTON_DELAY: 3, // Delay before enabling buttons
+    SOCIAL_DELAY: 4, // Delay before first social answers come in
+    SOCIAL_DURATION: 8, // Duration of time that social answers come in
     CLICK_DELAY: 1, // Delay after clicking on a button
     ADVERSE_PROPORTION: 0.2,
 
@@ -159,7 +159,7 @@ $(document).ready(function() {
     ],
     
     // Facts + Opinions = # of social (30). Just using fact counts as shorthand.
-    questionSocialFactCount: [
+    questionCorrectCount: [
       11,
       12,
       12,
@@ -175,21 +175,21 @@ $(document).ready(function() {
       8,
       8,
       9,
-      15 - 12,
-      15 - 10,
-      15 - 11,
-      15 - 9,
-      15 - 10,
-      15 - 11,
-      15 - 12,
-      15 - 14,
-      15 - 13,
-      15 - 11,
-      15 - 13,
-      15 - 11,
-      15 - 13,
-      15 - 11,
-      15 - 11
+      12,
+      10,
+      11,
+      9,
+      10,
+      11,
+      12,
+      14,
+      13,
+      11,
+      13,
+      11,
+      13,
+      11,
+      11
     ],
     
     questionOrder: [],
@@ -197,12 +197,12 @@ $(document).ready(function() {
     
     generateTimes: function() {
       var SOCIAL_DURATION = this.SOCIAL_DURATION;
-      var factCount = this.questionSocialFactCount;
+      var correctCount = this.questionCorrectCount;
       var times = _.map(_.range(30), function(q) {
         return _.map(_.range(14), function(p) { 
-          var facts = factCount[q];
+          var correct = correctCount[q];
           var time = Math.random() * SOCIAL_DURATION;
-          return [p < facts, time];
+          return [p < correct, time];
         });
       });
       
@@ -225,9 +225,11 @@ $(document).ready(function() {
       } else if (window.location.hash.indexOf('control') != -1) {
         this.prepareControlConditionExperiment();
       } else if (window.location.hash.indexOf('similar-dialog') != -1) {
-        this.prepareSimilarConditionExperiment();
+        this.prepareSimilarConditionDialog();
       } else if (window.location.hash.indexOf('similar') != -1) {
         this.prepareSimilarConditionExperiment();
+      } else if (window.location.hash.indexOf('adverse-dialog') != -1) {
+        this.prepareAdverseConditionDialog();
       } else if (window.location.hash.indexOf('adverse') != -1) {
         this.prepareAdverseConditionExperiment();
       } else if (window.location.hash.indexOf('survey') != -1) {
@@ -309,15 +311,12 @@ $(document).ready(function() {
       
       $("#experiment").hide();
       
-      if (this.conditionOrder == "123") {
-        $("#similar-condition-modal-title").text("One third completed");
-      } else {
-        $("#similar-condition-modal-title").text("Two thirds completed");
-      }
+      var $modal = this.conditionOrder == "123" ? $("#similar-condition-modal-1") : $("#similar-condition-modal-2");
+      $(".similar-condition-modal-room").text("The other users in this room are randomly selected.");
       
-      $("#similar-condition-modal").modal(this.modalOptions);
+      $modal.modal(this.modalOptions);
 
-      $("#submit-similar-condition").off(".similar-condition").on("click.similar-condition", _.bind(function() {
+      $(".submit-condition").off(".similar-condition").on("click.similar-condition", _.bind(function() {
         this.prepareSimilarConditionExperiment();
       }, this));
     },
@@ -328,7 +327,8 @@ $(document).ready(function() {
       this.currentCondition = "similar";
       this.prepareQuestions();
       
-      $("#similar-condition-modal").modal('hide');
+      $("#similar-condition-modal-1").modal('hide');
+      $("#similar-condition-modal-2").modal('hide');
 
       $("#explainer").text("Select the option that you think best represents what the statement is. We’ve asked a panel of 15 other fellow users to weigh in on the same questions, with their answers shown below as they come in.");
       $(".social").css('opacity', 1);
@@ -347,15 +347,12 @@ $(document).ready(function() {
       
       $("#experiment").hide();
       
-      if (this.conditionOrder == "123") {
-        $("#adverse-condition-modal-title").text("Two thirds completed");
-      } else {
-        $("#adverse-condition-modal-title").text("One third completed");
-      }
+      var $modal = this.conditionOrder == "123" ? $("#similar-condition-modal-1") : $("#similar-condition-modal-2");
+      $(".similar-condition-modal-room").text("The other users in this room answered similarly to you in the previous rounds.");
       
-      $("#adverse-condition-modal").modal(this.modalOptions);
+      $modal.modal(this.modalOptions);
 
-      $("#submit-adverse-condition").off(".adverse-condition").on("click.adverse-condition", _.bind(function() {
+      $(".submit-condition").off(".adverse-condition").on("click.adverse-condition", _.bind(function() {
         this.prepareAdverseConditionExperiment();          
       }, this));
     },
@@ -366,7 +363,8 @@ $(document).ready(function() {
       this.currentCondition = "adverse";
       this.prepareQuestions();
       
-      $("#adverse-condition-modal").modal('hide');
+      $("#similar-condition-modal-1").modal('hide');
+      $("#similar-condition-modal-2").modal('hide');
       $(".social").css('opacity', 1);
 
       $("#explainer").text("Select the option that you think best represents what the statement is. We’ve asked a panel of 15 other fellow users who answered with similar views to you to weigh in on the same questions.");
@@ -448,6 +446,7 @@ $(document).ready(function() {
         'facts': 0,
         'opinions': 0
       };
+      var correct = this.questionAnswers[this.questionOrder[this.currentCard]];
       // console.log(['updateSocialBars', secondsSince, this.currentCondition, times]);
       
       if (!times) return;
@@ -455,9 +454,11 @@ $(document).ready(function() {
       _.each(times, function(time) {
         if (secondsSince >= time[1]) {
           if (isAdverse) {
-            seenTimes[!time[0] ? 'facts' : 'opinions'] += 1;
+            if (correct == "fact")    seenTimes[!time[0] ? 'facts' : 'opinions'] += 1;
+            if (correct == "opinion") seenTimes[!time[0] ? 'opinions' : 'facts'] += 1;
           } else {
-            seenTimes[time[0] ? 'facts' : 'opinions'] += 1;
+            if (correct == "fact")    seenTimes[time[0] ? 'facts' : 'opinions'] += 1;
+            if (correct == "opinion") seenTimes[time[0] ? 'opinions' : 'facts'] += 1;
           }
         }
       });
@@ -482,6 +483,8 @@ $(document).ready(function() {
         'facts': 0,
         'opinions': 0
       };
+      var correct = this.questionAnswers[this.questionOrder[this.currentCard]];
+      
       // console.log(['updateSocialPeople', secondsSince, this.currentCondition, times]);
       
       if (!times) return;
@@ -489,9 +492,11 @@ $(document).ready(function() {
       _.each(times, function(time) {
         if (secondsSince >= time[1]) {
           if (isAdverse) {
-            seenTimes[!time[0] ? 'facts' : 'opinions'] += 1;
+            if (correct == "fact")    seenTimes[!time[0] ? 'facts' : 'opinions'] += 1;
+            if (correct == "opinion") seenTimes[!time[0] ? 'opinions' : 'facts'] += 1;
           } else {
-            seenTimes[time[0] ? 'facts' : 'opinions'] += 1;
+            if (correct == "fact")    seenTimes[time[0] ? 'facts' : 'opinions'] += 1;
+            if (correct == "opinion") seenTimes[time[0] ? 'opinions' : 'facts'] += 1;
           }
         }
       });
