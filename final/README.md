@@ -4,9 +4,9 @@
 ## Changes for CSCW Submission (3/28)
 
 SAM
-- [ ] Rename rounds: control, social, social similar
+- [x] Rename rounds: control, social, social similar
 - [x] Between subject (1-2, 1-3) vs. *within subject (1-2-3 vs. 1-3-2)*
-- [ ] Change data labeling to 0/1
+- [x] Change data labeling to 0/1
 - [x] Prevent dupes
 - [x] Update to Pew/LIAR questions
 - [x] Show total correct page at the end of the experiment
@@ -18,8 +18,8 @@ SAM
 LUCY: 
 - [x] Finalize IRB forms by 3/8
 - [x] Reconcile with IRB consent forms
-- [ ] Add in more hard questions (to fight saturation): "Data/Experiment Statements" gdoc
-- [ ] Clean up and convert to ACM for CSCW (check constraints)
+- [x] Add in more hard questions (to fight saturation): "Data/Experiment Statements" gdoc
+- [x] Clean up and convert to ACM for CSCW (check constraints)
 - [ ] Reread intro of paper
 
 JENNY: Jenny send designs to Sam before 3/8
@@ -27,8 +27,8 @@ JENNY: Jenny send designs to Sam before 3/8
 - [x] Design the Hook page
 - [x] Design the Results page + deception debrief
 - [x] Running the code
-- [ ] Change wording around Round 3 intro to be more order neutral
-- [ ] "What was this test about? TODO - debrief on deception"
+- [x] Change wording around Round 3 intro to be more order neutral
+- [x] "What was this test about? TODO - debrief on deception"
  
 ## Later
 - Sam shows run/update

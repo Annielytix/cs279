@@ -80,7 +80,12 @@ def taskdata():
     return jsonify(dict(message="OK", form=request.form))
 
 @app.route("/xlsx")
-def xlsx():    
+def xlsx():
+    ROUND_MAP = {
+        "control": 1,
+        "similar": 2,
+        "adverse": 3,
+    }
     xlsx_path = "CS279.xlsx"
     workbook = xlsxwriter.Workbook(xlsx_path)
     bold = workbook.add_format({'bold': 1})
@@ -185,6 +190,8 @@ def xlsx():
     data.set_column(col, col, 15); col += 1
     data.write(row, col, "Round", bold)
     data.set_column(col, col, 15); col += 1
+    data.write(row, col, "Order", bold)
+    data.set_column(col, col, 15); col += 1
     data.write(row, col, "Question #", bold)
     data.set_column(col, col, 15); col += 1
     data.write(row, col, "Adverse?", bold)
@@ -203,10 +210,11 @@ def xlsx():
             data.write_datetime(row, col, date, date_format); col += 1;
             data.write(row, col, trial[0]); col += 1;
             data.write(row, col, trial[1]); col += 1;
-            data.write(row, col, trial[2]); col += 1;
+            data.write(row, col, ROUND_MAP[trial[2]]); col += 1;
+            data.write(row, col, trial[6]); col += 1;
             data.write(row, col, trial[3]+1); col += 1;
-            data.write(row, col, trial[4]); col += 1;
-            data.write(row, col, trial[5]); col += 1;
+            data.write(row, col, 1 if trial[4] else 0); col += 1;
+            data.write(row, col, 1 if trial[5] else 0); col += 1;
     
     workbook.close()
     
