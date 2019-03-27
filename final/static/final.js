@@ -408,10 +408,10 @@ $(document).ready(function() {
       
       
       _.delay(_.bind(function() {
-        $(".social-label").animate({'opacity': 1}, this.CLICK_DELAY*1000);
-        $(".social-user").animate({'opacity': 1}, this.CLICK_DELAY*1000);
-        $(".social-bars").animate({'opacity': 1}, this.CLICK_DELAY*1000);
-        $(".social-people").animate({'opacity': 1}, this.CLICK_DELAY*1000);
+        $(".social-label").animate({'opacity': 1}, 1*1000);
+        $(".social-user").animate({'opacity': 1}, 1*1000);
+        $(".social-bars").animate({'opacity': 1}, 1*1000);
+        $(".social-people").animate({'opacity': 1}, 1*1000);
       }, this), this.BUTTON_DELAY*1000);
       
       _.delay(_.bind(function() {
@@ -492,10 +492,10 @@ $(document).ready(function() {
         if (secondsSince >= time[1]) {
           if (isAdverse) {
             if (correct == "fact")    seenTimes[!time[0] ? 'facts' : 'opinions'] += 1;
-            if (correct == "opinion") seenTimes[!time[0] ? 'opinions' : 'facts'] += 1;
+            if (correct == "opinion") seenTimes[time[0] ? 'opinions' : 'facts'] += 1;
           } else {
             if (correct == "fact")    seenTimes[time[0] ? 'facts' : 'opinions'] += 1;
-            if (correct == "opinion") seenTimes[time[0] ? 'opinions' : 'facts'] += 1;
+            if (correct == "opinion") seenTimes[!time[0] ? 'opinions' : 'facts'] += 1;
           }
         }
       });
