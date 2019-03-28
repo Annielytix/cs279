@@ -224,11 +224,11 @@ $(document).ready(function() {
       } else if (window.location.hash.indexOf('control') != -1) {
         this.prepareControlConditionExperiment();
       } else if (window.location.hash.indexOf('similar-dialog') != -1) {
-        this.prepareSimilarConditionDialog();
+        this.prepareOneThirdDialog();
       } else if (window.location.hash.indexOf('similar') != -1) {
         this.prepareSimilarConditionExperiment();
       } else if (window.location.hash.indexOf('adverse-dialog') != -1) {
-        this.prepareAdverseConditionDialog();
+        this.prepareTwoThirdsDialog();
       } else if (window.location.hash.indexOf('adverse') != -1) {
         this.prepareAdverseConditionExperiment();
       } else if (window.location.hash.indexOf('survey') != -1) {
@@ -305,18 +305,24 @@ $(document).ready(function() {
       this.prepareCard(0);
     },
 
-    prepareSimilarConditionDialog: function(exp) {
-      console.log("prepareSimilarConditionDialog", this.modalOptions);
+    prepareOneThirdDialog: function(exp) {
+      console.log("prepareOneThirdDialog", this.modalOptions);
       
       $("#experiment").hide();
       
-      var $modal = this.conditionOrder == "123" ? $("#similar-condition-modal-1") : $("#similar-condition-modal-2");
-      $(".similar-condition-modal-room").text("The other users in this room are randomly selected.");
-      
-      $modal.modal(this.modalOptions);
+      if (this.conditionOrder == "123") {
+        $(".similar-condition-modal-room").text("The other users in this room are randomly selected.");
+      } else {
+        $(".similar-condition-modal-room").text("The other users in this room answered similarly to you in the previous rounds.");
+      }
+      $("#similar-condition-modal-1").modal(this.modalOptions);
 
       $(".submit-condition").off(".similar-condition").on("click.similar-condition", _.bind(function() {
-        this.prepareSimilarConditionExperiment();
+        if (this.conditionOrder == "123") {
+          this.prepareSimilarConditionExperiment();
+        } else {
+          this.prepareAdverseConditionExperiment();          
+        }
       }, this));
     },
 
@@ -341,18 +347,25 @@ $(document).ready(function() {
       }
     },
     
-    prepareAdverseConditionDialog: function(exp) {
-      console.log("prepareAdverseConditionDialog");
+    prepareTwoThirdsDialog: function(exp) {
+      console.log("prepareTwoThirdsDialog");
       
       $("#experiment").hide();
       
-      var $modal = this.conditionOrder == "123" ? $("#similar-condition-modal-1") : $("#similar-condition-modal-2");
-      $(".similar-condition-modal-room").text("The other users in this room answered similarly to you in the previous rounds.");
+      if (this.conditionOrder == "123") {
+        $(".similar-condition-modal-room").text("The other users in this room answered similarly to you in the previous rounds.");
+      } else {
+        $(".similar-condition-modal-room").text("The other users in this room are randomly selected.");
+      }
       
-      $modal.modal(this.modalOptions);
+      $("#similar-condition-modal-2").modal(this.modalOptions);
 
       $(".submit-condition").off(".adverse-condition").on("click.adverse-condition", _.bind(function() {
-        this.prepareAdverseConditionExperiment();          
+        if (this.conditionOrder == "123") {
+          this.prepareAdverseConditionExperiment();          
+        } else {
+          this.prepareSimilarConditionExperiment();
+        }
       }, this));
     },
 
@@ -555,17 +568,9 @@ $(document).ready(function() {
       ];
       
       if (this.currentCard == 9) {
-        if (this.conditionOrder == "123") {
-          _.delay(_.bind(this.prepareSimilarConditionDialog, this), this.CLICK_DELAY*1000);
-        } else {
-          _.delay(_.bind(this.prepareAdverseConditionDialog, this), this.CLICK_DELAY*1000);
-        }
+        _.delay(_.bind(this.prepareOneThirdDialog, this), this.CLICK_DELAY*1000);
       } else if (this.currentCard == 19) {
-        if (this.conditionOrder == "123") {
-          _.delay(_.bind(this.prepareAdverseConditionDialog, this), this.CLICK_DELAY*1000);
-        } else {
-          _.delay(_.bind(this.prepareSimilarConditionDialog, this), this.CLICK_DELAY*1000);
-        }
+        _.delay(_.bind(this.prepareTwoThirdsDialog, this), this.CLICK_DELAY*1000);
       } else if (this.currentCard == 29) {
         _.delay(_.bind(this.finishMainExperiment, this), this.CLICK_DELAY*1000);
       } else {
