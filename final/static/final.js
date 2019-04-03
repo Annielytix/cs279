@@ -241,6 +241,8 @@ $(document).ready(function() {
           this.prepareControlConditionModal();
         }, this));
       }
+      
+      share.makeButtons(".share_this");
     },
     
     prepareQuestions: function() {

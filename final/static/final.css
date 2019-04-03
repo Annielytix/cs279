@@ -248,3 +248,7 @@ html, body {
   background-image: url(/static/icon_person_opinion.svg);
   fill: #c98cff;
 }
+
+.social-share {
+  margin: 24px 0 0;
+}
