@@ -231,6 +231,10 @@ $(document).ready(function() {
         this.prepareTwoThirdsDialog();
       } else if (window.location.hash.indexOf('adverse') != -1) {
         this.prepareAdverseConditionExperiment();
+      } else if (window.location.hash.indexOf('social-dialog') != -1) {
+        this.prepareTwoThirdsDialog();
+      } else if (window.location.hash.indexOf('social') != -1) {
+        this.prepareAdverseConditionExperiment();
       } else if (window.location.hash.indexOf('survey') != -1) {
         this.finishMainExperiment(null);
       } else if (window.location.hash.indexOf('total') != -1) {
