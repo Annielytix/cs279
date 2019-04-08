@@ -6,8 +6,8 @@ $(document).ready(function() {
       'backdrop': 'static'
     },
   
-    BUTTON_DELAY: 3, // Delay before enabling buttons
-    SOCIAL_DELAY: 4, // Delay before first social answers come in
+    BUTTON_DELAY: 1, // Delay before enabling buttons
+    SOCIAL_DELAY: 2, // Delay before first social answers come in
     SOCIAL_DURATION: 8, // Duration of time that social answers come in
     CLICK_DELAY: 1, // Delay after clicking on a button
     ADVERSE_PROPORTION: 0.2,
