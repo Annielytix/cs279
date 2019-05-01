@@ -4,7 +4,7 @@
 
 Priority changes:
 - [ ] add the “share on social media” buttons to the first page too (we can take out google+), important for self-propagating the study
-- [ ] highlight the “who’s in this room?” Statement
+- [ ] highlight the “who’s in this room?” Statement for each instructions page
 - [ ] Add a target=“blank” to all the source links on the concluding page
 
 UI Changes:
