@@ -1,5 +1,20 @@
 # Distinguishing Factual and Opinion Statements in the Presence of Online Social Groups
 
+## Changes for CHI
+
+
+[] define fact as capable of being proven/disproven on the main page
+[] add the “share on social media” buttons to the first page too (we can take out google+)
+[] emphasize the “capable of being proven/disproven with evidence” part
+[] check the color of the last completion (factual colors as the opinion color when clicked?)
+[] highlight the “who’s in this room?” Statement
+[] typo: “Theres no data” —> “There is no data”
+[] typo: “Spending on Social Security, Medicare, and Medicaid make” —> “makes”
+[] Gender text form auto-completes as name: Male, Female, Prefer not to say, Non-binary
+[] Demographic: change default first option on forms to “Select option”
+[] change Newspaper to News publisher? (Align it with news source aggregators)
+[] Add a target=“blank” to all the source links
+
 
 ## Changes for CSCW Submission (3/28)
 
