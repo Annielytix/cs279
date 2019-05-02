@@ -252,3 +252,7 @@ html, body {
 .social-share {
   margin: 24px 0 0;
 }
+
+h5 {
+    font-weight: bold;
+}
