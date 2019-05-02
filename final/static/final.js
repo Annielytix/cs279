@@ -42,7 +42,7 @@ $(document).ready(function() {
       "People have lost control over how personal information is collected and used by social media platforms",
       "Last year, E. Coli from romaine lettuce posed a more dangerous threat than undocumented immigrants did to Americans",
       "The opioid crisis poses a large risk to public health in America",
-      "Theres no data that says a gun-free zone has saved lives.",
+      "There is no data that says a gun-free zone has saved lives.",
       "ISIS lost a significant portion of its territory in Iraq and Syria in 2017",
       "There are more coal jobs and more coal produced in Ohio now than there were five years ago.",
       "There are almost as many guns in the United States as there are people.",
@@ -52,7 +52,7 @@ $(document).ready(function() {
       "The poorest counties in the U.S. are in Appalachia and happen to be more than 90 percent white.",
       "Health care costs per person in the U.S. are the highest in the developed world",
       "Immigrants who are in the U.S. illegally have some rights under the Constitution",
-      "Spending on Social Security, Medicare, and Medicaid make up the largest portion of the U.S. federal budget",
+      "Spending on Social Security, Medicare, and Medicaid makes up the largest portion of the U.S. federal budget",
       "Federal programs have incentivized the militarization of local police precincts.",
       "Drone strikes that target extremists in countries like Pakistan, Yemen, and Somalia lead to extremist retaliation ",
       "Expanding the border wall between Mexico and America would lead to a major reduction in illegal immigration in the country"
@@ -683,7 +683,7 @@ $(document).ready(function() {
         $(".total-question-statement", $question).text(question);
         $(".total-question-answer", $question).text(answer);
         $(".total-question-youranswer", $question).html(correct ? $("<span class='answer-correct'></span>") : $("<span class='answer-wrong'></span>"));
-        $(".total-question-source", $question).html($("<a href=\""+sourceLink+"\">"+source+"</a>"));
+        $(".total-question-source", $question).html($("<a href=\""+sourceLink+"\" target=\"blank\">"+source+"</a>"));
         
         $(".total-questions").append($question);
       }, this));

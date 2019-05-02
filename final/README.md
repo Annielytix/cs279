@@ -3,16 +3,16 @@
 ## Changes for CHI
 
 Priority changes:
-- [ ] add the “share on social media” buttons to the first page too (we can take out google+), important for self-propagating the study
+- [x] add the “share on social media” buttons to the first page too (we can take out google+), important for self-propagating the study
 - [ ] highlight the “who’s in this room?” Statement for each instructions page
-- [ ] Add a target=“blank” to all the source links on the concluding page
+- [x] Add a target=“blank” to all the source links on the concluding page
 
 UI Changes:
-- [ ] Gender text form auto-completes as name: Male, Female, Prefer not to say, Non-binary
-- [ ] Demographic: change default first option on forms to “Select option”
-- [ ] change Newspaper to News publisher? (Align it with news source aggregators)
-- [ ] typo: “Theres no data” —> “There is no data”
-- [ ] typo: “Spending on Social Security, Medicare, and Medicaid make” —> “makes”
+- [x] Gender text form auto-completes as name: Male, Female, Prefer not to say, Non-binary
+- [x] Demographic: change default first option on forms to “Select option”
+- [x] change Newspaper to News publisher? (Align it with news source aggregators)
+- [x] typo: “Theres no data” —> “There is no data”
+- [x] typo: “Spending on Social Security, Medicare, and Medicaid make” —> “makes”
 
 Confusing points:
 - [ ] define fact as capable of being proven/disproven on the main page

@@ -41,6 +41,7 @@
           <h5 class="modal-title">Can you tell the difference between facts and opinions?</h5>
         </div>
         <div class="modal-body">
+          
           <p>Do you know the difference between a fact and an opinion? Take our test and find out! Your contribution to our research allows us to learn more about how factual and opinion statements are presented in the news.</p>
 
 <p><b>Please read the following information carefully before proceeding:</b></p>
@@ -48,6 +49,8 @@
 <p>Your participation in this research is voluntary. You are free to refuse to take part, and you may stop the quiz at any time. Your will not be asked for personally identifying information, and your data will not be recorded unless you complete this experiment in its entirety.</p>
 
 <p>This experiment is split into three parts. You will be shown simple tasks and instructions to finish them. We will not ask you for your name, and any data that we collect will be securely stored. The duration of this test is approximately 10 minutes.</p>
+          <h2 class="modal-title text-center social-share"><div class="share_this"></div></h2>
+
         </div>
         <div class="modal-footer">
           <p>By consenting to participate, you acknowledge that you have read and agree to the above consent form, and agree to take part in this research.</p>
@@ -72,13 +75,20 @@
             <div class="form-group row">
               <label for="inputGender" class="col-sm-3 col-form-label">Gender</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" placeholder="" name="gender" id="inputGender">
+                <select class="form-control" name="gender" id="inputGender">
+                  <option>Select option</option>
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>Non-binary</option>
+                  <option>Prefer not to say</option>
+                </select>
               </div>
             </div>
             <div class="form-group row">
               <label for="inputAge" class="col-sm-3 col-form-label">Age</label>
               <div class="col-sm-9">
                 <select class="form-control" name="age" id="inputAge">
+                  <option>Select option</option>
                   <option>18-24</option>
                   <option>25-34</option>
                   <option>35-44</option>
@@ -93,6 +103,7 @@
               <label for="inputEducation" class="col-sm-3 col-form-label">Level of education</label>
               <div class="col-sm-9">
                 <select class="form-control" name="education" id="inputEducation">
+                  <option>Select option</option>
                   <option>Some high school</option>
                   <option>High school graduate</option>
                   <option>Some college</option>
@@ -288,7 +299,7 @@
                 </div>
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="newssource" id="newssource6" value="newspaper">
-                  <label class="form-check-label" for="newssource6">Newspaper (NYT, WSJ, WaPo, etc)</label>
+                  <label class="form-check-label" for="newssource6">News publisher (NYT, WSJ, WaPo, etc)</label>
                 </div>
                 <div class="form-check">
                   <input class="form-check-input" type="radio" name="newssource" id="newssource7" value="aggregator">
